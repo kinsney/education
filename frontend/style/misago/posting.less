@@ -1,0 +1,104 @@
+//
+// Posting
+// --------------------------------------------------
+
+// Affix and style placeholder
+#posting-placeholder {
+  background-color: @gray-lighter;
+  padding: @line-height-computed 0px;
+
+  position: fixed;
+  bottom: -100%;
+
+  width: 100%;
+
+  transition: bottom 300ms, box-shadow 300ms;
+
+  &.slide-in {
+    .box-shadow(0px 0px 8px @gray-light);
+    bottom: 0px;
+  }
+}
+
+
+// First row
+#posting-placeholder .first-row {
+  margin-bottom: @line-height-computed;
+
+  .form-control {
+    border: 1px solid darken(@gray-lighter, 15%);
+  }
+
+  .posting-options {
+    .btn {
+      margin-right: @padding-small-horizontal;
+      padding: 2px 0px;
+    }
+
+    .material-icon {
+      width: 28px;
+      height: 28px;
+
+      position: relative;
+      top: 0px;
+      left: 2px;
+
+      font-size: 28px;
+      line-height: 28px;
+      text-align: center;
+    }
+  }
+}
+
+
+// Posting ui preview
+.posting-ui-preview {
+  padding: @line-height-computed 0px;
+  position: relative;
+
+  .form-control {
+    box-shadow: none;
+    resize: none;
+  }
+}
+
+
+// Posting Loader
+.posting-loader {
+  text-align: center;
+}
+
+.posting-loader .loader {
+  height: 100px;
+
+  .loader-spinning-wheel {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+
+// Posting message
+@posting-icon-width: 28px;
+
+.posting-message {
+  text-align: center;
+
+  .material-icon {
+    margin-right: @line-height-computed / 3;
+    position: relative;
+    top: -1px;
+
+    width: @posting-icon-width;
+    height: @posting-icon-width;
+
+    font-size: @posting-icon-width;
+    line-height: @posting-icon-width;
+  }
+
+  .message-body {
+    p {
+      font-size: @font-size-large;
+    }
+  }
+}

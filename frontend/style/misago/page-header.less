@@ -1,0 +1,231 @@
+//
+// Page Header
+// --------------------------------------------------
+
+
+// Common styles
+.page-header {
+  margin: 0px;
+  margin-bottom: @line-height-computed;
+
+  .btn-aligned {
+    float: right;
+    margin-top: @line-height-computed + 3px;
+    margin-left: 8px;
+
+    &.pull-left {
+      margin-left: 0px;
+      margin-right: 8px;
+    }
+  }
+}
+
+
+// Small displays
+@media screen and (max-width: @screen-sm-max) {
+  .container {
+    h1 {
+      font-size: @font-size-large * 1.25;
+    }
+
+    .btn-aligned {
+      float: right;
+      margin-top: @line-height-computed - 7px;
+    }
+
+    .btn-icon {
+      .material-icon {
+        width: 24px;
+        height: 24px;
+
+        font-size: 24px;
+        line-height: 24px;
+      }
+    }
+  }
+}
+
+
+// Breadcrumbs
+.page-breadcrumbs .breadcrumb {
+  background: none;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-bottom: @line-height-computed * -1;
+  overflow: auto;
+}
+
+.page-breadcrumbs .breadcrumb li {
+  &, &:before {
+    display: block;
+    float: left;
+  }
+
+  &:before {
+    margin-left: 4px;
+  }
+}
+
+
+// Stats
+.header-stats .list-inline li {
+  margin-right: 8px;
+  overflow: auto;
+
+  .status-icon {
+    width: 18px;
+    height: 18px;
+
+    margin-right: 4px;
+
+    position: relative;
+    bottom: 1px;
+
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  &>.material-icon, &>.icon-legend {
+    float: left;
+  }
+
+  &>.material-icon {
+    margin-right: 4px;
+
+    position: relative;
+    top: 3px;
+  }
+}
+
+@media screen and (max-width: @screen-sm-max) {
+  .header-stats .list-inline {
+    margin-top: @line-height-computed / 2;
+    margin-bottom: 0px;
+
+    font-size: @font-size-small;
+  }
+}
+
+
+// Tabs
+.page-header .page-tabs .nav {
+  &>li {
+    margin: 0px;
+
+    &>a {
+      border-radius: 0px;
+    }
+  }
+}
+
+
+@media screen and (max-width: @screen-sm-max) {
+  .page-header .page-tabs {
+    margin-top: ((@line-height-computed / 2) - 1);
+    margin-bottom: ((@line-height-computed / 2) - 1) * -1;
+  }
+
+  .page-header .page-tabs .container {
+    padding: 0px;
+    width: 100%;
+
+    .nav-pills {
+      li {
+        display: block;
+        float: inherit;
+        width: auto;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: @screen-md-min) {
+  .page-header.tabbed {
+    padding-bottom: 0px;
+  }
+}
+
+
+// Edit title
+.title-editable {
+  overflow: auto;
+
+  h1, .btn {
+    float: left;
+  }
+
+  .btn {
+    position: relative;
+    top: @line-height-computed;
+  }
+
+  .material-icon {
+    width: 14px;
+    height: 14px;
+
+    font-size: 14px;
+    line-height:14px;
+  }
+}
+
+.title-edit-form {
+  background: @body-bg;
+  border: 1px solid @gray-lighter;
+  border-radius: 3px;
+  float: none;
+  margin: 0px;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  padding: 1px;
+  position: relative;
+  overflow: auto;
+
+  white-space: nowrap;
+
+  input, button {
+    display: inline-block;
+    margin: 3px;
+  }
+
+  input {
+    border: none;
+    width: 400px;
+
+    &, &:focus, &:active {
+      .box-shadow(none);
+    }
+  }
+
+  .btn-default {
+    padding: 2px;
+    padding-right: 0px;
+    padding-bottom: 1px;
+
+    color: darken(@gray-lighter, 5%);
+
+    &, &:hover, &:focus, &:active {
+      background: transparent;
+      border-color: transparent;
+      .box-shadow(none);
+    }
+
+    &:hover, &:focus {
+      color: @gray-darker;
+    }
+
+    &:active {
+      color: @gray;
+    }
+
+    .material-icon {
+      top: 0px;
+      left: 1px;
+
+      height: 28px;
+      width: 28px;
+
+      font-size: 28px;
+      line-height: 28px;
+    }
+  }
+}

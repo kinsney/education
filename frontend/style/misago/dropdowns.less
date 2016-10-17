@@ -1,0 +1,149 @@
+//
+// Dropdowns
+// --------------------------------------------------
+
+
+// Unify .btn-link appearance with anchors
+.dropdown-menu>li>a,
+.dropdown-menu>li>.btn-link,
+.modal-menu>li>a,
+.modal-menu>li>.btn-link {
+  display: block;
+  border: none;
+  clear: both;
+  float: none;
+  padding: 4px 20px;
+  width: 100%;
+
+  color: @dropdown-link-color;
+  font-weight: normal;
+  line-height: @line-height-base;
+  text-align: left;
+  white-space: nowrap;
+
+  &:hover, &:focus {
+    background-color: @dropdown-link-hover-bg;
+
+    color: @dropdown-link-hover-color;
+    text-decoration: none;
+  }
+
+  // Set material icons in dropdown menus
+  .material-icon {
+    margin: -2px 0px;
+    margin-right: @line-height-computed * .35;
+
+    position: relative;
+    bottom: 1px;
+
+    font-size: 18px;
+  }
+
+  .badge {
+    float: right;
+  }
+}
+
+
+// Extra overrides for modal nav
+.modal-menu {
+  margin: @line-height-computed 0px;
+  padding: 0px;
+}
+
+.modal-menu>li {
+  margin: @line-height-computed / 3 0px;
+  padding: 0px;
+
+  list-style: none;
+}
+
+
+// Bump min dropdown width to 210px
+.dropdown-menu {
+  width: 210px;
+}
+
+
+// Dropdown footer
+.dropdown-menu .dropdown-footer {
+  padding: 6px 20px;
+}
+
+
+// Dropdown buttons container
+.dropdown-menu .dropdown-buttons {
+  padding: 2px 20px;
+
+  .btn {
+    margin: 4px 0px;
+  }
+}
+
+
+// Always displayed on mobile dropdown
+.mobile-dropdown, .compact-nav {
+  position: static;
+  margin: 0px;
+  overflow: auto;
+
+  &.open {
+    margin-bottom: @line-height-computed;
+  }
+}
+
+.compact-nav.open {
+  margin-top: @line-height-computed * -1;
+}
+
+.mobile-dropdown.open>.dropdown-menu, .compact-nav.open>.dropdown-menu {
+  border: none;
+  border-radius: 0;
+  .box-shadow(none);
+
+  display: block;
+  margin: 0px;
+  width: 100%;
+
+  position: static;
+}
+
+
+// Guest menu
+.user-dropdown .guest-preview {
+  text-align: center;
+
+  .row {
+    margin: 0px;
+  }
+}
+
+
+// User menu
+.navbar .user-dropdown {
+  width: 240px;
+}
+
+.user-dropdown .dropdown-header {
+  padding: 6px 20px;
+
+  font-size: @font-size-large;
+
+  strong {
+    font-weight: normal;
+  }
+}
+
+
+// Category picker
+.category-picker .dropdown-menu {
+  // Make category picker wider on desktops
+  @media screen and (min-width: @screen-md-min) {
+    width: 300px;
+  }
+}
+
+.category-picker .dropdown-menu>li>.btn-link {
+  white-space: normal;
+  word-wrap: break-word;
+}

@@ -1,0 +1,110 @@
+{% load i18n staticfiles %}
+<nav class="navbar navbar-misago navbar-default navbar-static-top" role="navigation">
+
+  <div class="container navbar-full hidden-xs hidden-sm">
+    {% if misago_settings.forum_branding_display %}
+    <a href="{% url 'misago:index' %}" class="navbar-brand">
+      <img src="{% static 'misago/img/site-logo.png' %}" alt="">
+      {% if misago_settings.forum_branding_text %}
+        <span class="hidden-xs hidden-sm">{{ misago_settings.forum_branding_text}}</span>
+      {% endif %}
+    </a>
+    {% endif %}
+
+    <ul class="nav navbar-nav">
+      {% if THREADS_ON_INDEX %}
+      <li>
+        <a href="{% url 'misago:index' %}">
+          {% trans "Threads" %}
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'misago:categories' %}">
+          {% trans "Categories" %}
+        </a>
+      </li>
+      {% else %}
+      <li>
+        <a href="{% url 'misago:categories' %}">
+          {% trans "Categories" %}
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'misago:threads' %}">
+          {% trans "Threads" %}
+        </a>
+      </li>
+      {% endif %}
+      <li>
+        <a href="{% url 'misago:users' %}">
+          {% trans "Users" %}
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          {% trans "Search" %}
+        </a>
+      </li>
+    </ul>
+
+    <div id="user-menu-mount"></div>
+  </div><!-- /full navbar -->
+
+  <ul class="nav navbar-nav navbar-compact-nav hidden-md hidden-lg">
+    {% if misago_settings.forum_branding_display %}
+      <li>
+        <a href="{% url 'misago:index' %}">
+          <img src="{% static 'misago/img/site-icon.png' %}" alt="">
+        </a>
+      </li>
+      {% if THREADS_ON_INDEX %}
+        <li>
+          <a href="{% url 'misago:categories' %}">
+            <i class="material-icon">forum</i>
+          </a>
+        </li>
+      {% else %}
+        <li>
+          <a href="{% url 'misago:threads' %}">
+            <i class="material-icon">message</i>
+          </a>
+        </li>
+      {% endif %}
+    {% elif THREADS_ON_INDEX %}
+      <li>
+        <a href="{% url 'misago:index' %}">
+          <i class="material-icon">message</i>
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'misago:categories' %}">
+          <i class="material-icon">forum</i>
+        </a>
+      </li>
+    {% else %}
+      <li>
+        <a href="{% url 'misago:index' %}">
+          <i class="material-icon">forum</i>
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'misago:threads' %}">
+          <i class="material-icon">message</i>
+        </a>
+      </li>
+    {% endif %}
+    <li>
+      <a href="{% url 'misago:users' %}">
+        <i class="material-icon">group</i>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <i class="material-icon">search</i>
+      </a>
+    </li>
+    <li id="user-menu-compact-mount"></li>
+  </ul>
+  <!-- /compact navbar -->
+</nav>
+<div id="mobile-navbar-dropdown-mount" class="mobile-dropdown"></div>

@@ -1,0 +1,115 @@
+{% extends "misago/profile/base.html" %}
+{% load i18n misago_avatars misago_batch %}
+
+{% block title %}{% trans "Follows" %} | {{ block.super }}{% endblock %}
+
+
+{% block section %}
+<div class="profile-follows">
+
+  <nav class="toolbar">
+    <h3 class="toolbar-left">
+      {% if is_authenticated_user %}
+        {% blocktrans trimmed count users=count %}
+          You are following {{ users }} user.
+        {% plural %}
+          You are following {{ users }} users.
+        {% endblocktrans %}
+      {% else %}
+        {% blocktrans trimmed count users=count with username=profile %}
+          {{ username }} is following {{ users }} user.
+        {% plural %}
+          {{ username }} is following {{ users }} users.
+        {% endblocktrans %}
+      {% endif %}
+    </h3>
+  </nav>
+
+  {% if count %}
+  <div>
+    {% for row in follows|batch:2 %}
+      <div class="row">
+        {% for user in row %}
+          <div class="col-md-6">
+
+            <div class="user-card {% if user.rank.css_class %} user-card-{{ user.rank.css_class }}{% endif %}">
+              <div class="user-card-bg-image">
+                <img src="{{ user|avatar:400 }}" alt="" class="bg-image">
+
+                <div class="user-card-bg">
+                  <div class="user-details">
+
+                    <div class="user-avatar">
+                      <a href="{{ user.get_absolute_url }}">
+                        <img src="{{ user|avatar:400 }}" alt="">
+                      </a>
+                    </div>
+
+                    <h4 class="user-name">
+                      <a href="{{ user.get_absolute_url }}" class="item-title">
+                        {{ user.username }}
+                      </a>
+                    </h4>
+
+                    <p class="user-subscript">
+                      {% if user.title %}
+                        <span class="user-title">{{ user.title }}</span>
+                      {% endif %}
+                      <span class="user-joined-on">
+                        {% blocktrans trimmed with joined_on=user.joined_on|date %}
+                          Joined on {{ joined_on }}
+                        {% endblocktrans %}
+                      </span>
+                    </p>
+
+                  </div>
+                  <div class="user-card-stats">
+
+                    <ul class="list-unstyled">
+                      <li class="user-posts-count">
+                        {% blocktrans trimmed count posts=user.posts %}
+                          {{ posts }} post
+                        {% plural %}
+                          {{ posts }} posts
+                        {% endblocktrans %}
+                      </li>
+                      <li class="user-threads-count">
+                        {% blocktrans trimmed count threads=user.threads %}
+                          {{ threads }} thread
+                        {% plural %}
+                          {{ threads }} threads
+                        {% endblocktrans %}
+                      </li>
+                      <li class="user-followers-count">
+                        {% blocktrans trimmed count followers=user.followers %}
+                          {{ followers }} follower
+                        {% plural %}
+                          {{ followers }} followers
+                        {% endblocktrans %}
+                      </li>
+                    </ul>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        {% endfor %}
+      </div>
+    {% endfor %}
+    </div>
+  {% else %}
+    <p class="lead">
+      {% if is_authenticated_user %}
+        {% trans "You are not following any users." %}
+      {% else %}
+        {% blocktrans trimmed with username=profile.username %}
+          {{ username }} is not following any users.
+        {% endblocktrans %}
+      {% endif %}
+    </p>
+  {% endif %}
+
+</div>
+{% endblock section %}

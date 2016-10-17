@@ -1,0 +1,31 @@
+{
+  "undef": true,
+  "unused": true,
+  "esnext": true,
+  
+  "predef": [
+    "global",
+    "console",
+    "window",
+    "document",
+    "require",
+    "confirm",
+
+    "gettext",
+    "ngettext",
+    "gettext_noop",
+    "pgettext",
+    "npgettext",
+    "interpolate",
+
+    "beforeEach",
+    "afterEach",
+    "describe",
+    "it",
+
+    "$",
+    "jQuery",
+
+    "phantom"
+  ]
+}

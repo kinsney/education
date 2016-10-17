@@ -1,0 +1,58 @@
+{% extends "misago/threadslist/base.html" %}
+{% load i18n misago_shorthands %}
+
+
+{% block title %}
+{% if THREADS_ON_INDEX %}
+  {% if list_name %}
+    {{ list_name }} | {{ block.super }}
+  {% elif paginator.page > 1 %}
+    {% if misago_settings.forum_index_title %}
+      {{ misago_settings.forum_index_title }} ({% blocktrans with page=paginator.page %}page: {{ page }}{% endblocktrans %})
+    {% else %}
+      {{ misago_settings.forum_name }} ({% blocktrans with page=paginator.page %}page: {{ page }}{% endblocktrans %})
+    {% endif %}
+  {% else %}
+    {% if misago_settings.forum_index_title %}
+      {{ misago_settings.forum_index_title }}
+    {% else %}
+      {{ misago_settings.forum_name }}
+    {% endif %}
+  {% endif %}
+{% else %}
+  {% if list_name %}
+    {{ list_name }} | {% trans "Threads" %} | {{ block.super }}
+  {% elif paginator.page > 1 %}
+    {% trans "Threads" %} ({% blocktrans with page=paginator.page %}page: {{ page }}{% endblocktrans %}) | {{ block.super }}
+  {% else %}
+    {% trans "Threads" %} | {{ block.super }}
+  {% endif %}
+{% endif %}
+{% endblock title %}
+
+
+{% block meta-description %}
+{% if THREADS_ON_INDEX and misago_settings.forum_index_meta_description %}
+  {{ misago_settings.forum_index_meta_description }}
+{% endif %}
+{% endblock meta-description %}
+
+
+{% block page-header %}
+<div class="page-header {{ user.is_authenticated|iftrue:"tabbed" }}">
+  <div class="container">
+    {% if THREADS_ON_INDEX %}
+      {% if misago_settings.forum_index_title %}
+        <h1>{{ misago_settings.forum_index_title }}</h1>
+      {% else %}
+        <h1>{{ misago_settings.forum_name }}</h1>
+      {% endif %}
+    {% else %}
+      <h1>{% trans "Threads" %}</h1>
+    {% endif %}
+  </div>
+  {% if user.is_authenticated %}
+    {% include "misago/threadslist/tabs.html" %}
+  {% endif %}
+</div>
+{% endblock page-header %}

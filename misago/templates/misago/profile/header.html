@@ -1,0 +1,49 @@
+{% load i18n misago_avatars %}
+<div class="page-header with-stats">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-9 col-md-offset-3">
+
+        <h1>
+          <img src="{{ profile|avatar:100 }}" alt="">
+          <span class="user-name">{{ profile.username }}</span>
+        </h1>
+
+      </div>
+    </div>
+  </div>
+  <div class="header-stats">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9 col-md-offset-3">
+
+          <ul class="list-inline">
+            {% if profile.rank.is_tab %}
+            <li class="user-rank">
+              <a href="{% url 'misago:users-rank' slug=profile.rank.slug %}" class="item-title">
+                {{ profile.rank.name }}
+              </a>
+            </li>
+            {% else %}
+            <li class="user-rank">
+              <span class="item-title">{{ profile.rank.name }}</span>
+            </li>
+            {% endif %}
+            {% if profile.title %}
+            <li class="user-title">{{ profile.title }}</li>
+            {% elif profile.rank.title %}
+            <li class="user-title">{{ profile.rank.title }}</li>
+            {% endif %}
+            <li class="user-joined-on">
+              {% blocktrans trimmed with joined_on=profile.joined_on|date %}
+                Member since {{ joined_on }}
+              {% endblocktrans %}
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

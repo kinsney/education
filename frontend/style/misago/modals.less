@@ -1,0 +1,120 @@
+//
+// Misago Modals
+// --------------------------------------------------
+
+
+// Modals displaying messages
+
+// Small displays
+@media screen and (max-width: @screen-sm-max) {
+  .modal-message {
+    text-align: center;
+
+    .message-icon {
+      margin: @line-height-computed * 1.5;
+
+      .material-icon {
+        font-size: @message-page-icon-size * 2;
+      }
+    }
+  }
+}
+
+
+// Full displays
+@media screen and (min-width: @screen-md-min) {
+  .modal-message {
+    .modal-body {
+      padding-top: @line-height-computed;
+      padding-bottom: @line-height-computed * 1.5;
+    }
+
+    .message-icon {
+      float: left;
+      position: relative;
+      left: 7px;
+
+      .material-icon {
+        font-size: @line-height-computed * 2.5;
+      }
+    }
+
+    .message-body {
+      margin-left: @line-height-computed * 3.75;
+      margin-top: @line-height-computed * .6 - 2px;
+
+      p {
+        margin-top: @line-height-computed;
+      }
+
+      .lead {
+        margin-top: 0px;
+        margin-bottom: 0px;
+      }
+    }
+  }
+}
+
+
+// Modal loader
+.modal-loader {
+  padding: @line-height-computed * 2.5 0px;
+
+  .loader {
+    width: 100%;
+    height: @loader-size;
+    text-align: center;
+  }
+
+  .loader-spinning-wheel {
+    width: @loader-size;
+    height: @loader-size;
+  }
+}
+
+
+// Modal form
+.modal-body .form-group {
+  min-height: 34px;
+}
+
+@media screen and (min-width: @screen-md-min) {
+  .modal-body .form-group .control-label {
+    position: relative;
+    top: 7px;
+  }
+}
+
+
+// Registration modal
+.modal-register .modal-footer a {
+  float: left;
+  margin-top: @line-height-computed / 3;
+}
+
+@media screen and (max-width: @screen-sm-max) {
+  .modal-register .modal-footer {
+    text-align: center;
+
+    a {
+      display: block;
+    }
+
+    .btn {
+      display: block;
+      float: none;
+      margin-top: @line-height-computed / 2;
+      width: 100%;
+    }
+  }
+}
+
+
+// Errors modal
+.list-item-errors {
+  margin-bottom: @line-height-computed;
+}
+
+.list-errored-items li:last-child .list-item-errors {
+  margin-bottom: 0px;
+}
