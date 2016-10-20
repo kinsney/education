@@ -16,6 +16,9 @@ from misago.conf.defaults import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+INSTALLED_APPS += (
+
+)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -59,7 +62,7 @@ CACHES = {
 # Site language
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'zh-hans'
+LANGUAGE_CODE = 'zh-cn'
 
 # Fallback Timezone
 # Used to format dates on server, that are then
@@ -99,6 +102,7 @@ STATICFILES_DIRS = (
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'theme', 'templates'),
+    os.path.join(BASE_DIR,'education','templates')
 ) + TEMPLATE_DIRS
 
 
