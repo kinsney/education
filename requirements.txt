@@ -15,6 +15,3 @@ psycopg2==2.6.1
 pytz
 requests<3
 unidecode
-
-
-// kidCare

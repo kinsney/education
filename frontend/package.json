@@ -22,6 +22,7 @@
     "jquery": "jQuery"
   },
   "dependencies": {
+    "antd": "^2.1.0",
     "babel-core": "6.7.x",
     "babel-plugin-module-alias": "^1.0.0",
     "babel-plugin-transform-class-properties": "^6.3.13",
@@ -40,9 +41,9 @@
     "glob": "^7.0.3",
     "gulp": "^3.9.0",
     "gulp-image-optimization": "^0.1.3",
-    "gulp-load-plugins": "^1.3.0",
     "gulp-jshint": "^2.0.0",
     "gulp-less": "^3.0.5",
+    "gulp-load-plugins": "^1.3.0",
     "gulp-minify-css": "^1.2.2",
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^1.6.0",

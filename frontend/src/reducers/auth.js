@@ -1,8 +1,8 @@
-import { UPDATE_AVATAR, UPDATE_USERNAME } from 'misago/reducers/users';
+import {UPDATE_AVATAR, UPDATE_USERNAME } from 'misago/reducers/users';
 
 export var initialState = {
-  signedIn: false,
-  signedOut: false
+    signedIn: false,
+    signedOut: false
 };
 
 export const PATCH_USER = 'PATCH_USER';
@@ -10,67 +10,67 @@ export const SIGN_IN = 'SIGN_IN';
 export const SIGN_OUT = 'SIGN_OUT';
 
 export function patch(patch) {
-  return {
-    type: PATCH_USER,
-    patch
-  };
+    return {
+        type: PATCH_USER,
+        patch
+    };
 }
 
 export function signIn(user) {
-  return {
-    type: SIGN_IN,
-    user
-  };
+    return {
+        type: SIGN_IN,
+        user
+    };
 }
 
-export function signOut(soft=false) {
-  return {
-    type: SIGN_OUT,
-    soft
-  };
+export function signOut(soft = false) {
+    return {
+        type: SIGN_OUT,
+        soft
+    };
 }
 
-export default function auth(state=initialState, action=null) {
-  switch (action.type) {
-    case PATCH_USER:
-        let newState = Object.assign({}, state);
-        newState.user = Object.assign({}, state.user, action.patch);
-        return newState;
+export default function auth(state = initialState, action = null) {
+    switch (action.type) {
+        case PATCH_USER:
+            let newState = Object.assign({}, state);
+            newState.user = Object.assign({}, state.user, action.patch);
+            return newState;
 
-    case SIGN_IN:
-      return Object.assign({}, state, {
-        signedIn: action.user
-      });
+        case SIGN_IN:
+            return Object.assign({}, state, {
+                signedIn: action.user
+            });
 
-    case SIGN_OUT:
-      return Object.assign({}, state, {
-        isAuthenticated: false,
-        isAnonymous: true,
-        signedOut: !action.soft
-      });
+        case SIGN_OUT:
+            return Object.assign({}, state, {
+                isAuthenticated: false,
+                isAnonymous: true,
+                signedOut: !action.soft
+            });
 
-    case UPDATE_AVATAR:
-      if (state.isAuthenticated && state.user.id === action.userId) {
-        let newState = Object.assign({}, state);
-        newState.user = Object.assign({}, state.user, {
-          'avatar_hash': action.avatarHash
-        });
-        return newState;
-      }
-      return state;
+        case UPDATE_AVATAR:
+            if (state.isAuthenticated && state.user.id === action.userId) {
+                let newState = Object.assign({}, state);
+                newState.user = Object.assign({}, state.user, {
+                    'avatar_hash': action.avatarHash
+                });
+                return newState;
+            }
+            return state;
 
-    case UPDATE_USERNAME:
-      if (state.isAuthenticated && state.user.id === action.userId) {
-        let newState = Object.assign({}, state);
-        newState.user = Object.assign({}, state.user, {
-          username: action.username,
-          slug: action.slug
-        });
-        return newState;
-      }
-      return state;
+        case UPDATE_USERNAME:
+            if (state.isAuthenticated && state.user.id === action.userId) {
+                let newState = Object.assign({}, state);
+                newState.user = Object.assign({}, state.user, {
+                    username: action.username,
+                    slug: action.slug
+                });
+                return newState;
+            }
+            return state;
 
-    default:
-      return state;
-  }
+        default:
+            return state;
+    }
 }
