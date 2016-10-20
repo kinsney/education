@@ -17,7 +17,7 @@ from misago.conf.defaults import *
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 INSTALLED_APPS += (
-
+    'home',
 )
 
 # Quick-start development settings - unsuitable for production
