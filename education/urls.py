@@ -8,7 +8,6 @@ from django.contrib import admin
 # Register default views
 from misago.core.views import javascript_catalog, momentjs_catalog
 from misago.users.forms.auth import AdminAuthenticationForm
-from . import views
 
 admin.autodiscover()
 admin.site.login_form = AdminAuthenticationForm
@@ -16,7 +15,7 @@ admin.site.login_form = AdminAuthenticationForm
 
 
 urlpatterns = [
-    url(r'^$', views.home , name='home'),
+    url(r'^$', include('home.urls', namespace='home')),
     url(r'^forum/', include('misago.urls', namespace='misago')),
     # Javascript translations
     url(r'^django-i18n.js$', javascript_catalog),
