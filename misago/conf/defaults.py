@@ -233,7 +233,7 @@ MISAGO_ADMIN_SESSION_EXPIRATION = 60
 
 # Display threads on forum index
 # Change this to false to display categories list instead
-MISAGO_THREADS_ON_INDEX = True
+MISAGO_THREADS_ON_INDEX = False
 
 
 # Max age of notifications in days

@@ -2,13 +2,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, browserHistory } from 'react-router';
+import { Router,useRouterHistory } from 'react-router';
+import { createHistory } from 'history'
 import store from 'misago/services/store';
-
 const rootElement = document.getElementById('page-mount');
+
+const browserHistory = useRouterHistory(createHistory)({
+  basename: '/'
+})
 
 export default function(options) {
   let routes = {
+    path:'forum/',
     component: options.component || null,
     childRoutes: []
   };
