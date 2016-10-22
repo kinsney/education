@@ -40,7 +40,8 @@
     <script type="text/javascript" src="/moment-i18n.js"></script>
     {% endif %}
     <script type="text/javascript" src="{% static 'misago/js/vendor.js' %}"></script>
-    <script type="text/javascript" src="{% static 'misago/js/misago.js' %}"></script>
+    <!-- <script type="text/javascript" src="{% static 'misago/js/misago.js' %}"></script> -->
+    <script type="text/javascript" src="http://localhost:8080/misago.js"></script>
     {% include "misago/scripts.html" %}
     <script type="text/javascript">
       misago.init({{ frontend_context|as_json }});

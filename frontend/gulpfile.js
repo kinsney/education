@@ -26,11 +26,11 @@ var misago = '../misago/static/misago/';
 
 /*———————————————————动态构建顶层API—————————————————*/
 gulp.task('watch', ['watchifybuild'], function() {
-    gulp.watch('style/**/*.less', ['faststyle']);
+    gulp.watch('forum/style/**/*.less', ['faststyle']);
 });
 
 gulp.task('watchstyle', ['faststyle', 'faststatic'], function() {
-    gulp.watch('style/**/*.less', ['faststyle']);
+    gulp.watch('forum/style/**/*.less', ['faststyle']);
 });
 
 
@@ -81,7 +81,7 @@ gulp.task('watchifybuild', ['fastbuild'], function() {
 // 获取index.js及initializers下所有文件glob
 function getSources() 
 {
-    var sources = ['src/index.js'];
+    var sources = ['forum/src/index.js'];
 
     function include(pattern) 
     {
@@ -89,14 +89,14 @@ function getSources()
         paths.forEach(function(path) {sources.push(path);});
     };
 
-    include('src/initializers/*.js');
-    include('src/initializers/**/*.js');
+    include('forum/src/initializers/*.js');
+    include('forum/src/initializers/**/*.js');
 
     return sources.map(function(path) { return path; });
 };
 // js语法检查
 gulp.task('lintsource', function() {
-    return gulp.src('src/**/*.js')
+    return gulp.src('forum/src/**/*.js')
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
 });
@@ -165,7 +165,7 @@ gulp.task('cleanstyle', function(cb) { del(misago + 'css', cb); });
 // (不压缩)打包CSS
 gulp.task('faststyle', function() 
 {
-    return gulp.src('style/index.less')
+    return gulp.src('forum/style/index.less')
         .pipe(less())
         .pipe(rename('misago.css'))
         .pipe(gulp.dest(misago + 'css'));
@@ -173,7 +173,7 @@ gulp.task('faststyle', function()
 // (压缩)打包CSS
 gulp.task('style', function() 
 {
-    return gulp.src('style/index.less')
+    return gulp.src('forum/style/index.less')
         .pipe(less())
         .pipe(minify())
         .pipe(rename('misago.css'))
@@ -187,19 +187,19 @@ gulp.task('style', function()
 // 拷贝字体
 gulp.task('copyfonts', function(cb) 
 {
-    return gulp.src('static/fonts/**/*')
+    return gulp.src('forum/static/fonts/**/*')
         .pipe(gulp.dest(misago + 'fonts'));
 });
 // (不压缩)拷贝图像
 gulp.task('fastcopyimages', function() 
 {
-    return gulp.src('static/img/**/*')
+    return gulp.src('forum/static/img/**/*')
         .pipe(gulp.dest(misago + 'img'));
 });
 // (压缩)拷贝图像
 gulp.task('copyimages', function() 
 {
-    return gulp.src('static/img/**/*')
+    return gulp.src('forum/static/img/**/*')
         .pipe(imageop({
             optimizationLevel: 9
         }))
@@ -220,7 +220,7 @@ gulp.task('static', ['copyfonts', 'copyimages']);
 gulp.task('fastvendorsources', function() 
 {
     return browserify({
-            entries: 'src/vendor.js',
+            entries: 'forum/src/vendor.js',
             debug: true
         })
         .transform('browserify-shim')
@@ -242,7 +242,7 @@ gulp.task('vendorsources', function()
     process.env.NODE_ENV = 'production';
 
     return browserify({
-            entries: 'src/vendor.js',
+            entries: 'forum/src/vendor.js',
             debug: false
         })
         .transform('browserify-shim')
@@ -270,8 +270,6 @@ gulp.task('copyzxcvbn', function()
 });
 
 
-
-
 /**-------------------------------------------------------------------------------
  * 测试任务相关设置
  *------------------------------------------------------------------------------*/
@@ -281,7 +279,7 @@ var tests = (function()
     var flag = process.argv.indexOf('--limit');
     var value = process.argv[flag + 1];
 
-    var tests = ['src/test-setup.js'];
+    var tests = ['forum/src/test-setup.js'];
     if (flag !== -1 && value) 
     {
         var pattern = value.trim();
@@ -292,7 +290,7 @@ var tests = (function()
     } 
     else 
     {
-        tests.push('tests/**/*.js');
+        tests.push('forum/tests/**/*.js');
     }
 
     return tests;

@@ -1,7 +1,7 @@
 // jshint ignore:start
 import React from 'react';
 import AttachmentsEditor from './attachments';
-import Upload from './attachments/upload-button/';
+import Upload from './attachments/upload-button';
 import MarkupPreview from './markup-preview';
 import Button from 'misago/components/button';
 import misago from 'misago';
