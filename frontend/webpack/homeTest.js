@@ -1,17 +1,17 @@
 var webpack = require('webpack');
 var join = require('path').join;
-var path = join(__dirname, '../');
+var dirpath = join(__dirname, '../');
 
 module.exports = 
 {
-    context: path+'home',
+    context: dirpath+'home',
     entry: 
     {
         app: ['./index.js'],
     },
     output: 
     {
-        path: path+'dist',
+        path: dirpath+'dist',
         filename: '[name].js',
         // publicPath:"http://localhost:8000/"
     },
@@ -31,9 +31,9 @@ module.exports =
     devtool: 'eval',
     devServer: 
     {
-        contentBase: path+'dist',    // 提供一个服务器服务的文件夹
+        contentBase: dirpath+'dist',    // 提供一个服务器服务的文件夹
         inline: true,   // 实施刷新页面
         host: process.env.IP || '0.0.0.0',
-        port: process.env.PORT || 8000,
+        port: process.env.PORT || 8080,
     }
 }

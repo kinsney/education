@@ -15,7 +15,7 @@ admin.site.login_form = AdminAuthenticationForm
 
 
 urlpatterns = [
-    url(r'^$', include('home.urls', namespace='home')),
+    url(r'^', include('home.urls', namespace='home')),
     url(r'^forum/', include('misago.urls', namespace='misago')),
     # Javascript translations
     url(r'^django-i18n.js$', javascript_catalog),

@@ -13,7 +13,6 @@ export default function(options)
 {
     let routes = 
     {
-        path: 'forum/',
         component: options.component || null,
         childRoutes: []
     };
