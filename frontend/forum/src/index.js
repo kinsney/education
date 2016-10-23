@@ -1,14 +1,13 @@
 import OrderedList from 'misago/utils/ordered-list';
-
 export class Misago
 {
-    constructor() 
+    constructor()
     {
         this._initializers = [];
         this._context = {};
     }
 
-    addInitializer(initializer) 
+    addInitializer(initializer)
     {
         this._initializers.push(
         {
@@ -21,7 +20,7 @@ export class Misago
         });
     }
 
-    init(context) 
+    init(context)
     {
         this._context = context;
 
@@ -32,27 +31,27 @@ export class Misago
     // context accessors
     has(key) { return !!this._context[key]; }
 
-    get(key, fallback) 
+    get(key, fallback)
     {
-        if (this.has(key)) 
+        if (this.has(key))
         {
             return this._context[key];
-        } 
-        else 
+        }
+        else
         {
             return fallback || undefined;
         }
     }
 
-    pop(key) 
+    pop(key)
     {
-        if (this.has(key)) 
+        if (this.has(key))
         {
             let value = this._context[key];
             this._context[key] = null;
             return value;
-        } 
-        else 
+        }
+        else
         {
             return undefined;
         }

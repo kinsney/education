@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-export default class MyComponent extends React.Component 
+alert("123")
+export default class MyComponent extends React.Component
 {
-	render() 
+	render()
 	{
 		return <div> this is a this can be done </div>
 	}
