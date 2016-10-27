@@ -16,7 +16,7 @@ module.exports =
         // publicPath:"http://localhost:8000/"
     },
     // 当希望以<script>的形式挂载到页面上来加载某些js库，但又希望能在 webpack 的模块中使用上,可以使用 externals 属性：
-    external: ['react', 'react-dom', 'react-router', 'redux', 'react-redux', 'moment', 'cropit'],
+    // external: ['react', 'react-dom', 'react-router', 'redux', 'react-redux', 'moment', 'cropit'],
     resolve: {extensions: ['', '.js', 'jsx', '.json'] },
     module: 
     {
@@ -33,7 +33,7 @@ module.exports =
     {
         contentBase: dirpath+'dist',    // 提供一个服务器服务的文件夹
         inline: true,   // 实施刷新页面
-        host: process.env.IP || '0.0.0.0',
-        port: process.env.PORT || 8080,
+        host: 'localhost',
+        port: 8080,
     }
 }

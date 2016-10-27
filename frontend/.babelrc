@@ -6,6 +6,7 @@
 			"babel-plugin-module-alias", 
 			[{ "src": "./forum/src", "expose": "misago" } ]
 		],
+		["import", { libraryName: "antd", style: "css" }],
 		"transform-class-properties",
 		'transform-runtime',
 		"react-hot-loader/babel"

@@ -1,12 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-alert("123")
-export default class MyComponent extends React.Component
+
+import { Steps } from 'antd';
+const Step = Steps.Step;
+
+module.hot.accept();
+
+
+export default class HomePage extends React.Component
 {
 	render()
 	{
-		return <div> this is a this can be done </div>
+		return <div>
+			<h2>sdhalfkajs</h2>
+			<Steps current={1}>
+    <Step title="Finished" description="This is a description." />
+    <Step title="In Progress" description="This is a description." />
+    <Step title="Waiting" description="This is a description." />
+  </Steps>
+		</div>
 	}
 }
-
-ReactDOM.render(<MyComponent/>, document.getElementById('home') );
+ReactDOM.render(<HomePage/>, document.getElementById('home') );
