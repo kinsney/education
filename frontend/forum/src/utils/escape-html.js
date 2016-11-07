@@ -6,7 +6,6 @@ const map = {
   "'": '&#039;'
 };
 
-export default function(text) 
-{
-	return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+export default function(text) {
+  return text.replace(/[&<>"']/g, function(m) { return map[m]; });
 }

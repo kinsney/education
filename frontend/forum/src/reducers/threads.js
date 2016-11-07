@@ -10,147 +10,147 @@ export const READ_THREADS = 'READ_THREADS';
 export const SORT_THREADS = 'SORT_THREADS';
 
 export const MODERATION_PERMISSIONS = [
-    'can_announce',
-    'can_approve',
-    'can_close',
-    'can_hide',
-    'can_move',
-    'can_merge',
-    'can_pin',
-    'can_review'
+  'can_announce',
+  'can_approve',
+  'can_close',
+  'can_hide',
+  'can_move',
+  'can_merge',
+  'can_pin',
+  'can_review'
 ];
 
 export function append(items, sorting) {
-    return {
-        type: APPEND_THREADS,
-        items,
-        sorting
-    };
+ return {
+    type: APPEND_THREADS,
+    items,
+    sorting
+  };
 }
 
 export function deleteThread(thread) {
-    return {
-        type: DELETE_THREAD,
-        thread
-    };
+  return {
+    type: DELETE_THREAD,
+    thread
+  };
 }
 
 export function filterThreads(category, categoriesMap) {
-    return {
-        type: FILTER_THREADS,
-        category,
-        categoriesMap
-    };
+  return {
+    type: FILTER_THREADS,
+    category,
+    categoriesMap
+  };
 }
 
 export function hydrate(items) {
-    return {
-        type: HYDRATE_THREADS,
-        items
-    };
+  return {
+    type: HYDRATE_THREADS,
+    items
+  };
 }
 
-export function patch(thread, patch, sorting = null) {
-    return {
-        type: PATCH_THREAD,
-        thread,
-        patch,
-        sorting
-    };
+export function patch(thread, patch, sorting=null) {
+  return {
+    type: PATCH_THREAD,
+    thread,
+    patch,
+    sorting
+  };
 }
 
 export function read(categoriesMap, category) {
-    return {
-        type: READ_THREADS,
-        categoriesMap,
-        category
-    };
+  return {
+    type: READ_THREADS,
+    categoriesMap,
+    category
+  };
 }
 
 export function sort(sorting) {
-    return {
-        type: SORT_THREADS,
-        sorting
-    };
+  return {
+    type: SORT_THREADS,
+    sorting
+  };
 }
 
 export function getThreadModerationOptions(thread_acl) {
-    let options = [];
-    MODERATION_PERMISSIONS.forEach(function(perm) {
-        if (thread_acl[perm]) {
-            options.push(perm);
-        }
-    });
-    return options;
+  let options = [];
+  MODERATION_PERMISSIONS.forEach(function(perm) {
+    if (thread_acl[perm]) {
+      options.push(perm);
+    }
+  });
+  return options;
 }
 
 export function hydrateThread(thread) {
-    return Object.assign({}, thread, {
-        started_on: moment(thread.started_on),
-        last_post_on: moment(thread.last_post_on),
-        moderation: getThreadModerationOptions(thread.acl)
-    });
+  return Object.assign({}, thread, {
+    started_on: moment(thread.started_on),
+    last_post_on: moment(thread.last_post_on),
+    moderation: getThreadModerationOptions(thread.acl)
+  });
 }
 
-export default function thread(state = [], action = null) {
-    switch (action.type) {
-        case APPEND_THREADS:
-            const mergedState = concatUnique(action.items.map(hydrateThread), state);
-            return mergedState.sort(action.sorting);
+export default function thread(state=[], action=null) {
+  switch (action.type) {
+    case APPEND_THREADS:
+      const mergedState = concatUnique(action.items.map(hydrateThread), state);
+      return mergedState.sort(action.sorting);
 
-        case DELETE_THREAD:
-            return state.filter(function(item) {
-                return item.id !== action.thread.id;
-            });
+    case DELETE_THREAD:
+      return state.filter(function(item) {
+        return item.id !== action.thread.id;
+      });
 
-        case FILTER_THREADS:
-            return state.filter(function(item) {
-                const itemCategory = action.categoriesMap[item.category];
-                if (itemCategory.lft >= action.category.lft && itemCategory.rght <= action.category.rght) {
-                    // same or sub category
-                    return true;
-                } else if (item.weight == 2) {
-                    // globally pinned
-                    return true;
-                } else {
-                    // thread moved outside displayed scope, hide it
-                    return false;
-                }
-            });
+    case FILTER_THREADS:
+      return state.filter(function(item) {
+        const itemCategory = action.categoriesMap[item.category];
+        if (itemCategory.lft >= action.category.lft && itemCategory.rght <= action.category.rght) {
+          // same or sub category
+          return true;
+        } else if (item.weight == 2) {
+          // globally pinned
+          return true;
+        } else {
+          // thread moved outside displayed scope, hide it
+          return false;
+        }
+      });
 
-        case HYDRATE_THREADS:
-            return action.items.map(hydrateThread);
+    case HYDRATE_THREADS:
+      return action.items.map(hydrateThread);
 
-        case PATCH_THREAD:
-            const patchedState = state.map(function(item) {
-                if (item.id === action.thread.id) {
-                    return Object.assign({}, item, action.patch);
-                } else {
-                    return item;
-                }
-            });
+    case PATCH_THREAD:
+      const patchedState = state.map(function(item) {
+        if (item.id === action.thread.id) {
+          return Object.assign({}, item, action.patch);
+        } else {
+          return item;
+        }
+      });
 
-            if (action.sorting) {
-                return patchedState.sort(action.sorting);
-            }
-            return patchedState;
+      if (action.sorting) {
+        return patchedState.sort(action.sorting);
+      }
+      return patchedState;
 
-        case READ_THREADS:
-            return state.map(function(item) {
-                const itemCategory = action.categoriesMap[item.category];
-                if (itemCategory.lft >= action.category.lft && itemCategory.rght <= action.category.rght) {
-                    return Object.assign({}, item, {
-                        is_read: true
-                    });
-                } else {
-                    return item;
-                }
-            });
+    case READ_THREADS:
+      return state.map(function(item) {
+        const itemCategory = action.categoriesMap[item.category];
+        if (itemCategory.lft >= action.category.lft && itemCategory.rght <= action.category.rght) {
+          return Object.assign({}, item, {
+            is_read: true
+          });
+        } else {
+          return item;
+        }
+      });
 
-        case SORT_THREADS:
-            return state.sort(action.sorting);
+    case SORT_THREADS:
+      return state.sort(action.sorting);
 
-        default:
-            return state;
-    }
+    default:
+      return state;
+  }
 }

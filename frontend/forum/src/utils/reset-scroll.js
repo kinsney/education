@@ -1,4 +1,3 @@
-export default function() 
-{
-	window.scrollTo(0, 0);
+export default function() {
+  window.scrollTo(0, 0);
 }

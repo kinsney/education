@@ -14,6 +14,7 @@ export function select(store) {
 export function paths() {
   const thread = misago.get('THREAD');
   const basePath = thread.url.index.replace(thread.slug + '-' + thread.pk, ':slug');
+
   return [
     {
       path: basePath,

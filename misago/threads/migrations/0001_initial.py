@@ -7,6 +7,7 @@ from django.conf import settings
 from django.contrib.postgres.fields import JSONField
 from django.db import migrations, models
 
+import misago.threads.models.attachment
 from misago.core.pgutils import CreatePartialCompositeIndex, CreatePartialIndex
 
 
@@ -26,7 +27,6 @@ class Migration(migrations.Migration):
                 ('original', models.TextField()),
                 ('parsed', models.TextField()),
                 ('checksum', models.CharField(max_length=64, default='-')),
-                ('has_attachments', models.BooleanField(default=False)),
                 ('attachments_cache', JSONField(null=True, blank=True)),
                 ('posted_on', models.DateTimeField()),
                 ('updated_on', models.DateTimeField()),
@@ -225,15 +225,15 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('secret', models.CharField(max_length=64)),
-                ('uploaded_on', models.DateTimeField(default=django.utils.timezone.now)),
+                ('uploaded_on', models.DateTimeField(default=django.utils.timezone.now, db_index=True)),
                 ('uploader_name', models.CharField(max_length=255)),
-                ('uploader_slug', models.CharField(max_length=255)),
+                ('uploader_slug', models.CharField(max_length=255, db_index=True)),
                 ('uploader_ip', models.GenericIPAddressField()),
-                ('filename', models.CharField(max_length=255)),
-                ('thumbnail', models.ImageField(blank=True, null=True, upload_to='attachments')),
-                ('image', models.ImageField(blank=True, null=True, upload_to='attachments')),
-                ('file', models.FileField(blank=True, null=True, upload_to='attachments')),
-                ('downloads', models.PositiveIntegerField(default=0)),
+                ('filename', models.CharField(max_length=255, db_index=True)),
+                ('size', models.PositiveIntegerField(default=0, db_index=True)),
+                ('thumbnail', models.ImageField(blank=True, null=True, upload_to=misago.threads.models.attachment.upload_to)),
+                ('image', models.ImageField(blank=True, null=True, upload_to=misago.threads.models.attachment.upload_to)),
+                ('file', models.FileField(blank=True, null=True, upload_to=misago.threads.models.attachment.upload_to)),
                 ('post', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='misago_threads.Post')),
             ],
         ),
@@ -259,5 +259,40 @@ class Migration(migrations.Migration):
             model_name='attachment',
             name='uploader',
             field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to=settings.AUTH_USER_MODEL),
+        ),
+        migrations.CreateModel(
+            name='Poll',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('poster_name', models.CharField(max_length=255)),
+                ('poster_slug', models.CharField(max_length=255)),
+                ('poster_ip', models.GenericIPAddressField()),
+                ('posted_on', models.DateTimeField(default=django.utils.timezone.now)),
+                ('length', models.PositiveIntegerField(default=0)),
+                ('question', models.CharField(max_length=255)),
+                ('choices', django.contrib.postgres.fields.jsonb.JSONField()),
+                ('allowed_choices', models.PositiveIntegerField(default=1)),
+                ('allow_revotes', models.BooleanField(default=False)),
+                ('votes', models.PositiveIntegerField(default=0)),
+                ('is_public', models.BooleanField(default=False)),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='misago_categories.Category')),
+                ('poster', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to=settings.AUTH_USER_MODEL)),
+                ('thread', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='misago_threads.Thread')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='PollVote',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('voter_name', models.CharField(max_length=255)),
+                ('voter_slug', models.CharField(max_length=255)),
+                ('voter_ip', models.GenericIPAddressField()),
+                ('voted_on', models.DateTimeField(default=django.utils.timezone.now)),
+                ('choice_hash', models.CharField(max_length=12, db_index=True)),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='misago_categories.Category')),
+                ('poll', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='misago_threads.Poll')),
+                ('thread', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='misago_threads.Thread')),
+                ('voter', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to=settings.AUTH_USER_MODEL)),
+            ],
         ),
     ]

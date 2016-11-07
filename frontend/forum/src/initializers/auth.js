@@ -4,14 +4,12 @@ import modal from 'misago/services/modal';
 import store from 'misago/services/store';
 import storage from 'misago/services/local-storage';
 
-export default function initializer() 
-{
-	auth.init(store, storage, modal);
+export default function initializer() {
+  auth.init(store, storage, modal);
 }
 
-misago.addInitializer(
-{
-	name: 'auth',
-	initializer: initializer,
-	after: 'store'
+misago.addInitializer({
+  name: 'auth',
+  initializer: initializer,
+  after: 'store'
 });

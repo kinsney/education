@@ -4,6 +4,7 @@ import Form from 'misago/components/form';
 import Container from './utils/container'; //jshint ignore:line
 import Loader from './utils/loader'; //jshint ignore:line
 import Message from './utils/message'; //jshint ignore:line
+import * as attachments from './utils/attachments'; //jshint ignore:line
 import { getPostValidators } from './utils/validators';
 import ajax from 'misago/services/ajax';
 import posting from 'misago/services/posting'; //jshint ignore:line
@@ -37,7 +38,7 @@ export default class extends Form {
     this.setState({
       isReady: true,
 
-      post: data.post ? ('[quote]\n' + data.post + '\n[/quote]') : ''
+      post: data.post ? ('[quote="' +  data.poster + '"]\n' + data.post + '\n[/quote]') : ''
     });
   };
 
@@ -83,7 +84,8 @@ export default class extends Form {
 
   send() {
     return ajax.post(this.props.submit, {
-      post: this.state.post
+      post: this.state.post,
+      attachments: attachments.clean(this.state.attachments)
     });
   }
 

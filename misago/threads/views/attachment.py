@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 import os
 
 from django.conf import settings
@@ -9,8 +11,8 @@ from django.shortcuts import get_object_or_404, redirect
 from ..models import Attachment, AttachmentType
 
 
-ATTACHMENT_404_URL = '/'.join((settings.STATIC_URL, settings.MISAGO_404_IMAGE))
-ATTACHMENT_403_URL = '/'.join((settings.STATIC_URL, settings.MISAGO_403_IMAGE))
+ATTACHMENT_404_URL = ''.join((settings.STATIC_URL, settings.MISAGO_404_IMAGE))
+ATTACHMENT_403_URL = ''.join((settings.STATIC_URL, settings.MISAGO_403_IMAGE))
 
 
 def attachment_server(request, pk, secret, thumbnail=False):
@@ -27,12 +29,13 @@ def serve_file(request, pk, secret, thumbnail):
     queryset = Attachment.objects.select_related('filetype')
     attachment = get_object_or_404(queryset, pk=pk, secret=secret)
 
+    if not attachment.post_id and request.GET.get('shva') != '1':
+        # if attachment is orphaned, don't run acl test unless explictly told so
+        # this saves user suprise of deleted attachment still showing in posts/quotes
+        raise Http404()
+
     if not request.user.is_staff:
         allow_file_download(request, attachment)
-
-    if not thumbnail:
-        attachment.downloads = F('downloads') + 1
-        attachment.save(update_fields=['downloads'])
 
     if attachment.is_image:
         if thumbnail:
@@ -49,8 +52,10 @@ def serve_file(request, pk, secret, thumbnail):
 def allow_file_download(request, attachment):
     is_authenticated = request.user.is_authenticated()
 
-    if not attachment.post_id or not request.user.acl['can_download_other_users_attachments']:
-        if not is_authenticated or request.user.id != attachment.uploader_id:
+    if not is_authenticated or request.user.id != attachment.uploader_id:
+        if not attachment.post_id:
+            raise Http404()
+        if not request.user.acl['can_download_other_users_attachments']:
             raise PermissionDenied()
 
     allowed_roles = set(r.pk for r in attachment.filetype.limit_downloads_to.all())

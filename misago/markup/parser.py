@@ -1,21 +1,29 @@
+from __future__ import unicode_literals
+
 import markdown
 
 import bleach
 from bs4 import BeautifulSoup
+from django.core.urlresolvers import resolve
+from django.http import Http404
 from django.utils import six
 from htmlmin.minify import html_minify
 
 from .bbcode import blocks, inline
 from .md.shortimgs import ShortImagesExtension
+from .md.striketrough import StriketroughExtension
 from .mentions import add_mentions
 from .pipeline import pipeline
 
 
 __all__ = ['parse']
 
+MISAGO_ATTACHMENT_VIEWS = ('misago:attachment', 'misago:attachment-thumbnail')
+
+
 
 def parse(text, request, poster, allow_mentions=True, allow_links=True,
-          allow_images=True, allow_blocks=True, minify=True):
+          allow_images=True, allow_blocks=True, force_shva=False, minify=True):
     """
     Message parser
 
@@ -57,7 +65,7 @@ def parse(text, request, poster, allow_mentions=True, allow_links=True,
         add_mentions(request, parsing_result)
 
     if allow_links or allow_images:
-        clean_links(request, parsing_result)
+        clean_links(request, parsing_result, force_shva)
 
     if minify:
         minify_result(parsing_result)
@@ -68,8 +76,7 @@ def md_factory(allow_links=True, allow_images=True, allow_blocks=True):
     """
     Create and configure markdown object
     """
-    md = markdown.Markdown(safe_mode='escape',
-                           extensions=['nl2br'])
+    md = markdown.Markdown(safe_mode='escape', extensions=['nl2br'])
 
     # Remove references
     del md.preprocessors['reference']
@@ -82,10 +89,11 @@ def md_factory(allow_links=True, allow_images=True, allow_blocks=True):
     md.inlinePatterns.add('bb_i', inline.italics, '<emphasis')
     md.inlinePatterns.add('bb_u', inline.underline, '<emphasis2')
 
-    if allow_links:
-        # Add [url]
-        pass
-    else:
+    # Add ~~deleted~~
+    striketrough_md = StriketroughExtension()
+    striketrough_md.extendMarkdown(md)
+
+    if not allow_links:
         # Remove links
         del md.inlinePatterns['link']
         del md.inlinePatterns['autolink']
@@ -100,8 +108,11 @@ def md_factory(allow_links=True, allow_images=True, allow_blocks=True):
         del md.inlinePatterns['image_link']
 
     if allow_blocks:
-        # Add [hr] [quote], [spoiler], [list] and [code] blocks
+        # Add [hr] and [quote] blocks
         md.parser.blockprocessors.add('bb_hr', blocks.BBCodeHRProcessor(md.parser), '>hr')
+
+        quote_bbcode = blocks.QuoteExtension()
+        quote_bbcode.extendMarkdown(md)
     else:
         # Remove blocks
         del md.parser.blockprocessors['hashheader']
@@ -119,40 +130,80 @@ def linkify_paragraphs(result):
     result['parsed_text'] = bleach.linkify(result['parsed_text'], skip_pre=True, parse_email=True)
 
 
-def clean_links(request, result):
+def clean_links(request, result, force_shva=False):
+    host = request.get_host()
     site_address = '%s://%s' % (request.scheme, request.get_host())
 
     soup = BeautifulSoup(result['parsed_text'], 'html5lib')
     for link in soup.find_all('a'):
-        if link['href'].lower().startswith(site_address):
+        if is_internal_link(link['href'], host):
+            link['href'] = clean_internal_link(link['href'], host)
             result['inside_links'].append(link['href'])
-            if link['href'].lower() == site_address:
-                link['href'] = '/'
-            else:
-                link['href'] = link['href'].lower()[len(site_address):]
+            link['href'] = clean_attachment_link(link['href'], force_shva)
         else:
             result['outgoing_links'].append(link['href'])
 
-        if link.string.startswith('http://'):
-            link.string.replace_with(link.string[7:].strip())
-        if link.string.startswith('https://'):
-            link.string.replace_with(link.string[8:].strip())
+        if link.string:
+            link.string = clean_link_prefix(link.string)
 
     for img in soup.find_all('img'):
-        result['images'].append(img['src'])
-        if img['src'].lower().startswith(site_address):
-            if img['src'].lower() == site_address:
-                img['src'] = '/'
-            else:
-                img['src'] = img['src'].lower()[len(site_address):]
-
-        if img['alt'].startswith('http://'):
-            img['alt'] = img['alt'][7:].strip()
-        if img['alt'].startswith('https://'):
-            img['alt'] = img['alt'][8:].strip()
+        img['alt'] = clean_link_prefix(img['alt'])
+        if is_internal_link(img['src'], host):
+            img['src'] = clean_internal_link(img['src'], host)
+            result['images'].append(img['src'])
+            img['src'] = clean_attachment_link(img['src'], force_shva)
+        else:
+            result['images'].append(img['src'])
 
     # [6:-7] trims <body></body> wrap
     result['parsed_text'] = six.text_type(soup.body)[6:-7]
+
+
+def is_internal_link(link, host):
+    if link.startswith('/') and not link.startswith('//'):
+        return True
+
+    link = clean_link_prefix(link).lstrip('www.').lower()
+    return link.lower().startswith(host.lstrip('www.'))
+
+
+def clean_link_prefix(link):
+    if link.lower().startswith('https:'):
+        link = link[6:]
+    if link.lower().startswith('http:'):
+        link = link[5:]
+    if link.startswith('//'):
+        link = link[2:]
+    return link
+
+
+def clean_internal_link(link, host):
+    link = clean_link_prefix(link)
+
+    if link.lower().startswith('www.'):
+        link = link[4:]
+    if host.lower().startswith('www.'):
+        host = host[4:]
+
+    if link.lower().startswith(host):
+        link = link[len(host):]
+
+    return link or '/'
+
+
+def clean_attachment_link(link, force_shva=False):
+    try:
+        resolution = resolve(link)
+        url_name = ':'.join(resolution.namespaces + [resolution.url_name])
+    except (Http404, ValueError):
+        return link
+
+    if url_name in MISAGO_ATTACHMENT_VIEWS:
+        if force_shva:
+            link = '{}?shva=1'.format(link)
+        elif link.endswith('?shva=1'):
+            link = link[:-7]
+    return link
 
 
 def minify_result(result):

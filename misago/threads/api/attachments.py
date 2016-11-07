@@ -38,6 +38,7 @@ class AttachmentViewSet(viewsets.ViewSet):
         attachment = Attachment(
             secret=Attachment.generate_new_secret(),
             filetype=filetype,
+            size=upload.size,
             uploader=request.user,
             uploader_name=request.user.username,
             uploader_slug=request.user.slug,
@@ -85,14 +86,14 @@ def validate_filetype(upload, user_roles):
 
 def validate_filesize(upload, filetype, hard_limit):
     if upload.size > hard_limit * 1024:
-        message = _("You can't upload files larger than %(limit)s. (Your file has %(upload)s)")
+        message = _("You can't upload files larger than %(limit)s (your file has %(upload)s).")
         raise ValidationError(message % {
             'upload': filesizeformat(upload.size).rstrip('.0'),
             'limit': filesizeformat(hard_limit * 1024).rstrip('.0')
         })
 
     if filetype.size_limit and upload.size > filetype.size_limit * 1024:
-        message = _("You can't upload files of this type larger than %(limit)s. (Your file has %(upload)s)")
+        message = _("You can't upload files of this type larger than %(limit)s (your file has %(upload)s).")
         raise ValidationError(message % {
             'upload': filesizeformat(upload.size).rstrip('.0'),
             'limit': filesizeformat(filetype.size_limit * 1024).rstrip('.0')

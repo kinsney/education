@@ -124,9 +124,22 @@ Hey there @{}, how's going?
 
 class CleanLinksTests(TestCase):
     def test_clean_current_link(self):
-        """clean_links step leaves http://test.com alone"""
+        """clean_links step cleans http://test.com"""
         test_text = """
 Lorem ipsum: http://test.com
+""".strip()
+
+        expected_result = """
+<p>Lorem ipsum: <a href="/" rel="nofollow">test.com</a></p>
+""".strip()
+
+        result = parse(test_text, MockRequest(), MockPoster(), minify=True)
+        self.assertEqual(expected_result, result['parsed_text'])
+
+    def test_clean_schemaless_link(self):
+        """clean_links step cleans test.com"""
+        test_text = """
+Lorem ipsum: test.com
 """.strip()
 
         expected_result = """
@@ -199,4 +212,178 @@ Lorem ipsum: http://somewhere.com/somewhere-something/
 """.strip()
 
         result = parse(test_text, MockRequest(), MockPoster(), minify=True)
+        self.assertEqual(expected_result, result['parsed_text'])
+
+    def test_clean_linked_image(self):
+        """parser handles image element nested in link"""
+        test_text = """
+[![3.png](http://test.com/attachment/thumb/test-43/)](http://test.com/attachment/test-43/)
+        """.strip()
+
+        expected_result = """
+<p><a href="/attachment/test-43/" rel="nofollow"><img alt="3.png" src="/attachment/thumb/test-43/"/></a></p>
+""".strip()
+
+        result = parse(test_text, MockRequest(), MockPoster(), minify=True)
+        self.assertEqual(expected_result, result['parsed_text'])
+
+    def test_force_shva(self):
+        """parser appends ?shva=1 bit to attachment links if flag is present"""
+        test_text = """
+![3.png](http://test.com/attachment/thumb/test-43/)
+        """.strip()
+
+        expected_result = """
+<p><img alt="3.png" src="/attachment/thumb/test-43/?shva=1"/></p>
+""".strip()
+
+        result = parse(test_text, MockRequest(), MockPoster(), minify=True, force_shva=True)
+        self.assertEqual(expected_result, result['parsed_text'])
+
+    def test_remove_shva(self):
+        """parser removes ?shva=1 bit from attachment links if flag is absent"""
+        test_text = """
+![3.png](http://test.com/attachment/thumb/test-43/?shva=1)
+        """.strip()
+
+        expected_result = """
+<p><img alt="3.png" src="/attachment/thumb/test-43/"/></p>
+""".strip()
+
+        result = parse(test_text, MockRequest(), MockPoster(), minify=True)
+        self.assertEqual(expected_result, result['parsed_text'])
+
+
+class StriketroughTests(TestCase):
+    def test_striketrough(self):
+        """striketrough markdown deletes test"""
+        test_text = """
+Lorem ~~ipsum, dolor~~ met.
+""".strip()
+
+        expected_result = """
+<p>Lorem <del>ipsum, dolor</del> met.</p>
+""".strip()
+
+        result = parse(test_text, MockRequest(), MockPoster(), minify=False)
+        self.assertEqual(expected_result, result['parsed_text'])
+
+
+class QuoteTests(TestCase):
+    def test_quotes(self):
+        """bbcode for quote is supported"""
+        test_text = """
+Lorem ipsum.
+[quote]Dolor met[/quote]
+[quote]Dolor <b>met</b>[/quote]
+[quote]Dolor **met**[quote]Dolor met[/quote][/quote]
+""".strip()
+
+        expected_result = """
+<p>Lorem ipsum.</p>
+<blockquote>
+<header></header>
+<p>Dolor met</p>
+</blockquote>
+<blockquote>
+<header></header>
+<p>Dolor &lt;b&gt;met&lt;/b&gt;</p>
+</blockquote>
+<blockquote>
+<header></header>
+<p>Dolor <strong>met</strong></p>
+<blockquote>
+<header></header>
+<p>Dolor met</p>
+</blockquote>
+</blockquote>
+""".strip()
+
+        result = parse(test_text, MockRequest(), MockPoster(), minify=False)
+        self.assertEqual(expected_result, result['parsed_text'])
+
+    def test_authored_quotes(self):
+        """bbcode for authored quote is supported and handles mentions as well"""
+        test_text = """
+Lorem ipsum.
+[quote]Dolor met[/quote]
+[quote=\"Bob\"]Dolor <b>met</b>[/quote]
+[quote]Dolor **met**[quote=@Bob]Dolor met[/quote][/quote]
+""".strip()
+
+        expected_result = """
+<p>Lorem ipsum.</p>
+<blockquote>
+<header></header>
+<p>Dolor met</p>
+</blockquote>
+<blockquote>
+<header>@Bob</header>
+<p>Dolor &lt;b&gt;met&lt;/b&gt;</p>
+</blockquote>
+<blockquote>
+<header></header>
+<p>Dolor <strong>met</strong></p>
+<blockquote>
+<header>@Bob</header>
+<p>Dolor met</p>
+</blockquote>
+</blockquote>
+""".strip()
+
+        result = parse(test_text, MockRequest(), MockPoster(), minify=False)
+        self.assertEqual(expected_result, result['parsed_text'])
+
+    def test_invalid_author_quote(self):
+        """parser handles invalid author quote"""
+        test_text = """
+Lorem ipsum.
+[quote=\"Bob Sasasasa]Dolor <b>met</b>[/quote]
+""".strip()
+
+        expected_result = """
+<p>Lorem ipsum.<br/>
+[quote="Bob Sasasasa]Dolor &lt;b&gt;met&lt;/b&gt;[/quote]</p>
+""".strip()
+
+        result = parse(test_text, MockRequest(), MockPoster(), minify=False)
+        self.assertEqual(expected_result, result['parsed_text'])
+
+    def test_invalid_author_quote(self):
+        """parser handles invalid author quote"""
+        test_text = """
+Lorem ipsum.
+[quote=\"Bob Sasasasa]Dolor <b>met</b>[/quote]
+""".strip()
+
+        expected_result = """
+<p>Lorem ipsum.<br/>
+[quote="Bob Sasasasa]Dolor &lt;b&gt;met&lt;/b&gt;[/quote]</p>
+""".strip()
+
+        result = parse(test_text, MockRequest(), MockPoster(), minify=False)
+        self.assertEqual(expected_result, result['parsed_text'])
+
+    def test_hr_edge_case(self):
+        """test for weird edge case in which hr gets moved outside of quote"""
+        test_text = """
+Lorem ipsum.
+[quote]
+Dolor met
+- - - - -
+Amet elit
+[/quote]
+""".strip()
+
+        expected_result = """
+<p>Lorem ipsum.</p>
+<blockquote>
+<header></header>
+<p>Dolor met</p>
+<hr/>
+<p>Amet elit</p>
+</blockquote>
+""".strip()
+
+        result = parse(test_text, MockRequest(), MockPoster(), minify=False)
         self.assertEqual(expected_result, result['parsed_text'])

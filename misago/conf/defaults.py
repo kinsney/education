@@ -119,6 +119,7 @@ MISAGO_ACL_EXTENSIONS = (
     'misago.users.permissions.delete',
     'misago.categories.permissions',
     'misago.threads.permissions.attachments',
+    'misago.threads.permissions.polls',
     'misago.threads.permissions.threads',
     'misago.threads.permissions.privatethreads',
 )
@@ -126,10 +127,12 @@ MISAGO_ACL_EXTENSIONS = (
 MISAGO_MARKUP_EXTENSIONS = ()
 
 MISAGO_POSTING_MIDDLEWARES = (
-    # Note: always keep FloodProtectionMiddleware middleware first one
+    # Always keep FloodProtectionMiddleware middleware first one
     'misago.threads.api.postingendpoint.floodprotection.FloodProtectionMiddleware',
+
     'misago.threads.api.postingendpoint.category.CategoryMiddleware',
     'misago.threads.api.postingendpoint.reply.ReplyMiddleware',
+    'misago.threads.api.postingendpoint.attachments.AttachmentsMiddleware',
     # 'misago.threads.api.postingendpoint.participants.ThreadParticipantsFormMiddleware',
     'misago.threads.api.postingendpoint.pin.PinMiddleware',
     'misago.threads.api.postingendpoint.close.CloseMiddleware',
@@ -139,8 +142,10 @@ MISAGO_POSTING_MIDDLEWARES = (
     'misago.threads.api.postingendpoint.updatestats.UpdateStatsMiddleware',
     'misago.threads.api.postingendpoint.mentions.MentionsMiddleware',
     'misago.threads.api.postingendpoint.subscribe.SubscribeMiddleware',
-    # Note: always keep SaveChangesMiddleware middleware after all state-changing middlewares
+
+    # Always keep SaveChangesMiddleware middleware after all state-changing middlewares
     'misago.threads.api.postingendpoint.savechanges.SaveChangesMiddleware',
+
     # Those middlewares are last because they don't change app state
     'misago.threads.api.postingendpoint.emailnotification.EmailNotificationMiddleware',
 )
@@ -233,7 +238,7 @@ MISAGO_ADMIN_SESSION_EXPIRATION = 60
 
 # Display threads on forum index
 # Change this to false to display categories list instead
-MISAGO_THREADS_ON_INDEX = False
+MISAGO_THREADS_ON_INDEX = True
 
 
 # Max age of notifications in days
@@ -276,9 +281,15 @@ MISAGO_POSTS_TAIL = 7
 # Number of attachments possible to assign to single post
 MISAGO_POST_ATTACHMENTS_LIMIT = 16
 
+# Max allowed size of image before Misago will generate thumbnail for it
+MISAGO_ATTACHMENT_IMAGE_SIZE_LIMIT = (500, 500)
 
 # Length of secret used for attachments url tokens and filenames
 MISAGO_ATTACHMENT_SECRET_LENGTH = 64
+
+# How old (in minutes) should attachments unassociated with any be before they'll
+# automatically deleted by "clearattachments" task
+MISAGO_ATTACHMENT_ORPHANED_EXPIRE = 24 * 60
 
 
 # Names of files served when user requests file that doesn't exist or is unavailable

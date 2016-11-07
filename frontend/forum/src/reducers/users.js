@@ -7,83 +7,83 @@ export const UPDATE_AVATAR = 'UPDATE_AVATAR';
 export const UPDATE_USERNAME = 'UPDATE_USERNAME';
 
 export function append(items) {
-    return {
-        type: APPEND_USERS,
-        items
-    };
+  return {
+    type: APPEND_USERS,
+    items
+  };
 }
 
 export function hydrate(items) {
-    return {
-        type: HYDRATE_USERS,
-        items
-    };
+  return {
+    type: HYDRATE_USERS,
+    items
+  };
 }
 
 export function hydrateStatus(status) {
-    if (status) {
-        return Object.assign({}, status, {
-            last_click: status.last_click ? moment(status.last_click) : null,
-            banned_until: status.banned_until ? moment(status.banned_until) : null
-        });
-    } else {
-        return null;
-    }
+  if (status) {
+    return Object.assign({}, status, {
+      last_click: status.last_click ? moment(status.last_click) : null,
+      banned_until: status.banned_until ? moment(status.banned_until) : null
+    });
+  } else {
+    return null;
+  }
 }
 
 export function hydrateUser(user) {
-    return Object.assign({}, user, {
-        joined_on: moment(user.joined_on),
-        status: hydrateStatus(user.status)
-    });
+  return Object.assign({}, user, {
+    joined_on: moment(user.joined_on),
+    status: hydrateStatus(user.status)
+  });
 }
 
 export function updateAvatar(user, avatarHash) {
-    return {
-        type: UPDATE_AVATAR,
-        userId: user.id,
-        avatarHash
-    };
+  return {
+    type: UPDATE_AVATAR,
+    userId: user.id,
+    avatarHash
+  };
 }
 
 export function updateUsername(user, username, slug) {
-    return {
-        type: UPDATE_USERNAME,
-        userId: user.id,
-        username,
-        slug
-    };
+  return {
+    type: UPDATE_USERNAME,
+    userId: user.id,
+    username,
+    slug
+  };
 }
 
-export default function user(state = [], action = null) {
-    switch (action.type) {
-        case APPEND_USERS:
-            let mergedState = concatUnique(state, action.items.map(hydrateUser));
+export default function user(state=[], action=null) {
+  switch (action.type) {
+    case APPEND_USERS:
+      let mergedState = concatUnique(state, action.items.map(hydrateUser));
 
-            return mergedState.sort(function(a, b) {
-                if (a.username < b.username) {
-                    return -1;
-                } else if (a.username > b.username) {
-                    return 1;
-                } else {
-                    return 0;
-                }
-            });
+      return mergedState.sort(function(a, b) {
+        if (a.username < b.username) {
+          return -1;
+        } else if (a.username > b.username) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
 
-        case HYDRATE_USERS:
-            return action.items.map(hydrateUser);
+    case HYDRATE_USERS:
+      return action.items.map(hydrateUser);
 
-        case UPDATE_AVATAR:
-            return state.map(function(item) {
-                item = Object.assign({}, item);
-                if (item.id === action.userId) {
-                    item.avatar_hash = action.avatarHash;
-                }
+    case UPDATE_AVATAR:
+      return state.map(function(item) {
+        item = Object.assign({}, item);
+        if (item.id === action.userId) {
+          item.avatar_hash = action.avatarHash;
+        }
 
-                return item;
-            });
+        return item;
+      });
 
-        default:
-            return state;
-    }
+    default:
+      return state;
+  }
 }
