@@ -1,0 +1,30 @@
+@import '../theme.less';
+
+.crossLab
+{
+	position: relative;
+	.slick-slider {padding:0;}
+	.cover
+	{
+		height:580px;
+		background-position:center;
+		background-size:cover;
+		background-repeat:no-repeat;
+	}
+	.info
+	{
+		position:absolute; height:366px; width:366px; left:50%; top:50%; margin:-183px 0 0 -183px;
+		background-color:rgba(255,255,255,0.75); border-radius:200px; overflow:hidden;
+		.profile
+		{
+			height:366px; width:366px; padding:70px 60px; text-align:center;
+			img{display:inline-block;}
+		}
+		.arrow
+		{
+			position:absolute; width:100%; height:40px; top:50%; padding:0 16px; margin-top:-20px;
+			font-size:40px; font-weight:lighter; color:#c8c8c8;
+			>div{height:100%; line-height:40px;} .left{float:left;} .right{float:right;}
+		}
+	}
+}

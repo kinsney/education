@@ -22,7 +22,7 @@ module.exports =
     },
     // 当希望以<script>的形式挂载到页面上来加载某些js库，但又希望能在 webpack 的模块中使用上,可以使用 externals 属性：
     // external: ['react', 'react-dom', 'react-router', 'redux', 'react-redux', 'moment', 'cropit'],
-    resolve: {extensions: ['', '.js', 'jsx', '.json'] },
+    resolve: {extensions: ['', '.js', '.jsx', '.json'] },
     module: 
     {
         loaders: 
@@ -40,7 +40,7 @@ module.exports =
     {
         contentBase: dirpath+'dist',    // 提供一个服务器服务的文件夹
         hot: true,
-        host: 'localhost',
+        host: '0.0.0.0',
         port: 8080,
         historyApiFallback: true
     }

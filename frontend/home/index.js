@@ -1,23 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { Steps } from 'antd';
-const Step = Steps.Step;
+import Header from './src/header/index';
+import Banner from './src/banner/index';
+import Steam from './src/homeCross-steam/index';
+import Course from './src/homeCross-course/index';
+import Laboratory from './src/homeCross-lab/index';
+import Activity from './src/homeCross-activity/index';
+import Footer from './src/footer/index';
 
-module.hot.accept();
+if(module.hot) 
+{
+	module.hot.accept();
+}
 
 
 export default class HomePage extends React.Component
 {
 	render()
 	{
-		return <div>
-			<h2>sdhalfkajs</h2>
-			<Steps current={1}>
-    <Step title="Finished" description="This is a description." />
-    <Step title="In Progress" description="This is a description." />
-    <Step title="Waiting" description="This is a description." />
-  </Steps>
+		return 	<div>
+			<Header></Header>
+			<Banner></Banner>
+			<Steam></Steam>
+			<Course></Course>
+			<Laboratory></Laboratory>
+			<Activity></Activity>
+			<Footer></Footer>
 		</div>
 	}
 }

@@ -1,0 +1,57 @@
+@import '../theme.less';
+
+.crossCourse
+{
+	padding:40px 0; *{box-sizing:border-box;}
+	.crossCont
+	{
+		width:1208px; margin:0 auto;
+		.topBar
+		{
+			height:50px; line-height:50px;
+			.ant-menu-horizontal{border:none; font-size:14px;}
+		}
+		.courses
+		{
+			height:550px; *{font-weight:lighter;}
+			.hotCard
+			{
+				height:550px; border:1px solid #F1F4F4;
+				.slick-slider
+				{
+					position:relative; padding:0;
+					.cover { height:460px; img{height:100%;}}
+					.slick-dots { position:absolute; bottom:20px; }
+				}
+				.info
+				{
+					padding:16px; position:relative; height:90px;
+					h5{font-size:16px; color:#333333;}
+					p{font-size:14px; color:#333333; position:absolute; bottom:16px;}
+					a{
+						position:absolute; right:16px; bottom:16px; height:35px; width:85px; color:white;
+						background-color:#4776e6; border-radius:6px; line-height:35px; text-align:center;
+					}
+				}
+			}
+			.card
+			{
+				height:265px; border:1px solid #F1F4F4;
+				.cover
+				{
+					height:175px; overflow:hidden; img{height:100%;}
+				}
+				.info
+				{
+					padding:16px; position:relative; height:90px;
+					h5{font-size:16px; color:#333333; line-height:18px;}
+					p{font-size:14px; color:#333333; position:absolute; bottom:16px;}
+					a{
+						position:absolute; right:16px; bottom:16px; color:#009944; font-size:16px;
+					}
+				}
+			}
+
+		}
+	}
+}

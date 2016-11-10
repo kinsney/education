@@ -41,7 +41,7 @@ DATABASES = {
     'default': {
         # Only PostgreSQL is supported
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'testforum',
+        'NAME': 'education',
         'USER': '',
         'HOST': 'localhost',
         'PORT': 5432,

@@ -69,3 +69,7 @@ venv/
 future-manage.py
 misago-admin.py
 db.sqlite3
+
+
+# django settings
+education/settings

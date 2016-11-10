@@ -10,7 +10,7 @@ module.exports =
         path: join(__dirname, 'dist'),
         filename: 'vendor.js'
     },
-    resolve: {extensions: ['', '.js', 'jsx', '.json'] },
+    resolve: {extensions: ['', '.js', '.jsx', '.json'] },
     module: 
     {
         loaders: 
