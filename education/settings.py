@@ -131,3 +131,26 @@ MISAGO_SENDFILE_LOCATIONS_PATH = ''
 # Don't edit those settings unless you know what you are doing
 ROOT_URLCONF = 'education.urls'
 WSGI_APPLICATION = 'education.wsgi.application'
+
+
+#aliyun oss settings
+
+# ACCESS_KEY_ID = "LTAIgxtquk5E15ut"
+# ACCESS_KEY_SECRET = "DyMSzsy8czsvYHsN550xxIx8UustMG"
+# END_POINT = "oss-cn-beijing.aliyuncs.com"
+# BUCKET_NAME = "yanhe-edu"
+# BUCKET_ACL_TYPE = "public-read-write"  # private, public-read, public-read-write
+
+# DEFAULT_FILE_STORAGE = 'aliyun_oss2_storage.backends.AliyunMediaStorage'
+# STATICFILES_STORAGE = 'aliyun_oss2_storage.backends.AliyunStaticStorage'
+
+#aliyun mail settings
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_USE_TLS = False
+EMAIL_HOST = 'smtpdm.aliyun.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'post@verify.yanheedu.cn'
+EMAIL_HOST_PASSWORD = 'kinsney123'
+DEFAULT_FROM_EMAIL = 'post@verify.yanheedu.cn'
