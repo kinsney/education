@@ -19,6 +19,8 @@
 			.hotCard
 			{
 				height:550px; border:1px solid #F1F4F4;
+				position:relative; top:0; transition:0.3s ease-in-out;
+				&:hover{ top:-3px; box-shadow:0 20px 80px rgba(0,0,0,0.2);}
 				.slick-slider
 				{
 					position:relative; padding:0;
@@ -38,7 +40,9 @@
 			}
 			.card
 			{
-				height:265px; border:1px solid @BDC-split;
+				height:265px; border:1px solid @BDC-split; 
+				position:relative; top:0; transition:0.3s ease-in-out;
+				&:hover{ top:-3px; box-shadow:0 20px 80px rgba(0,0,0,0.2);}
 				.cover
 				{
 					height:175px; overflow:hidden; img{height:100%;}
