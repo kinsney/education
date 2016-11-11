@@ -1,13 +1,46 @@
 import React from 'react';
 
-import {Icon} from 'antd'
+import {Icon,Carousel} from 'antd';
 import './style.less';
+
+import $ from 'jquery';
 
 export default class Banner extends React.Component
 {
+	state = {
+		imgUrls:[
+			"image/home/banner/1.png",
+			"image/home/banner/1.png",
+		]
+	};
+	constructor(props) {super(props);}
+	componentDidMount()
+	{
+		// ajax 获取图像url
+		var _this = this;
+		$.ajax(
+		{
+			type:'GET',
+			url:"",
+			success:function(data) {
+				_this.setState({imgUrls:["image/home/banner/1.png","image/home/banner/1.png"]});
+			},
+			error:()=>{ console.log('hahah we failed!!!') }
+		});
+
+		console.log('ajax has been done!!');
+	}
+
 	render()
 	{
-		return <div className="banner" style={{backgroundImage:"url('/static/image/home/banner.png')"}}>
+		var Covers = this.state.imgUrls.map((item,index)=> {
+			return <div key={index} className="cover" style={{backgroundImage:"url('"+item+"')"}}></div>
+		});
+
+		return <div className="banner">
+			<Carousel autoplay ref="slider1" speed={1000} draggable={false} dots={false}>
+				{Covers}
+			</Carousel>
 			<div className="slogon">
 				<h1>快乐<span>创</span>造</h1>
 				<h2><span>Create</span> To Happy</h2>

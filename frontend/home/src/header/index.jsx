@@ -6,14 +6,32 @@ const MenuItem = Menu.Item;
 
 export default class Header extends React.Component
 {
-	constructor(props) 
-	{
-        super(props);
-        this.state = {currunt:'home'};
-    }
+	state = {
+        menu:
+        [
+        	{key:'home', txt:'首页', url:"http://www.baidu.com"},
+        	{key:'course', txt:'创客课程', url:"http://www.baidu.com"},
+        	{key:'activity', txt:'创客活动', url:"http://www.baidu.com"},
+        	{key:'lab', txt:'创客实验室', url:"http://www.baidu.com"},
+        	{key:'forum', txt:'创客论坛', url:"http://www.baidu.com"},
+        ]
+    };
+    static propTypes = { 
+		currunt: React.PropTypes.string.isRequired,
+	};
+	static defaultProps = { 
+		currunt: 'home',
+	};
+	constructor(props) {super(props);}
 
 	render()
 	{
+		var menuItems = this.state.menu.map((item)=>
+		{
+			if(item.key==this.props.currunt) return <MenuItem key={item.key}>{item.txt}</MenuItem>;
+			else return <MenuItem key={item.key}><a href={item.url}>{item.txt}</a></MenuItem>;
+		});
+
 		return <div className="header">
 			<div className="headCont">
 				<Row>
@@ -23,12 +41,8 @@ export default class Header extends React.Component
 						</div>
 					</Col>
 					<Col span={16}>
-						<Menu selectedKeys={["home"]} mode="horizontal">
-							<MenuItem key="home">首页</MenuItem>
-							<MenuItem key="course">创客课程</MenuItem>
-							<MenuItem key="activity">创客活动</MenuItem>
-							<MenuItem key="lab">创客实验室</MenuItem>
-							<MenuItem key="forum">创客论坛</MenuItem>
+						<Menu selectedKeys={[this.props.currunt]} mode="horizontal">
+							{menuItems}
 						</Menu>
 					</Col>
 					<Col span={4}>
