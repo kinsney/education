@@ -40,7 +40,7 @@ module.exports =
     {
         contentBase: dirpath+'dist',    // 提供一个服务器服务的文件夹
         hot: true,
-        host: '0.0.0.0',
+        host: process.env.IP || '0.0.0.0',
         port: 8080,
         historyApiFallback: true
     }

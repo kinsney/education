@@ -17,7 +17,7 @@ export default class Course extends React.Component
 				<Row gutter={24}>
 					<Col span={6}> <h1>热门公开课</h1> </Col>
 					<Col span={12}>
-						<Menu mode="horizontal">
+						<Menu selectedKeys={["home"]} mode="horizontal">
 							<MenuItem key="home">航模及无人机</MenuItem>
 							<MenuItem key="course">机械工程</MenuItem>
 							<MenuItem key="activity">电学</MenuItem>
@@ -27,9 +27,11 @@ export default class Course extends React.Component
 						</Menu>
 					</Col>
 					<Col span={6}>
-						<div style={{textAlign:'right'}}>
+						<div className="more" style={{textAlign:'right'}}>
+							<a href="">
 							<span>更多课程</span> &nbsp;
 							<Icon type="right-circle" />
+							</a>
 						</div>
 					</Col>
 				</Row>

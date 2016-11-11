@@ -9,9 +9,10 @@ export default class HotCard extends React.Component
 		return <div className="hotCard">
 			<Carousel autoplay speed={1000} dots={true}>
 				<div className="cover"><img src="image/home/course/hot1.png"/></div>
-				<div className="cover"><img src="image/home/course/hot1.png"/></div>
-				<div className="cover"><img src="image/home/course/hot1.png"/></div>
-				<div className="cover"><img src="image/home/course/hot1.png"/></div>
+				<div className="cover"><img src="image/home/course/hot2.png"/></div>
+				<div className="cover"><img src="image/home/course/hot3.png"/></div>
+				<div className="cover"><img src="image/home/course/hot4.png"/></div>
+				<div className="cover"><img src="image/home/course/hot5.png"/></div>
 			</Carousel>
 			<div className="info">
 				<h5>2016线下课程开发报名</h5>

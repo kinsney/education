@@ -24,32 +24,32 @@ export default class laboratory extends React.Component
 	render()
 	{
 		return <div className="crossLab">
-			<Carousel autoplay ref="slider1" effect="fade" speed="1000" draggable={false} dots={false}>
-				<div className="cover" style={{backgroundImage:"url('/image/home/lab/lab1.png')"}}></div>
-				<div className="cover" style={{backgroundImage:"url('/image/home/lab/lab1.png')"}}></div>
-				<div className="cover" style={{backgroundImage:"url('/image/home/lab/lab1.png')"}}></div>
-				<div className="cover" style={{backgroundImage:"url('/image/home/lab/lab1.png')"}}></div>
+			<Carousel autoplay ref="slider1" effect="fade" speed={1500} draggable={false} dots={false}>
+				<div className="cover" style={{backgroundImage:"url('image/home/lab/1.png')"}}></div>
+				<div className="cover" style={{backgroundImage:"url('image/home/lab/2.png')"}}></div>
+				<div className="cover" style={{backgroundImage:"url('image/home/lab/3.png')"}}></div>
+				<div className="cover" style={{backgroundImage:"url('image/home/lab/4.png')"}}></div>
 			</Carousel>
 			<div className="info">
 				<Carousel autoplay ref="slider2" speed={1500} draggable={false} dots={false}>
 					<div className="profile">
 						<img src={require('./img/1.png')}/>
-						<h1>创客实验室</h1>
+						<h1>基础创客实验室</h1>
 						<p>谁考得好是，的加法打卡很多事开发的首付款，速度快接啊款到发货</p>
 					</div>
 					<div className="profile">
-						<img src={require('./img/1.png')}/>
-						<h1>创客实验室</h1>
+						<img src={require('./img/2.png')}/>
+						<h1>航模及无人机实验室</h1>
 						<p>谁考得好是，的加法打卡很多事开发的首付款，速度快接啊款到发货</p>
 					</div>
 					<div className="profile">
-						<img src={require('./img/1.png')}/>
-						<h1>创客实验室</h1>
+						<img src={require('./img/3.png')}/>
+						<h1>机器人实验室</h1>
 						<p>谁考得好是，的加法打卡很多事开发的首付款，速度快接啊款到发货</p>
 					</div>
 					<div className="profile">
-						<img src={require('./img/1.png')}/>
-						<h1>创客实验室</h1>
+						<img src={require('./img/4.png')}/>
+						<h1>电子信息实验室</h1>
 						<p>谁考得好是，的加法打卡很多事开发的首付款，速度快接啊款到发货</p>
 					</div>
 				</Carousel>

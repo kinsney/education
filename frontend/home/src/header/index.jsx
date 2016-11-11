@@ -24,7 +24,7 @@ export default class Header extends React.Component
 					</Col>
 					<Col span={16}>
 						<Menu selectedKeys={["home"]} mode="horizontal">
-							<MenuItem key="home"><Icon type="home"/>首页</MenuItem>
+							<MenuItem key="home">首页</MenuItem>
 							<MenuItem key="course">创客课程</MenuItem>
 							<MenuItem key="activity">创客活动</MenuItem>
 							<MenuItem key="lab">创客实验室</MenuItem>

@@ -51,7 +51,7 @@ export default class Steam extends React.Component
 
 		return <div className="crossSteam"> <div className="crossCont">
 			<h1>延河创客教育</h1>
-			<h4>科学（Science）+技术（Technology）+工程（Engineering）+艺术（Arts）+数学（Mathematics）</h4>
+			<h5>科学（Science）+技术（Technology）+工程（Engineering）+艺术（Arts）+数学（Mathematics）</h5>
 			<Row gutter={24}>
 				{items}
 			</Row>

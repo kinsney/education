@@ -25,15 +25,13 @@ module.exports =
             { test: /\.(js|jsx)$/, exclude: /node_modules/, loader: 'babel' },
             { test: /\.json$/, loader: 'json' },
             { test: /\.(png|jpg)$/, loader: 'url' },
-            { test: /\.less$/, loaders: ["style", "css","less"] },    
+            { test: /\.less$/, loaders: ["style", "css", "postcss", "less"] },    
         ]
     },
-    devtool: 'eval',
-    devServer: 
-    {
-        contentBase: dirpath+'dist',    // 提供一个服务器服务的文件夹
-        inline: true,   // 实施刷新页面
-        host: process.env.IP || '0.0.0.0',
-        port: process.env.PORT ||8080,
-    }
+    postcss: [require('autoprefixer') ],  // 使用postcss时需要的配置
+    plugins: 
+    [
+        new webpack.DefinePlugin({'process.env': {NODE_ENV: '"production"'} }),
+        new webpack.optimize.UglifyJsPlugin({compress:{warnings:false },output:{comments:false}})
+    ]
 }

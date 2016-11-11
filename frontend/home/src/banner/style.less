@@ -12,14 +12,14 @@
 		position: absolute; left:15%; top:200px; height:315px; width:290px;
 		background-color:rgba(255,255,255,0.3); border-radius:6px; color:white;
 		overflow: hidden; padding:22px;
-		h1{font-size:48px; font-weight:normal; span{color:#4776e6;}} 
-		h2{font-size:28px; font-weight:normal; span{color:#4776e6;}} 
-		h4{font-size:20px; font-weight:normal;} p{font-size:14px; font-weight:lighter;}
+		h1{.mix-F-h1(48px,white); span{color:@primary-color;}} 
+		h2{.mix-F-h2(28px,white); span{color:@primary-color;}} 
+		h4{.mix-F-h4(20px,white);} p{.mix-F-txt(@c:white,@w:lighter);}
 		.bottom
 		{
 			position:absolute; left:0; bottom:0; width:100%; height:55px;
-			background-color: #4776e6; padding:0 22px; line-height:55px;
-			font-size:16px; font-weight:lighter; .downArrow { float: right }
+			background-color: @primary-color; padding:0 22px; line-height:55px;
+			.mix-F-txt(16px,white,lighter); .downArrow { float: right }
 			&:hover{ cursor:pointer; }
 		}
 	}
