@@ -15,6 +15,16 @@ if(module.hot)
 }
 
 
+function timeout(ms) {
+  return new Promise((resolve, reject) => {
+    setTimeout(resolve, ms, 'promise done');
+  });
+}
+
+timeout(100).then((value) => {
+  console.log(value);
+});
+
 export default class HomePage extends React.Component
 {
 	render()
