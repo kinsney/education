@@ -22,6 +22,7 @@ class Banner(models.Model):
 class LessonCategory(models.Model):
     name = models.CharField('课程类别', max_length=10,blank=False)
     order = models.SmallIntegerField('顺序', default=0)
+    slug = models.SlugField()
     def __str__(self):
         return self.name
     class Meta:

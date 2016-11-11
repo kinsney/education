@@ -7,7 +7,7 @@ export default class Banner extends React.Component
 {
 	render()
 	{
-		return <div className="banner" style={{backgroundImage:"url('image/home/banner.png')"}}>
+		return <div className="banner" style={{backgroundImage:"url('/static/image/home/banner.png')"}}>
 			<div className="slogon">
 				<h1>快乐<span>创</span>造</h1>
 				<h2><span>Create</span> To Happy</h2>
