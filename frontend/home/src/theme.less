@@ -1,70 +1,46 @@
-// Prefix
-@ant-prefix             : ant;
+/*This is the themes defined by self*/
 
-// Color
-@primary-color          : #2db7f5;
-@info-color             : #2db7f5;
-@success-color          : #87d068;
-@error-color            : #f50;
-@warning-color          : #fa0;
-@normal-color           : #d9d9d9;
+/*--Color---------------------------------------*/
+@primary-color          : #4776e6;
+@second-color			: #8e54e9;
+@hover-color			: #6c91eb;
 
-// ------ Base & Require ------
-@body-background        : #fff;
-@font-family            : -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, sans-serif;
-@code-family            : Consolas,Menlo,Courier,monospace;
-@text-color             : #666;
-@heading-color          : #404040;
-@font-size-base         : 12px;
-@line-height-base       : 1.5;
-@line-height-computed   : floor((@font-size-base * @line-height-base));
-@border-radius-base     : 6px;
-@border-radius-sm       : 4px;
 
-// ICONFONT
-@iconfont-css-prefix    : anticon;
-@icon-url               : "https://at.alicdn.com/t/font_1473840929_824008";
+/*--Font---------------------------------------*/
+@FS-h1					: 28px;
+@FS-h2					: 24px;
+@FS-h3					: 20px;
+@FS-h4					: 18px;
+@FS-h5					: 16px;
 
-// LINK
-@link-color             : #2db7f5;
-@link-hover-color       : tint(@link-color, 20%);
-@link-active-color      : shade(@link-color, 5%);
-@link-hover-decoration  : none;
+@FS-txt					: 14px;
 
-// Disabled cursor for form controls and buttons.
-@cursor-disabled        : not-allowed;
+/*------Font-color---------------------------------------*/
+@FC-title 				: #404040;
+@FC-txt 				: #666;
+@FC-second 				: #999;
+@FC-disable 			: #ccc;
 
-// Animation
-@ease-out            : cubic-bezier(0.215, 0.61, 0.355, 1);
-@ease-in             : cubic-bezier(0.55, 0.055, 0.675, 0.19);
-@ease-in-out         : cubic-bezier(0.645, 0.045, 0.355, 1);
-@ease-out-back       : cubic-bezier(0.12, 0.4, 0.29, 1.46);
-@ease-in-back        : cubic-bezier(0.71, -0.46, 0.88, 0.6);
-@ease-in-out-back    : cubic-bezier(0.71, -0.46, 0.29, 1.46);
-@ease-out-circ       : cubic-bezier(0.08, 0.82, 0.17, 1);
-@ease-in-circ        : cubic-bezier(0.6, 0.04, 0.98, 0.34);
-@ease-in-out-circ    : cubic-bezier(0.78, 0.14, 0.15, 0.86);
-@ease-out-quint      : cubic-bezier(0.23, 1, 0.32, 1);
-@ease-in-quint       : cubic-bezier(0.755, 0.05, 0.855, 0.06);
-@ease-in-out-quint   : cubic-bezier(0.86, 0, 0.07, 1);
 
-// Border color
-@border-color-base      : #d9d9d9;        // base border outline a component
-@border-color-split     : #e9e9e9;        // split border inside a component
+/*------Font-minx---------------------------------------*/
+.mix-F-h1(@s:@FS-h1, @c:@FC-title, @w:normal) {font-size: @s; color: @c; font-weight: @w;}
+.mix-F-h2(@s:@FS-h2, @c:@FC-title, @w:normal) {font-size: @s; color: @c; font-weight: @w;}
+.mix-F-h3(@s:@FS-h3, @c:@FC-title, @w:normal) {font-size: @s; color: @c; font-weight: @w;}
+.mix-F-h4(@s:@FS-h4, @c:@FC-title, @w:normal) {font-size: @s; color: @c; font-weight: @w;}
+.mix-F-h5(@s:@FS-h5, @c:@FC-title, @w:normal) {font-size: @s; color: @c; font-weight: @w;}
+.mix-F-txt(@s:@FS-txt, @c:@FC-txt, @w:normal) {font-size: @s; color: @c; font-weight: @w;}
 
-// Outline
-@outline-blur-size      : 0;
-@outline-width          : 2px;
-@outline-color          : @primary-color;
 
-// Background color
-@background-color-base  : #f7f7f7;        // basic gray background
 
-// Shadow
-@shadow-color           : rgba(0, 0, 0, .2);
-@box-shadow-base        : @shadow-1-down;
-@shadow-1-up            : 0 -1px 6px @shadow-color;
-@shadow-1-down          : 0 1px 6px @shadow-color;
-@shadow-1-left          : -1px 0 6px @shadow-color;
-@shadow-1-right         : 1px 0 6px @shadow-color;
-@shadow-2               : 0 2px 8px @shadow-color;
+/*--Boder---------------------------------------*/
+@BDC-base				: #d9d9d9;
+@BDC-split				: #e9e9e9;
+
+
+/*--Background---------------------------------------*/
+@BGC-base:				: #fbfbfb;
+
+
+
+
+

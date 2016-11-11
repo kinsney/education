@@ -17,14 +17,14 @@ export default class Activity extends React.Component
 	{
 		return <div className="crossActivity"> <div className="crossCont">
 			<h1>创客活动</h1>
-			<h4>时空裂痕是看得见，奥斯卡的哈大量的收发货开始打</h4>
+			<h5>时空裂痕是看得见，奥斯卡的哈大量的收发货开始打</h5>
 			<Row>
 				<Col span={1}><div onClick={this.previous} className="icon"><Icon type="left-circle-o"/></div></Col>
 				<Col span={22}>
 					<Carousel ref="slider" dots={false} slidesToShow={2} >
 						<div className="activity">
-						<div style={{backgroundImage:"url('/image/home/activity/1.png')"}}>
-							<h3>2017创客活动</h3>
+						<div style={{backgroundImage:"url('image/home/activity/1.png')"}}>
+							<h2>2017创客活动</h2>
 							<p>看得见啊是看得见风案例老师的，谁考得好交罚款，是打了打飞机是打发，是肯定会发离开家打发打发卡斯加大回复阿道</p>
 							<a href="">
 								<Icon type="play-circle-o" />&nbsp;&nbsp;&nbsp;
@@ -32,8 +32,8 @@ export default class Activity extends React.Component
 							</a>
 						</div></div>
 						<div className="activity">
-						<div style={{backgroundImage:"url('/image/home/activity/2.png')"}}>
-							<h3>2017创客活动</h3>
+						<div style={{backgroundImage:"url('image/home/activity/2.png')"}}>
+							<h2>2017创客活动</h2>
 							<p>看得见啊是看得见风案例老师的，谁考得好交罚款，是打了打飞机是打发，是肯定会发离开家打发打发卡斯加大回复阿道</p>
 							<a href="">
 								<Icon type="play-circle-o" />&nbsp;&nbsp;&nbsp;

@@ -39,7 +39,7 @@ module.exports =
             { test: /\.(png|jpg)$/, loader: 'url' },
             // 如果使用css modules需要设置 "css?modules"
             // postcss可以为css自动加前缀，但是需要：npm install postcss-loader autoprefixer --save-dev
-            { test: /\.less$/, loaders: ["style", "css",  "postcss", "less"] },
+            { test: /\.less$/, loaders: ["style", "css", "postcss", "less"] },
         ]
     },
     postcss: [require('autoprefixer') ],  // 使用postcss时需要的配置
