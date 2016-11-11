@@ -18,6 +18,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 INSTALLED_APPS += (
     'home',
+    'ckeditor',
+    'ckeditor_uploader'
 )
 
 # Quick-start development settings - unsuitable for production
@@ -41,7 +43,7 @@ DATABASES = {
     'default': {
         # Only PostgreSQL is supported
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'education',
+        'NAME': 'testforum',
         'USER': '',
         'HOST': 'localhost',
         'PORT': 5432,
@@ -133,24 +135,45 @@ ROOT_URLCONF = 'education.urls'
 WSGI_APPLICATION = 'education.wsgi.application'
 
 
+#富文本编辑ck settings
+TINYMCE_DEFAULT_CONFIG = {
+    'plugins': "table,spellchecker,paste,searchreplace",
+    'theme': "advanced",
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 10,
+    'external_image_list_url' : "lists/image_list.js",
+    'style_formats' : [
+        {'title' : 'Bold text', 'inline' : 'strong'},
+        {'title' : 'Red text', 'inline' : 'span', 'styles' : {'color' : '#ff0000'}},
+        {'title' : 'Help', 'inline' : 'strong', 'classes' : 'help'},
+        {'title' : 'Table styles'},
+        {'title' : 'Table row 1', 'selector' : 'tr', 'classes' : 'tablerow'}
+    ],
+}
+
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+CKEDITOR_UPLOAD_PATH = "ckupload/"
+CKEDITOR_IMAGE_BACKEND = "pillow"
+CKEDITOR_RESTRICT_BY_USER = True
+
 #aliyun oss settings
+#注释后使用默认存储设置
+ACCESS_KEY_ID = "LTAIgxtquk5E15ut"
+ACCESS_KEY_SECRET = "DyMSzsy8czsvYHsN550xxIx8UustMG"
+END_POINT = "oss-cn-beijing.aliyuncs.com"
+BUCKET_NAME = "yanhe-edu"
+BUCKET_ACL_TYPE = "public-read-write"  # private, public-read, public-read-write
 
-# ACCESS_KEY_ID = "LTAIgxtquk5E15ut"
-# ACCESS_KEY_SECRET = "DyMSzsy8czsvYHsN550xxIx8UustMG"
-# END_POINT = "oss-cn-beijing.aliyuncs.com"
-# BUCKET_NAME = "yanhe-edu"
-# BUCKET_ACL_TYPE = "public-read-write"  # private, public-read, public-read-write
+DEFAULT_FILE_STORAGE = 'aliyun_oss2_storage.backends.AliyunMediaStorage'
 
-# DEFAULT_FILE_STORAGE = 'aliyun_oss2_storage.backends.AliyunMediaStorage'
-# STATICFILES_STORAGE = 'aliyun_oss2_storage.backends.AliyunStaticStorage'
 
 #aliyun mail settings
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-EMAIL_USE_TLS = False
-EMAIL_HOST = 'smtpdm.aliyun.com'
-EMAIL_PORT = 25
-EMAIL_HOST_USER = 'post@verify.yanheedu.cn'
-EMAIL_HOST_PASSWORD = 'kinsney123'
-DEFAULT_FROM_EMAIL = 'post@verify.yanheedu.cn'
+# EMAIL_USE_TLS = False
+# EMAIL_HOST = 'smtpdm.aliyun.com'
+# EMAIL_PORT = 25
+# EMAIL_HOST_USER = 'post@verify.yanheedu.cn'
+# EMAIL_HOST_PASSWORD = 'kinsney123'
+# DEFAULT_FROM_EMAIL = 'post@verify.yanheedu.cn'
