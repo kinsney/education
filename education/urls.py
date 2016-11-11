@@ -22,8 +22,9 @@ urlpatterns = [
     url(r'^moment-i18n.js$', momentjs_catalog),
 
     # Uncomment next line if you plan to use Django admin for 3rd party apps
-    url(r'^django-admin/', include(admin.site.urls)),
+    url(r'^admincp/', include(admin.site.urls)),
 
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     # Uncomment next line if you plan to use browseable API
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

@@ -11,13 +11,13 @@ export default class laboratory extends React.Component
 		this.next = this.next.bind(this)
     	this.previous = this.previous.bind(this)
 	}
-	next() 
-	{ 
+	next()
+	{
 		this.refs.slider1.refs.slick.slickNext();
-		this.refs.slider2.refs.slick.slickNext(); 
+		this.refs.slider2.refs.slick.slickNext();
 	}
-	previous() 
-	{ 
+	previous()
+	{
 		this.refs.slider1.refs.slick.slickPrev();
 		this.refs.slider2.refs.slick.slickPrev();
 	}
@@ -25,10 +25,10 @@ export default class laboratory extends React.Component
 	{
 		return <div className="crossLab">
 			<Carousel autoplay ref="slider1" effect="fade" speed={1500} draggable={false} dots={false}>
-				<div className="cover" style={{backgroundImage:"url('image/home/lab/1.png')"}}></div>
-				<div className="cover" style={{backgroundImage:"url('image/home/lab/2.png')"}}></div>
-				<div className="cover" style={{backgroundImage:"url('image/home/lab/3.png')"}}></div>
-				<div className="cover" style={{backgroundImage:"url('image/home/lab/4.png')"}}></div>
+				<div className="cover" style={{backgroundImage:"url('static/image/home/lab/1.png')"}}></div>
+				<div className="cover" style={{backgroundImage:"url('static/image/home/lab/2.png')"}}></div>
+				<div className="cover" style={{backgroundImage:"url('static/image/home/lab/3.png')"}}></div>
+				<div className="cover" style={{backgroundImage:"url('static/image/home/lab/4.png')"}}></div>
 			</Carousel>
 			<div className="info">
 				<Carousel autoplay ref="slider2" speed={1500} draggable={false} dots={false}>
