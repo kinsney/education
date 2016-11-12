@@ -5,6 +5,7 @@ import './style.less';
 
 import $ from 'jquery';
 
+
 export default class Banner extends React.Component
 {
 	state = {
@@ -21,14 +22,12 @@ export default class Banner extends React.Component
 		$.ajax(
 		{
 			type:'GET',
-			url:"",
+			url:"/api/banners/",
 			success:function(data) {
 				_this.setState({imgUrls:["image/home/banner/1.png","image/home/banner/1.png"]});
 			},
 			error:()=>{ console.log('hahah we failed!!!') }
 		});
-
-		console.log('ajax has been done!!');
 	}
 
 	render()
