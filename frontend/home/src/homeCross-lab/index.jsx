@@ -10,28 +10,26 @@ export default class laboratory extends React.Component
 		super(props);
 		this.next = this.next.bind(this)
     	this.previous = this.previous.bind(this)
+    	this.changeTab = this.changeTab.bind(this)
 	}
-	next()
+	next() { this.refs.slider2.refs.slick.slickNext(); }
+	previous() { this.refs.slider2.refs.slick.slickPrev(); }
+	changeTab(fromIndex,toIndex)
 	{
-		this.refs.slider1.refs.slick.slickNext();
-		this.refs.slider2.refs.slick.slickNext();
-	}
-	previous()
-	{
-		this.refs.slider1.refs.slick.slickPrev();
-		this.refs.slider2.refs.slick.slickPrev();
+		// console.log(fromIndex,":",toIndex);
+		this.refs.slider1.refs.slick.slickGoTo(toIndex);
 	}
 	render()
 	{
 		return <div className="crossLab">
-			<Carousel autoplay ref="slider1" effect="fade" speed={1500} draggable={false} dots={false}>
+			<Carousel ref="slider1" effect="fade" speed={1500} draggable={false} dots={false}>
 				<div className="cover" style={{backgroundImage:"url('image/home/lab/1.png')"}}></div>
 				<div className="cover" style={{backgroundImage:"url('image/home/lab/2.png')"}}></div>
 				<div className="cover" style={{backgroundImage:"url('image/home/lab/3.png')"}}></div>
 				<div className="cover" style={{backgroundImage:"url('image/home/lab/4.png')"}}></div>
 			</Carousel>
 			<div className="info">
-				<Carousel autoplay ref="slider2" speed={1500} draggable={false} dots={false}>
+				<Carousel autoplay ref="slider2" speed={1500} draggable={false} dots={false} beforeChange={this.changeTab}>
 					<div className="profile">
 						<img src={require('./img/1.png')}/>
 						<h1>基础创客实验室</h1>

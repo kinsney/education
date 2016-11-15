@@ -3,41 +3,42 @@ import React from 'react';
 import {Icon,Carousel} from 'antd';
 import './style.less';
 
-import $ from 'jquery';
+import context from 'home/../context';
 
 
 export default class Banner extends React.Component
 {
-	state = {
+	data = {
 		imgUrls:[
-			"image/home/banner/1.png",
-			"image/home/banner/1.png",
+			{
+	            "title": "测试",
+	            "image": "image/home/banner/1.png",
+	            "link": "http://www.baidu.com"
+	        },
+	        {
+	            "title": "ffff",
+	            "image": "image/home/banner/1.png",
+	            "link": "http://www.baidu.com"
+	        }
 		]
 	};
 	constructor(props) {super(props);}
 	componentDidMount()
 	{
-		// ajax 获取图像url
-		var _this = this;
-		$.ajax(
-		{
-			type:'GET',
-			url:"/api/banners/",
-			success:function(data) {
-				_this.setState({imgUrls:["image/home/banner/1.png","image/home/banner/1.png"]});
-			},
-			error:()=>{ console.log('hahah we failed!!!') }
-		});
+		var imgUrls = context.get("carousels");
+		if(imgUrls) this.data.imgUrls = imgUrls;
 	}
 
 	render()
 	{
-		var Covers = this.state.imgUrls.map((item,index)=> {
-			return <div key={index} className="cover" style={{backgroundImage:"url('"+item+"')"}}></div>
+		var Covers = this.data.imgUrls.map((item,index)=>{
+			return <div key={index} className="cover" style={{backgroundImage:"url('"+item.image+"')"}}>
+				<a href={item.link} target="_blank"></a>
+			</div>
 		});
 
 		return <div className="banner">
-			<Carousel autoplay ref="slider1" speed={1000} draggable={false} dots={false}>
+			<Carousel autoplay speed={5000} draggable={false} dots={false}>
 				{Covers}
 			</Carousel>
 			<div className="slogon">

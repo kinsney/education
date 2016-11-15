@@ -6,16 +6,9 @@
 	.crossCont
 	{
 		width:1208px; margin:0 auto;
-		.topBar
+		.hotTop{ height:42px; margin-bottom:10px; h1{.mix-F-h1} }
+		.hotDown
 		{
-			height:50px; line-height:50px;
-			.ant-menu-horizontal{border:none;}
-			h1{.mix-F-h1}  
-			div.more a{.mix-F-txt(@c:@FC-second); &:hover{color:@primary-color;}}
-		}
-		.courses
-		{
-			height:550px;
 			.hotCard
 			{
 				height:550px; border:1px solid #F1F4F4;
@@ -25,39 +18,39 @@
 				{
 					position:relative; padding:0;
 					.cover { height:460px; img{height:100%;}}
-					.slick-dots { position:absolute; bottom:20px; }
-				}
-				.info
-				{
-					padding:16px; position:relative; height:90px;
-					h5{.mix-F-h5;}
-					p{.mix-F-txt; position:absolute; bottom:16px;}
-					a{
-						position:absolute; right:16px; bottom:16px; height:35px; width:85px; color:white;
-						background-color:@primary-color; border-radius:6px; line-height:35px; text-align:center;
+					.slick-dots { position:absolute; bottom:100px; }
+					.info
+					{
+						padding:16px; position:relative; height:90px;
+						h5{.mix-F-h5;}
+						p{.mix-F-txt; position:absolute; bottom:16px;}
+						a{
+							position:absolute; right:16px; bottom:16px; height:35px; width:85px; color:white;
+							background-color:@primary-color; border-radius:6px; line-height:35px; text-align:center;
+						}
 					}
 				}
 			}
-			.card
-			{
-				height:265px; border:1px solid @BDC-split; 
-				position:relative; top:0; transition:0.3s ease-in-out;
-				&:hover{ top:-3px; box-shadow:0 20px 80px rgba(0,0,0,0.2);}
-				.cover
-				{
-					height:175px; overflow:hidden; img{height:100%;}
-				}
-				.info
-				{
-					padding:16px; position:relative; height:90px;
-					h5{.mix-F-h5(14px;); line-height:18px;}
-					p{.mix-F-txt; position:absolute; bottom:16px;}
-					a{
-						position:absolute; right:16px; bottom:16px; color:#009944; font-size:14px;
-					}
-				}
-			}
-
 		}
+		.card
+		{
+			height:265px; border:1px solid @BDC-split; 
+			position:relative; top:0; transition:0.3s ease-in-out;
+			// &:hover{ top:-3px; box-shadow:0 20px 80px rgba(0,0,0,0.2);}
+			.cover
+			{
+				height:175px; overflow:hidden; img{height:100%;}
+			}
+			.info
+			{
+				padding:16px; position:relative; height:90px;
+				h5{.mix-F-h5(14px;); line-height:18px;}
+				p{.mix-F-txt; position:absolute; bottom:16px;}
+				a{
+					position:absolute; right:16px; bottom:16px; color:#009944; font-size:14px;
+				}
+			}
+		}
+		div.more a{.mix-F-txt(@c:@FC-second); &:hover{color:@primary-color;}}
 	}
 }
