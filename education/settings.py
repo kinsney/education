@@ -43,11 +43,11 @@ DATABASES = {
     'default': {
         # Only PostgreSQL is supported
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'testforum',
-        'USER': 'yanhedb',
-        'PASSWORD':'Kinsney123',
-        'HOST': 'rm-2ze470sqf77tr9285o.pg.rds.aliyuncs.com',
-        'PORT': 3432,
+        'NAME': 'education',
+        'USER': 'Jason',
+        # 'PASSWORD':'911225',
+        'HOST': 'localhost',
+        'PORT': 5432,
     }
 }
 
