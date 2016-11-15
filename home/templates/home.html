@@ -22,10 +22,12 @@ var home_context = {
                 },
             {% endfor %}
         ],
-        "categories":{
-            {% for category in categories %}
-                "{{category.name}}":
-                    [
+        "categories":[
+                {% for category in categories %}
+                    {
+                        "slug":"{{ category.slug }}",
+                        "name":"{{ category.name }}",
+                        "lessons": [
                         {% for lesson in category.get_top_lessons %}
                             {
                                 "name":"{{ lesson.name }}",
@@ -35,15 +37,16 @@ var home_context = {
                                 "equipment":"{{ lesson.equipment }}",
                             },
                          {% endfor %}
-                    ],
-            {% endfor %}
-        },
+                        ],
+                    },
+                {% endfor %}
+            ],
         "activities":[
             {% for activity in activities %}
                 {
-                    "title":"activity.title",
-                    "video":"activity.video.url",
-                    "thumbnail":"activity.thumbnail.url",
+                    "title":"{{ activity.title }}",
+                    "video":"{{ activity.video.url }}",
+                    "thumbnail":"{{ activity.thumbnail.url }}",
                 },
             {% endfor %}
         ]

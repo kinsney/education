@@ -49,3 +49,11 @@ class ThreadPollApiTestCase(AuthenticatedUserTestCase):
             new_acl['categories'][self.category.pk].update(category)
 
         override_acl(self.user, new_acl)
+
+    def mock_poll(self):
+        self.poll = self.thread.poll = testutils.post_poll(self.thread, self.user)
+
+        self.api_link = reverse('misago:api:thread-poll-detail', kwargs={
+            'thread_pk': self.thread.pk,
+            'pk': self.poll.pk
+        })

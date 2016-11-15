@@ -37,7 +37,7 @@ class Rank(models.Model):
     class Meta:
         get_latest_by = 'order'
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
     def save(self, *args, **kwargs):

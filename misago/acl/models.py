@@ -16,7 +16,7 @@ class BaseRole(models.Model):
     class Meta:
         abstract = True
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
     def save(self, *args, **kwargs):
