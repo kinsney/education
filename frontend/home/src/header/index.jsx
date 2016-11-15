@@ -1,12 +1,14 @@
 import React from 'react';
 
 import './style.less';
-import { Row, Col, Menu, Icon } from 'antd';
+import { Row, Col, Menu } from 'antd';
 const MenuItem = Menu.Item;
+
+import LoginBox from './loginBox'
 
 export default class Header extends React.Component
 {
-	state = {
+	data = {
         menu:
         [
         	{key:'home', txt:'首页', url:"http://www.baidu.com"},
@@ -26,7 +28,7 @@ export default class Header extends React.Component
 
 	render()
 	{
-		var menuItems = this.state.menu.map((item)=>
+		var menuItems = this.data.menu.map((item)=>
 		{
 			if(item.key==this.props.currunt) return <MenuItem key={item.key}>{item.txt}</MenuItem>;
 			else return <MenuItem key={item.key}><a href={item.url}>{item.txt}</a></MenuItem>;
@@ -46,10 +48,7 @@ export default class Header extends React.Component
 						</Menu>
 					</Col>
 					<Col span={4}>
-						<div className="loginBox">
-							<Icon type="github" />
-							<span>我是赵日天</span>
-						</div>
+						<LoginBox isLogin={false}/>
 					</Col>
 				</Row>
 				

@@ -4,21 +4,44 @@ import { Carousel } from 'antd';
 
 export default class HotCard extends React.Component
 {
+	data = {
+        itemdata:
+        [
+	        {
+	            "title": "2017创客",
+	            "date" : "2016年12月12日",
+	            "image": "image/home/course/hot1.png",
+	            "link": "http://www.baidu.com"
+	        },
+	        {
+	            "title": "2018创客活动",
+	            "date" : "2016年12月12日",
+	            "image": "image/home/course/hot2.png",
+	            "link": "http://www.baidu.com"
+	        },
+	    ]
+    };
+    
+	static propTypes = {
+        itemdata: React.PropTypes.array.isRequired
+    };
+    
 	render()
 	{
+		var Covers = this.props.itemdata.map((item,index)=>{
+			return <div key={index}>
+				<div className="cover"><img src={item.image}/></div>
+				<div className="info">
+					<h5>{item.title}</h5>
+					<p>{item.date}</p>
+					<a href={item.link} target="_black">报 名</a>
+				</div>
+			</div>
+		});
 		return <div className="hotCard">
 			<Carousel autoplay speed={1000} dots={true}>
-				<div className="cover"><img src="image/home/course/hot1.png"/></div>
-				<div className="cover"><img src="image/home/course/hot2.png"/></div>
-				<div className="cover"><img src="image/home/course/hot3.png"/></div>
-				<div className="cover"><img src="image/home/course/hot4.png"/></div>
-				<div className="cover"><img src="image/home/course/hot5.png"/></div>
+				{Covers}
 			</Carousel>
-			<div className="info">
-				<h5>2016线下课程开发报名</h5>
-				<p>2016年12月12日</p>
-				<a>报 名</a>
-			</div>
 		</div>
 	}
 }

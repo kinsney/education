@@ -9,24 +9,12 @@ import Laboratory from './src/homeCross-lab/index';
 import Activity from './src/homeCross-activity/index';
 import Footer from './src/footer/index';
 
-import $ from "jquery";
 
 if(module.hot) 
 {
 	module.hot.accept();
 }
 
-function timeout(ms) {
-  return new Promise((resolve, reject) => {
-    setTimeout(()=>{
-    	resolve('this is a promise test');
-    }, ms);
-  });
-}
-
-timeout(5000).then((value) => {
-  console.log(value);
-});
 
 export default class HomePage extends React.Component
 {
