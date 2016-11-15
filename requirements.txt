@@ -16,4 +16,4 @@ pytz
 requests<3
 unidecode
 django-ckeditor
-django-aliyun-oss2-storage
+oss2

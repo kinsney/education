@@ -2,6 +2,9 @@ from django.db import models
 from . import POSITIONS
 from ckeditor_uploader.fields import RichTextUploadingField
 from misago.conf import settings
+from mptt.managers import TreeManager
+from mptt.models import MPTTModel, TreeForeignKey
+from misago.core.utils import slugify
 # Create your models here.
 class Banner(models.Model):
     title = models.CharField('横幅主题', max_length=64,blank=False)
@@ -19,12 +22,31 @@ class Banner(models.Model):
         verbose_name_plural = '横幅'
         ordering = ['order']
 
-class LessonCategory(models.Model):
-    name = models.CharField('课程类别', max_length=10,blank=False)
+class LessonCategory(MPTTModel):
+    parent = TreeForeignKey(
+        'self',
+        null=True,
+        blank=True,
+        related_name='children'
+    )
+    name = models.CharField('课程类别', max_length=255,blank=False)
+    slug = models.CharField(max_length=255,blank=True)
+    is_closed = models.BooleanField(default=False)
+    lessons = models.PositiveIntegerField(default=0)
     order = models.SmallIntegerField('顺序', default=0)
-    slug = models.SlugField()
+    def has_child(self, child):
+        return child.lft > self.lft and child.rght < self.rght
     def __str__(self):
         return self.name
+    def set_name(self, name):
+        self.name = name
+        self.slug = slugify(name)
+    #脏方法设置slug 之后重构
+    def save(self,*args, **kwargs):
+        self.set_name(self.name)
+        super(LessonCategory,self).save(*args, **kwargs)
+    def get_top_lessons(self):
+        return self.lesson_set.filter(order=0)[:6]
     class Meta:
         verbose_name = '课程分类'
         verbose_name_plural = '课程分类'
@@ -34,6 +56,7 @@ class Lesson(models.Model):
     def dir_path(instance,filename):
         return 'lessons/{}/{}/{}'.format(instance.category.name,instance.name,filename)
     name = models.CharField('课程名', max_length=30,blank=False)
+    slug = models.CharField(max_length=255,blank=True)
     thumbnail = models.ImageField('缩略图',upload_to=dir_path)
     price = models.DecimalField('价格',max_digits=5,decimal_places=1)
     category = models.ForeignKey(LessonCategory,verbose_name="课程类别")
@@ -50,8 +73,16 @@ class Lesson(models.Model):
     )
     def get_duration(self):
         return 0
+    def set_name(self, name):
+        self.name = name
+        self.slug = slugify(name)
+    def save(self,*args, **kwargs):
+        self.set_name(self.name)
+        super(Lesson,self).save(*args, **kwargs)
     def __str__(self):
         return self.name
+    def get_link(self):
+        return '/LesCategories/{}/{}'.format(self.category.slug,self.slug)
     class Meta:
         verbose_name = '课程'
         verbose_name_plural = '课程'
@@ -86,6 +117,7 @@ class Activity(models.Model):
     thumbnail = models.ImageField('缩略图',upload_to=activity_path)
     added = models.DateTimeField('发布时间',auto_now_add = True)
     order = models.SmallIntegerField('顺序', default=0)
+    is_visible = models.BooleanField('显示', default=True)
     def __str__(self):
         return self.title
     class Meta:

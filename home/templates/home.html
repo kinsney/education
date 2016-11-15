@@ -1,1 +1,52 @@
 {% extends "home_base.html" %}
+{% load i18n staticfiles misago_json %}
+{% block content %}
+<div id="home"></div>
+<script>
+var home_context = {
+        "carousels":[
+            {% for carousel in carousels %}
+                {
+                    "title":"{{ carousel.title }}",
+                    "image":"{{ carousel.image.url }}",
+                    "link":"{{ carousel.link }}"
+                },
+            {% endfor %}
+        ],
+        "hotpots":[
+            {% for hotpot in hotpots %}
+                {
+                    "title":"{{ hotpot.title }}",
+                    "image":"{{ hotpot.image.url }}",
+                    "link":"{{ hotpot.link }}"
+                },
+            {% endfor %}
+        ],
+        "categories":{
+            {% for category in categories %}
+                "{{category.name}}":
+                    [
+                        {% for lesson in category.get_top_lessons %}
+                            {
+                                "name":"{{ lesson.name }}",
+                                "thumbnail":"{{ lesson.thumbnail.url }}",
+                                "link":"{{ lesson.get_link }}",
+                                "price":"{{ lesson.price }}",
+                                "equipment":"{{ lesson.equipment }}",
+                            },
+                         {% endfor %}
+                    ],
+            {% endfor %}
+        },
+        "activities":[
+            {% for activity in activities %}
+                {
+                    "title":"activity.title",
+                    "video":"activity.video.url",
+                    "thumbnail":"activity.thumbnail.url",
+                },
+            {% endfor %}
+        ]
+    }
+</script>
+{% endblock %}

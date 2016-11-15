@@ -91,8 +91,10 @@ ACL's for targets
 """
 def add_acl_to_poll(user, poll):
     poll.acl.update({
+        'can_vote': can_vote_poll(user, poll),
         'can_edit': can_edit_poll(user, poll),
-        'can_delete': False,
+        'can_delete': can_delete_poll(user, poll),
+        'can_see_votes': can_see_poll_votes(user, poll),
     })
 
 
@@ -129,7 +131,7 @@ def allow_start_poll(user, target):
         if target.is_closed:
             raise PermissionDenied(_("This thread is closed. You can't start polls in it."))
     try:
-        if target.poll:
+        if target.poll and target.poll.pk:
             raise PermissionDenied(_("There's already a poll in this thread."))
     except Poll.DoesNotExist:
         pass
@@ -157,15 +159,80 @@ def allow_edit_poll(user, target):
                 user.acl['poll_edit_time'])
             raise PermissionDenied(message % {'minutes': user.acl['poll_edit_time']})
 
-    if target.is_over:
-        raise PermissionDenied(_("This poll is over. You can't edit it."))
+        if target.is_over:
+            raise PermissionDenied(_("This poll is over. You can't edit it."))
 
     if not category_acl.get('can_close_threads'):
         if target.category.is_closed:
-            raise PermissionDenied(_("This category is closed. You can't edito polls in it."))
+            raise PermissionDenied(_("This category is closed. You can't edit polls in it."))
         if target.thread.is_closed:
-            raise PermissionDenied(_("This thread is closed. You can't edito polls in it."))
+            raise PermissionDenied(_("This thread is closed. You can't edit polls in it."))
 can_edit_poll = return_boolean(allow_edit_poll)
+
+
+def allow_delete_poll(user, target):
+    if user.is_anonymous():
+        raise PermissionDenied(_("You have to sign in to delete polls."))
+
+    category_acl = user.acl['categories'].get(target.category_id, {
+        'can_close_threads': False,
+    })
+
+    if not user.acl.get('can_delete_polls'):
+        raise PermissionDenied(_("You can't delete polls."))
+
+    if user.acl.get('can_delete_polls') < 2:
+        if user.pk != target.poster_id:
+            raise PermissionDenied(_("You can't delete other users polls in this category."))
+        if not has_time_to_edit_poll(user, target):
+            message = ungettext(
+                "You can't delete polls that are older than %(minutes)s minute.",
+                "You can't delete polls that are older than %(minutes)s minutes.",
+                user.acl['poll_edit_time'])
+            raise PermissionDenied(message % {'minutes': user.acl['poll_edit_time']})
+        if target.is_over:
+            raise PermissionDenied(_("This poll is over. You can't delete it."))
+
+    if not category_acl.get('can_close_threads'):
+        if target.category.is_closed:
+            raise PermissionDenied(_("This category is closed. You can't delete polls in it."))
+        if target.thread.is_closed:
+            raise PermissionDenied(_("This thread is closed. You can't delete polls in it."))
+can_delete_poll = return_boolean(allow_delete_poll)
+
+
+def allow_vote_poll(user, target):
+    if user.is_anonymous():
+        raise PermissionDenied(_("You have to sign in to vote in polls."))
+
+    user_has_voted = False
+    if target.choices and 'selected' in target.choices[0]:
+        for choice in target.choices:
+            if choice['selected']:
+                user_has_voted = True
+                break
+
+    if user_has_voted and not target.allow_revotes:
+        raise PermissionDenied(_("You have already voted in this poll."))
+    if target.is_over:
+        raise PermissionDenied(_("This poll is over. You can't vote in it."))
+
+    category_acl = user.acl['categories'].get(target.category_id, {
+        'can_close_threads': False,
+    })
+
+    if not category_acl.get('can_close_threads'):
+        if target.category.is_closed:
+            raise PermissionDenied(_("This category is closed. You can't vote in it."))
+        if target.thread.is_closed:
+            raise PermissionDenied(_("This thread is closed. You can't vote in it."))
+can_vote_poll = return_boolean(allow_vote_poll)
+
+
+def allow_see_poll_votes(user, target):
+    if not target.is_public and not user.acl['can_always_see_poll_voters']:
+        raise PermissionDenied(_("You dont have permission to this poll's voters."))
+can_see_poll_votes = return_boolean(allow_see_poll_votes)
 
 
 def has_time_to_edit_poll(user, target):
@@ -177,3 +244,4 @@ def has_time_to_edit_poll(user, target):
         return diff_minutes < edit_time
     else:
         return True
+

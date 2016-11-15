@@ -1,3 +1,4 @@
+{% load i18n staticfiles misago_json %}
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans">
 <head>
@@ -25,10 +26,9 @@
     </style>
 </head>
 <body>
-    {% csrf_token %}
-    <div id="home"></div>
-    
-
+{% csrf_token %}
+    {% block content %}
+    {% endblock %}
 </body>
 <script src="http://localhost:8080/app.js"></script>
 </html>

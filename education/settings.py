@@ -44,8 +44,7 @@ DATABASES = {
         # Only PostgreSQL is supported
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'education',
-        'USER': 'Jason',
-        # 'PASSWORD':'911225',
+        'USER': '',
         'HOST': 'localhost',
         'PORT': 5432,
     }
@@ -159,13 +158,13 @@ CKEDITOR_RESTRICT_BY_USER = True
 
 #aliyun oss settings
 #注释后使用默认存储设置
-ACCESS_KEY_ID = "LTAIgxtquk5E15ut"
-ACCESS_KEY_SECRET = "DyMSzsy8czsvYHsN550xxIx8UustMG"
-END_POINT = "oss-cn-beijing.aliyuncs.com"
-BUCKET_NAME = "yanhe-edu"
-BUCKET_ACL_TYPE = "public-read-write"  # private, public-read, public-read-write
+# ACCESS_KEY_ID = "LTAIgxtquk5E15ut"
+# ACCESS_KEY_SECRET = "DyMSzsy8czsvYHsN550xxIx8UustMG"
+# END_POINT = "oss-cn-beijing.aliyuncs.com"
+# BUCKET_NAME = "yanhe-edu"
+# BUCKET_ACL_TYPE = "public-read-write"  # private, public-read, public-read-write
 
-DEFAULT_FILE_STORAGE = 'aliyun_oss2_storage.backends.AliyunMediaStorage'
+# DEFAULT_FILE_STORAGE = 'aliyun_oss2_storage.backends.AliyunMediaStorage'
 
 
 #aliyun mail settings
