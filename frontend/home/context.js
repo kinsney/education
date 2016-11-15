@@ -25,101 +25,91 @@ export default context;
 
 const contextModle = 
 {
-    "carousels": 
+    "carousels":
     [
         {
             "title": "测试",
-            "image": "/media/banner/banner.png",
+            "image": "image/home/banner/1.png",
             "link": "http://www.baidu.com"
         },
         {
             "title": "ffff",
-            "image": "/media/banner/banner_nMBIJmq.png",
+            "image": "image/home/banner/1.png",
             "link": "http://www.baidu.com"
-        },
+        }
     ],
-    "hotpots": 
+    hotpots: 
     [
         {
             "title": "2017创客",
-            "image": "/media/banner/hot1.png",
+            "date" : "2016年12月12日",
+            "image": "image/home/course/hot1.png",
             "link": "http://www.baidu.com"
         },
         {
-            "title": "2018创客活动",
-            "image": "/media/banner/hot1_Kj5UXzx.png",
+            "title": "2017创客",
+            "date" : "2016年12月12日",
+            "image": "image/home/course/hot1.png",
             "link": "http://www.baidu.com"
         },
     ],
-    "categories": 
+    categories: 
     [
-        "ji-jie-gong-cheng": {
-            "name": "机械工程",
-            "lessons": [
+        {
+            title:"航模及无人机",more:"http://www.baidu.com",
+            lessons:[
                 {
-                    "name": "水电费",
-                    "thumbnail": "/media/lessons/%E6%9C%BA%E6%A2%B0%E5%B7%A5%E7%A8%8B/%E6%B0%B4%E7%94%B5%E8%B4%B9/card6.png",
-                    "link": "/LesCategories/ji-jie-gong-cheng/shui-dian-fei",
-                    "price": "0.0",
-                    "equipment": "小木片|单片机|铜电线",
+                    "title": "1十分钟教你制作一个超级炫酷的跑酷机器人",
+                    "thumbnail": "image/home/course/card2.png",
+                    "link": "http://www.baidu.com",
+                    "price": 0,
+                    "time" : "10:08",
+                    "equipment": "卡斯大|上的法|三大|是打发"
                 },
                 {
-                    "name": "方式",
-                    "thumbnail": "/media/lessons/%E6%9C%BA%E6%A2%B0%E5%B7%A5%E7%A8%8B/%E6%96%B9%E5%BC%8F/card5.png",
-                    "link": "/LesCategories/ji-jie-gong-cheng/fang-shi",
-                    "price": "0.0",
-                    "equipment": ['小木片','单片机','铜电线'],
+                    "title": "2十分钟教你制作一个超级炫酷的跑酷机器人",
+                    "thumbnail": "image/home/course/card2.png",
+                    "link": "http://www.baidu.com",
+                    "price": 0,
+                    "time" : "10:08",
+                    "equipment": "卡斯大|上的法|三大|是打发"
                 },
                 {
-                    "name": "发收到",
-                    "thumbnail": "/media/lessons/%E6%9C%BA%E6%A2%B0%E5%B7%A5%E7%A8%8B/%E5%8F%91%E6%94%B6%E5%88%B0/card4.png",
-                    "link": "/LesCategories/ji-jie-gong-cheng/fa-shou-dao",
-                    "price": "0.0",
-                    "equipment": ['小木片','单片机','铜电线'],
+                    "title": "3十分钟教你制作一个超级炫酷的跑酷机器人",
+                    "thumbnail": "image/home/course/card2.png",
+                    "link": "http://www.baidu.com",
+                    "price": 0,
+                    "time" : "10:08",
+                    "equipment": "卡斯大|上的法|三大|是打发"
                 },
                 {
-                    "name": "发斯蒂芬",
-                    "thumbnail": "/media/lessons/%E6%9C%BA%E6%A2%B0%E5%B7%A5%E7%A8%8B/%E5%8F%91%E6%96%AF%E8%92%82%E8%8A%AC/card3.png",
-                    "link": "/LesCategories/ji-jie-gong-cheng/fa-si-di-fen",
-                    "price": "0.0",
-                    "equipment": ['小木片','单片机','铜电线'],
+                    "title": "4十分钟教你制作一个超级炫酷的跑酷机器人",
+                    "thumbnail": "image/home/course/card2.png",
+                    "link": "http://www.baidu.com",
+                    "price": 0,
+                    "time" : "10:08",
+                    "equipment": "卡斯大|上的法|三大|是打发"
                 },
-                {
-                    "name": "十分钟",
-                    "thumbnail": "/media/lessons/%E6%9C%BA%E6%A2%B0%E5%B7%A5%E7%A8%8B/%E5%8D%81%E5%88%86%E9%92%9F/card2.png",
-                    "link": "/LesCategories/ji-jie-gong-cheng/shi-fen-zhong",
-                    "price": "1.0",
-                    "equipment": ['小木片','单片机','铜电线'],
-                },
-                {
-                    "name": "十分钟教你快速制作一个跑酷机器人",
-                    "thumbnail": "/media/lessons/%E6%9C%BA%E6%A2%B0%E5%B7%A5%E7%A8%8B/%E5%8D%81%E5%88%86%E9%92%9F%E6%95%99%E4%BD%A0%E5%BF%AB%E9%80%9F%E5%88%B6%E4%BD%9C%E4%B8%80%E4%B8%AA%E8%B7%91%E9%85%B7%E6%9C%BA%E5%99%A8%E4%BA%BA/card1.png",
-                    "link": "/LesCategories/ji-jie-gong-cheng/shi-fen-zhong-jiao-ni-kuai-su-zhi-zuo-yi-ge-pao-ku-ji-qi-ren",
-                    "price": "0.0",
-                    "equipment": ['小木片','单片机','铜电线'],
-                },
-            ],
+            ]
         },
-        "ce-shi": {
-            "name": "测试",
-            "lessons": [],
-        },
-        "huan-shi-ce-shi": {
-            "name": "还是测试",
-            "lessons": [],
+        {
+            title:"机械工程",more:"http://www.360.com",
+            lessons:[]
         }
     ],
     "activities": 
     [
         {
-            "title": "收到",
-            "video": "/media/activities/%E6%94%B6%E5%88%B0/110102104365andorid.mp4",
-            "thumbnail": "/media/activities/%E6%94%B6%E5%88%B0/2.png",
+            "title": "2017创客活动",
+            "profile":"看得见啊是看得见风案例老师的，谁考得好交罚款，是打了打飞机是打发，是肯定会发离开家打发打发卡斯加大回复阿道",
+            "video": "http://www.baidu.com",
+            "thumbnail": "image/home/activity/1.png",
         },
         {
-            "title": "地方",
-            "video": "/media/activities/%E5%9C%B0%E6%96%B9/110102104365andorid.mp4",
-            "thumbnail": "/media/activities/%E5%9C%B0%E6%96%B9/2.png",
-        },
+            "title": "沙发斯蒂芬",
+            "profile":"看得见啊是看得见风案例老师的，谁考得好交罚款，是打了打飞机是打发，是肯定会发离开家打发打发卡斯加大回复阿道",
+            "video": "http://www.baidu.com",
+            "thumbnail": "image/home/activity/2.png",
+        }
     ]
 }
