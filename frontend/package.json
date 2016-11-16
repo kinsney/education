@@ -7,7 +7,8 @@
     "forumTest": "webpack-dev-server --config webpack/forumTest.js",
     "homeTest": "webpack-dev-server --config webpack/homeTest.js",
     "homeHot": "webpack-dev-server --config webpack/home.hot.js",
-    "homeBuild": "webpack --config webpack/homeBuild.js"
+    "homeBuild": "webpack --config webpack/homeBuild.js",
+    "vendor": "webpack --config webpack/vendor.js"
   },
   "author": "Rafal Piton",
   "license": "GPL-2.0",

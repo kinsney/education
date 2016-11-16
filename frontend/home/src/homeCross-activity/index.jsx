@@ -32,7 +32,7 @@ export default class Activity extends React.Component
 	}
 	next() { this.refs.slider.refs.slick.slickNext(); }
 	previous() { this.refs.slider.refs.slick.slickPrev(); }
-	componentDidMount()
+	componentWillMount()
 	{
 		var activities = context.get("activities");
 		if (activities) this.data.activities = activities;

@@ -23,7 +23,7 @@ export default class Banner extends React.Component
 		]
 	};
 	constructor(props) {super(props);}
-	componentDidMount()
+	componentWillMount()
 	{
 		var imgUrls = context.get("carousels");
 		if(imgUrls) this.data.imgUrls = imgUrls;
