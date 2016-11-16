@@ -7,7 +7,7 @@ import './style.less';
 import HotCard from './hotCard';
 import Card from './card';
 
-import context from 'home/../context';
+import context from 'home/../index';
 
 export default class Course extends React.Component
 {

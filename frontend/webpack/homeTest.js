@@ -7,7 +7,7 @@ module.exports =
     context: dirpath+'home',
     entry: 
     {
-        app: ['./index.js'],
+        app: ['./homePage.js'],
     },
     output: 
     {

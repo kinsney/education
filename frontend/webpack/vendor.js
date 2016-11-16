@@ -4,7 +4,7 @@ var join = require('path').join
 module.exports = 
 {
     context: join(__dirname, 'src'),
-    entry: ['react', 'react-dom', 'react-router', 'redux', 'react-redux', 'moment', 'cropit'],
+    entry: "vendor.js",
     output: 
     {
         path: join(__dirname, 'dist'),

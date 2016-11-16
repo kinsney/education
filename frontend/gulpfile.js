@@ -182,37 +182,6 @@ gulp.task('style', function()
 
 
 /**-------------------------------------------------------------------------------
- * 处理静态资源
- *------------------------------------------------------------------------------*/
-// 拷贝字体
-gulp.task('copyfonts', function(cb) 
-{
-    return gulp.src('forum/static/fonts/**/*')
-        .pipe(gulp.dest(misago + 'fonts'));
-});
-// (不压缩)拷贝图像
-gulp.task('fastcopyimages', function() 
-{
-    return gulp.src('forum/static/img/**/*')
-        .pipe(gulp.dest(misago + 'img'));
-});
-// (压缩)拷贝图像
-gulp.task('copyimages', function() 
-{
-    return gulp.src('forum/static/img/**/*')
-        .pipe(imageop({
-            optimizationLevel: 9
-        }))
-        .pipe(gulp.dest(misago + 'img'));
-});
-
-// (不压图)拷贝静态资源
-gulp.task('faststatic', ['copyfonts', 'fastcopyimages']);
-// (压图)拷贝静态资源
-gulp.task('static', ['copyfonts', 'copyimages']);
-
-
-/**-------------------------------------------------------------------------------
  * 打包处理辅js文件：vendor及zxcvb
  *------------------------------------------------------------------------------*/
 
@@ -268,6 +237,37 @@ gulp.task('copyzxcvbn', function()
     return gulp.src('node_modules/zxcvbn/dist/*')
         .pipe(gulp.dest(misago + 'js'));
 });
+
+
+/**-------------------------------------------------------------------------------
+ * 处理静态资源
+ *------------------------------------------------------------------------------*/
+// 拷贝字体
+gulp.task('copyfonts', function(cb) 
+{
+    return gulp.src('forum/static/fonts/**/*')
+        .pipe(gulp.dest(misago + 'fonts'));
+});
+// (不压缩)拷贝图像
+gulp.task('fastcopyimages', function() 
+{
+    return gulp.src('forum/static/img/**/*')
+        .pipe(gulp.dest(misago + 'img'));
+});
+// (压缩)拷贝图像
+gulp.task('copyimages', function() 
+{
+    return gulp.src('forum/static/img/**/*')
+        .pipe(imageop({
+            optimizationLevel: 9
+        }))
+        .pipe(gulp.dest(misago + 'img'));
+});
+
+// (不压图)拷贝静态资源
+gulp.task('faststatic', ['copyfonts', 'fastcopyimages']);
+// (压图)拷贝静态资源
+gulp.task('static', ['copyfonts', 'copyimages']);
 
 
 /**-------------------------------------------------------------------------------
