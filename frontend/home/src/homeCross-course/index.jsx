@@ -82,7 +82,7 @@ export default class Course extends React.Component
 		this.changeTab = this.changeTab.bind(this);
 		this.checkState = this.checkState.bind(this);
 	}
-	componentDidMount()
+	componentWillMount()
 	{
 		var categories = context.get("categories");
 		var hotpots = context.get("hotpots");

@@ -4,7 +4,8 @@ import './style.less';
 import { Row, Col, Menu } from 'antd';
 const MenuItem = Menu.Item;
 
-import LoginBox from './loginBox'
+import context from 'home/../index';
+import misago from 'home/misago';
 
 export default class Header extends React.Component
 {
@@ -25,6 +26,12 @@ export default class Header extends React.Component
 		currunt: 'home',
 	};
 	constructor(props) {super(props);}
+
+	componentDidMount()
+	{
+		var misagoContext = context.get('misagoContext');
+		if(misagoContext) misago(misagoContext);
+	}
 
 	render()
 	{
@@ -48,7 +55,7 @@ export default class Header extends React.Component
 						</Menu>
 					</Col>
 					<Col span={4}>
-						<LoginBox isLogin={false}/>
+						<div id="user-menu-mount"></div>
 					</Col>
 				</Row>
 				

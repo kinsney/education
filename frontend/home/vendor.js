@@ -9,13 +9,12 @@ require('bootstrap-affix');
 require('bootstrap-modal');
 require('bootstrap-dropdown');
 
-require('cropit');
-require('waypoints');
+global.Cropit = require('cropit');
+global.Waypoints = require('waypoints');
+global.Moment = require('moment');
 
-require('moment');
-require('cropit');
-require('react');
-require('react-dom');
-require('react-router');
-require('redux');
-require('react-redux');
+global.React = require('react');
+global.ReactDom = require('react-dom');
+global.ReactRouter = require('react-router');
+global.Redux = require('redux');
+global.ReactRedux = require('react-redux');

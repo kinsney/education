@@ -1,14 +1,18 @@
-var webpack = require('webpack')
-var join = require('path').join
+var webpack = require('webpack');
+var join = require('path').join;
+var dirpath = join(__dirname, '../');
 
 module.exports = 
 {
-    context: join(__dirname, 'src'),
-    entry: "vendor.js",
+    context: dirpath+'home',
+    entry: 
+    {
+        vendor: ['./vendor.js'],
+    },
     output: 
     {
-        path: join(__dirname, 'dist'),
-        filename: 'vendor.js'
+        path: dirpath+'dist/js',
+        filename: '[name].js',
     },
     resolve: {extensions: ['', '.js', '.jsx', '.json'] },
     module: 
@@ -17,10 +21,11 @@ module.exports =
         [
             { test: /\.(js|jsx)$/, exclude: /node_modules/, loader: 'babel' },
             { test: /\.json$/, loader: 'json' },
-            { test: /\.(png|jpg)$/, loader: 'url' },
-            { test: /\.less$/, loaders: ["style", "css", "less"] },
+            { test: /\.(png|jpg)$/, loader: 'url?limit=8192' },
+            { test: /\.less$/, loaders: ["style", "css?-url", "postcss", "less"] },    
         ]
     },
+    postcss: [require('autoprefixer') ],  // 使用postcss时需要的配置
     plugins: 
     [
         new webpack.DefinePlugin({'process.env': {NODE_ENV: '"production"'} }),

@@ -13,10 +13,19 @@ module.exports =
     {
         path: dirpath+'dist',
         filename: '[name].js',
-        // publicPath:"http://localhost:8000/"
     },
-    // 当希望以<script>的形式挂载到页面上来加载某些js库，但又希望能在 webpack 的模块中使用上,可以使用 externals 属性：
-    // external: ['react', 'react-dom', 'react-router', 'redux', 'react-redux', 'moment', 'cropit'],
+    externals: 
+    {
+        'jquery':'Jquery',
+        'react':'React', 
+        'react-dom':'ReactDom', 
+        'react-router':'ReactRouter', 
+        'redux':'Redux', 
+        'react-redux':'ReactRedux',
+        'cropit':'Cropit',
+        'waypoints':'Waypoints',
+        'moment':'Moment'
+    },
     resolve: {extensions: ['', '.js', '.jsx', '.json'] },
     module: 
     {
