@@ -3,7 +3,7 @@ import React from 'react';
 import { Carousel,Icon,Row,Col } from 'antd';
 import './style.less';
 
-import context from 'home/../context';
+import context from 'home/../index';
 
 export default class Activity extends React.Component
 {

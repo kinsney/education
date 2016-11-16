@@ -1,0 +1,45 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import Header from './src/header/index';
+import Banner from './src/banner/index';
+import Steam from './src/homeCross-steam/index';
+import Course from './src/homeCross-course/index';
+import Laboratory from './src/homeCross-lab/index';
+import Activity from './src/homeCross-activity/index';
+import Footer from './src/footer/index';
+
+import context from './index';
+
+
+if(module.hot) 
+{
+	module.hot.accept();
+}
+
+
+class HomePage extends React.Component
+{
+	render()
+	{
+		return 	<div>
+			<Header></Header>
+			<Banner></Banner>
+			<Steam></Steam>
+			<Course></Course>
+			<Laboratory></Laboratory>
+			<Activity></Activity>
+			<Footer></Footer>
+		</div>
+	}
+}
+
+function initializer() 
+{
+	ReactDOM.render(<HomePage/>, document.getElementById('home') );
+}
+
+context.addInitializer(initializer);
+
+
+
