@@ -4,8 +4,16 @@ import './style.less';
 import { Row, Col, Menu } from 'antd';
 const MenuItem = Menu.Item;
 
-import context from 'home/../index';
-import misago from 'home/misago';
+import misago from 'misago/index';
+import 'misago/initializers/reducers/auth';
+import 'misago/initializers/modal';
+import 'misago/initializers/ajax';
+import 'misago/initializers/store';
+import 'misago/initializers/auth';
+import 'misago/initializers/local-storage';
+import 'misago/initializers/components/user-menu';
+
+import Loader from 'home/../Loader';
 
 export default class Header extends React.Component
 {
@@ -29,8 +37,11 @@ export default class Header extends React.Component
 
 	componentDidMount()
 	{
-		var misagoContext = context.get('misagoContext');
-		if(misagoContext) misago(misagoContext);
+		var misagoContext = Loader.get('misagoContext');
+		if(misagoContext)
+		{
+			misago.init(misagoContext);
+		}
 	}
 
 	render()
@@ -55,7 +66,7 @@ export default class Header extends React.Component
 						</Menu>
 					</Col>
 					<Col span={4}>
-						<div id="user-menu-mount"></div>
+						<div id="user-menu-mount">良辰</div>
 					</Col>
 				</Row>
 				

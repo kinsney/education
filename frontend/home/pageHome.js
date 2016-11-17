@@ -1,37 +1,44 @@
-export class Context
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import Header from './src/header/index';
+import Banner from './src/banner/index';
+import Steam from './src/homeCross-steam/index';
+import Course from './src/homeCross-course/index';
+import Laboratory from './src/homeCross-lab/index';
+import Activity from './src/homeCross-activity/index';
+import Footer from './src/footer/index';
+
+import Loader from './Loader';
+
+
+if(module.hot) 
 {
-	constructor()
-	{
-		this._context = {};
-        this._initializers = [];
-	}
-
-    addInitializer(initializer)
-    {
-        this._initializers.push(initializer);
-    }
-
-	has(key) { return !!this._context[key]; }
-
-	get(key,callback)
-	{
-		if (this.has(key)) return this._context[key];
-		else return undefined;
-	}
-
-	init(context) 
-    { 
-        this._context = context; 
-        this._initializers.forEach(initializer => { initializer(this._context); });
-    }
+	module.hot.accept();
 }
 
+class PageHome extends React.Component
+{
+	render()
+	{
+		return 	<div>
+			<Header></Header>
+			<Banner></Banner>
+			<Steam></Steam>
+			<Course></Course>
+			<Laboratory></Laboratory>
+			<Activity></Activity>
+			<Footer></Footer>
+		</div>
+	}
+}
 
-var context = new Context();
-global.homeContext = context;
-export default context;
+function initializer() 
+{
+	ReactDOM.render(<PageHome/>, document.getElementById('home') );
+}
 
-
+Loader.addInitializer(initializer);
 
 const contextModle = 
 {
@@ -121,5 +128,7 @@ const contextModle =
             "video": "http://www.baidu.com",
             "thumbnail": "image/home/activity/2.png",
         }
-    ]
+    ],
+    "misagoContext":{}
 }
+

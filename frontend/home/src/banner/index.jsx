@@ -3,7 +3,7 @@ import React from 'react';
 import {Icon,Carousel} from 'antd';
 import './style.less';
 
-import context from 'home/../index';
+import Loader from 'home/../Loader';
 
 
 export default class Banner extends React.Component
@@ -25,7 +25,7 @@ export default class Banner extends React.Component
 	constructor(props) {super(props);}
 	componentWillMount()
 	{
-		var imgUrls = context.get("carousels");
+		var imgUrls = Loader.get("carousels");
 		if(imgUrls) this.data.imgUrls = imgUrls;
 	}
 

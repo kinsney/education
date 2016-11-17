@@ -3,7 +3,7 @@ import React from 'react';
 import { Carousel,Icon,Row,Col } from 'antd';
 import './style.less';
 
-import context from 'home/../index';
+import Loader from 'home/../Loader';
 
 export default class Activity extends React.Component
 {
@@ -34,7 +34,7 @@ export default class Activity extends React.Component
 	previous() { this.refs.slider.refs.slick.slickPrev(); }
 	componentWillMount()
 	{
-		var activities = context.get("activities");
+		var activities = Loader.get("activities");
 		if (activities) this.data.activities = activities;
 	}
 	render()
