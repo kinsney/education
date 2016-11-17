@@ -22,7 +22,7 @@ class PageHome extends React.Component
 	render()
 	{
 		return 	<div>
-			<Header></Header>
+			<Header currunt={'home'}></Header>
 			<Banner></Banner>
 			<Steam></Steam>
 			<Course></Course>
@@ -39,6 +39,7 @@ function initializer()
 }
 
 Loader.addInitializer(initializer);
+Loader.init({});
 
 const contextModle = 
 {

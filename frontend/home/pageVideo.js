@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Header from './src/header/index';
-
+import PlayerPanel from './src/videoPlayPanel/index';
 
 import Footer from './src/footer/index';
 
@@ -20,7 +20,9 @@ class PageVideo extends React.Component
 	{
 		return 	<div>
 			<Header></Header>
-
+			<div style={{backgroundColor:'#fbfbfb'}}>
+				<PlayerPanel/>
+			</div>
 			<Footer></Footer>
 		</div>
 	}
@@ -32,6 +34,7 @@ function initializer()
 }
 
 Loader.addInitializer(initializer);
+Loader.init({});
 
 const contextModle = 
 {

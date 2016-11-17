@@ -11,7 +11,8 @@ module.exports =
         [
             'webpack-dev-server/client?http://localhost:8080',
             'webpack/hot/only-dev-server',
-            './pageHome.js'
+            './pageHome.js',
+            // './pageVideo.js'
         ]
     },
     output: 
@@ -40,8 +41,8 @@ module.exports =
             { test: /\.(js|jsx)$/, exclude: /node_modules/, loaders: ['babel'] },
             { test: /\.json$/, loader: 'json' },
             { test: /\.(png|jpg)$/, loader: 'url' },
-            { test: /\.css$/, loaders: ["style", "css"] },
-            { test: /\.less$/, loaders: ["style", "css","less"] },
+            { test: /\.css$/, loaders: ["style", "css?-url"] },
+            { test: /\.less$/, loaders: ["style", "css?-url","less"] },
         ]
     },
     plugins: [ new webpack.HotModuleReplacementPlugin(),/* new webpack.NoErrorsPlugin() */],

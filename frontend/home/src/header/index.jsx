@@ -31,7 +31,7 @@ export default class Header extends React.Component
 		currunt: React.PropTypes.string.isRequired,
 	};
 	static defaultProps = { 
-		currunt: 'home',
+		currunt: '',
 	};
 	constructor(props) {super(props);}
 
@@ -66,7 +66,7 @@ export default class Header extends React.Component
 						</Menu>
 					</Col>
 					<Col span={4}>
-						<div id="user-menu-mount">良辰</div>
+						<div id="user-menu-mount"></div>
 					</Col>
 				</Row>
 				

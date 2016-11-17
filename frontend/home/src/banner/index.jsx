@@ -10,16 +10,12 @@ export default class Banner extends React.Component
 {
 	data = {
 		imgUrls:[
-			{
-	            "title": "测试",
-	            "image": "image/home/banner/1.png",
-	            "link": "http://www.baidu.com"
-	        },
-	        {
-	            "title": "ffff",
-	            "image": "image/home/banner/1.png",
-	            "link": "http://www.baidu.com"
-	        }
+			{"title": "测试", "image": "image/home/banner/1.png", "link": "http://www.baidu.com"},
+	        {"title": "测试", "image": "image/home/banner/2.png", "link": "http://www.baidu.com"},
+	        {"title": "测试", "image": "image/home/banner/3.png", "link": "http://www.baidu.com"},
+	        {"title": "测试", "image": "image/home/banner/4.png", "link": "http://www.baidu.com"},
+	        {"title": "测试", "image": "image/home/banner/5.png", "link": "http://www.baidu.com"},
+	        {"title": "测试", "image": "image/home/banner/6.png", "link": "http://www.baidu.com"},
 		]
 	};
 	constructor(props) {super(props);}
