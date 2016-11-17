@@ -47,6 +47,7 @@
     {% include "misago/scripts.html" %}
     <script type="text/javascript">
       misago.init({{ frontend_context|as_json }});
+      $('input[name="logout_direct"]').val("forum")
     </script>
 
   </body>

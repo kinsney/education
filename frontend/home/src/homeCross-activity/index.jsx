@@ -8,7 +8,7 @@ import context from 'home/../index';
 export default class Activity extends React.Component
 {
 	data = {
-		"activities": 
+		"activities":
 	    [
 	        {
 	            "title": "2017创客活动",

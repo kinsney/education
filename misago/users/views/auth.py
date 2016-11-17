@@ -29,4 +29,6 @@ def login(request):
 def logout(request):
     if request.method == 'POST' and request.user.is_authenticated():
         auth.logout(request)
+    if request.POST["logout_direct"] == 'home':
+        return redirect('/')
     return redirect(settings.LOGIN_REDIRECT_URL)

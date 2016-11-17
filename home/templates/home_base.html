@@ -16,19 +16,25 @@
     <link rel="icon" href="static/image/favicon/logo_48.png" sizes="48x48" type="image/png">
     <link rel="icon" href="static/image/favicon/logo_62.png" sizes="62x62" type="image/png">
     <link rel="icon" href="static/image/favicon/logo_192.png" sizes="192x192" type="image/png">
-
     <!-- 主体 -->
     <title>延河教育</title>
-    <link rel="stylesheet" href="" />
+    <link rel="stylesheet" href="/static/css/reset.css" />
     <link rel="stylesheet" href="/static/css/style.css" />
-    <style type="text/css">
-
-    </style>
 </head>
 <body>
 {% csrf_token %}
+
     {% block content %}
     {% endblock %}
+    <div class="modal fade" id="modal-mount" tabindex="-1" role="dialog" aria-labelledby="misago-modal-label"></div>
+    {% include "misago/auth.html" %}
+    <script type="text/javascript" src="/django-i18n.js"></script>
+    {% if LANGUAGE_CODE != "en-us" %}
+    <script type="text/javascript" src="/moment-i18n.js"></script>
+    {% endif %}
+    <script type="text/javascript" src="static/js/vendor.js"></script>
+    <script src="http://localhost:8080/app.js"></script>
+    <script>homeContext.init(home_context);$('input[name="logout_direct"]').val("home")</script>
 </body>
-<script src="http://localhost:8080/app.js"></script>
+
 </html>

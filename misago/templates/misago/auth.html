@@ -6,6 +6,7 @@
 </form>
 {% if user.is_authenticated %}
 <form id="hidden-logout-form" method="post" action="{% url LOGOUT_URL %}" style="display: none;">
+  <input type="hidden" name="logout_direct">
   {% csrf_token %}
   <input type="submit" id="signin-button" value="{% trans "Log out" %}">
 </form>

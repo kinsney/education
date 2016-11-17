@@ -6,7 +6,8 @@ import 'misago/initializers/modal';
 import 'misago/initializers/ajax';
 import 'misago/initializers/store';
 import 'misago/initializers/auth';
-
+import 'misago/initializers/local-storage';
+import 'misago/initializers/captcha';
 import 'misago/initializers/components/user-menu';
 
 

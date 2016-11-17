@@ -5,6 +5,7 @@ from misago.conf import settings
 from mptt.managers import TreeManager
 from mptt.models import MPTTModel, TreeForeignKey
 from misago.core.utils import slugify
+from django.db.models import Q,Sum,Count
 # Create your models here.
 class Banner(models.Model):
     title = models.CharField('横幅主题', max_length=64,blank=False)
@@ -32,7 +33,6 @@ class LessonCategory(MPTTModel):
     name = models.CharField('课程类别', max_length=255,blank=False)
     slug = models.CharField(max_length=255,blank=True)
     is_closed = models.BooleanField(default=False)
-    lessons = models.PositiveIntegerField(default=0)
     order = models.SmallIntegerField('顺序', default=0)
     def has_child(self, child):
         return child.lft > self.lft and child.rght < self.rght
@@ -81,6 +81,10 @@ class Lesson(models.Model):
         super(Lesson,self).save(*args, **kwargs)
     def __str__(self):
         return self.name
+    # def get_all_time(self):
+    #     return null
+    def get_video_number(self):
+        return self.lessonvideo_set.count()
     def get_link(self):
         return '/LesCategories/{}/{}'.format(self.category.slug,self.slug)
     class Meta:
@@ -95,7 +99,7 @@ class LessonVideo(models.Model):
     name = models.CharField('课程视频名称', max_length=20,blank=False)
     lesson = models.ForeignKey(Lesson,verbose_name='课程')
     file = models.FileField('视频文件',upload_to =video_path)
-    duration = models.DurationField('视频时长')
+    duration = models.DurationField('视频秒数')
     added = models.DateTimeField('发布时间',auto_now_add = True)
     thumbnail = models.ImageField('缩略图',upload_to=video_path)
     description = RichTextUploadingField()

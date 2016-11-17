@@ -12,7 +12,7 @@ import context from 'home/../index';
 export default class Course extends React.Component
 {
 	data = {
-		hotpots: 
+		hotpots:
 	    [
 	        {
 	            "title": "2017创客",
@@ -27,7 +27,7 @@ export default class Course extends React.Component
 	            "link": "http://www.baidu.com"
 	        },
 	    ],
-	    categories: 
+	    categories:
 	    [
 	    	{
 	    		title:"航模及无人机",more:"http://www.baidu.com",
@@ -119,8 +119,8 @@ export default class Course extends React.Component
 			</TabPane>
 		});
 
-		var tabMore = <div className="more"> 
-			<a href={categories[this.state.nowIndex].more}>更多&nbsp;<Icon type="right-circle-o"/></a> 
+		var tabMore = <div className="more">
+			<a href={categories[this.state.nowIndex].more}>更多&nbsp;<Icon type="right-circle-o"/></a>
 		</div>
 
 		return <div className="crossCourse"><div className="crossCont">
@@ -130,8 +130,8 @@ export default class Course extends React.Component
 					<div className="hotDown"> <HotCard itemdata={hotpots}/> </div>
 				</Col>
 				<Col span={18}>
-					<Tabs onChange={this.changeTab} 
-						tabBarExtraContent={tabMore} 
+					<Tabs onChange={this.changeTab}
+						tabBarExtraContent={tabMore}
 						activeKey={this.state.nowIndex+''} >
 						{TabPanes}
 					</Tabs>
