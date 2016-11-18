@@ -7,7 +7,7 @@ import './style.less';
 import HotCard from './hotCard';
 import Card from './card';
 
-import context from 'home/../index';
+import Loader from 'home/../Loader';
 
 export default class Course extends React.Component
 {
@@ -84,8 +84,8 @@ export default class Course extends React.Component
 	}
 	componentWillMount()
 	{
-		var categories = context.get("categories");
-		var hotpots = context.get("hotpots");
+		var categories = Loader.get("categories");
+		var hotpots = Loader.get("hotpots");
 		if (hotpots&&categories)
 		{
 			this.data.categories = categories;

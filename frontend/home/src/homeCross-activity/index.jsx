@@ -1,9 +1,12 @@
 import React from 'react';
 
 import { Carousel,Icon,Row,Col } from 'antd';
+
 import './style.less';
 
-import context from 'home/../index';
+
+import VModal from './vModal'
+import Loader from 'home/../Loader';
 
 export default class Activity extends React.Component
 {
@@ -30,11 +33,11 @@ export default class Activity extends React.Component
 		this.next = this.next.bind(this)
     	this.previous = this.previous.bind(this)
 	}
-	next() { this.refs.slider.refs.slick.slickNext(); }
+	next() { this.refs.slider.refs.slick.slickNext();}
 	previous() { this.refs.slider.refs.slick.slickPrev(); }
 	componentWillMount()
 	{
-		var activities = context.get("activities");
+		var activities = Loader.get("activities");
 		if (activities) this.data.activities = activities;
 	}
 	render()
@@ -47,6 +50,7 @@ export default class Activity extends React.Component
 					<Icon type="play-circle-o" />&nbsp;&nbsp;&nbsp;
 					<span>播放</span>
 				</a>
+
 			</div></div>
 		});
 
@@ -59,6 +63,7 @@ export default class Activity extends React.Component
 					<Carousel ref="slider" dots={false} slidesToShow={2} >
 						{Videos}
 					</Carousel>
+					<VModal vid="my-video"/>
 				</Col>
 				<Col span={1}><div onClick={this.next} className="icon"><Icon type="right-circle-o"/></div></Col>
 			</Row>

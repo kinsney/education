@@ -20,6 +20,10 @@
     <title>延河教育</title>
     <link rel="stylesheet" href="/static/css/reset.css" />
     <link rel="stylesheet" href="/static/css/style.css" />
+    <link href="http://vjs.zencdn.net/5.12.6/video-js.css" rel="stylesheet">
+
+      <!-- If you'd like to support IE8 -->
+      <script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
 </head>
 <body>
 {% csrf_token %}
@@ -34,7 +38,8 @@
     {% endif %}
     <script type="text/javascript" src="static/js/vendor.js"></script>
     <script src="http://localhost:8080/app.js"></script>
-    <script>homeContext.init(home_context);$('input[name="logout_direct"]').val("home")</script>
+    <script src="http://vjs.zencdn.net/5.12.6/video.js"></script>
+    <script>Loader.init(home_context);$('input[name="logout_direct"]').val("home")</script>
 </body>
 
 </html>

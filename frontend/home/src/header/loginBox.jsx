@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { Icon, Modal, Button } from 'antd';
 import Boxin from './Boxin';
 import Boxout from './Boxout';
 

@@ -4,10 +4,9 @@
   "description": "Misago Frontend",
   "main": "index.js",
   "scripts": {
-    "forumTest": "webpack-dev-server --config webpack/forumTest.js",
-    "homeTest": "webpack-dev-server --config webpack/homeTest.js",
-    "homeHot": "webpack-dev-server --config webpack/home.hot.js",
-    "homeBuild": "webpack --config webpack/homeBuild.js",
+    "test": "webpack-dev-server --config webpack/test.js",
+    "hot": "webpack-dev-server --config webpack/hot.js",
+    "build": "webpack --config webpack/build.js",
     "vendor": "webpack --config webpack/vendor.js"
   },
   "author": "Rafal Piton",
@@ -41,6 +40,7 @@
     "react-router": "^2.2.4",
     "redux": "^3.0.5",
     "redux-batched-actions": "^0.1.2",
+    "video.js": "^5.12.6",
     "waypoints": "^4.0.1",
     "zxcvbn": "^4.2.0"
   },

@@ -3,29 +3,25 @@ import React from 'react';
 import {Icon,Carousel} from 'antd';
 import './style.less';
 
-import context from 'home/../index';
+import Loader from 'home/../Loader';
 
 
 export default class Banner extends React.Component
 {
 	data = {
 		imgUrls:[
-			{
-	            "title": "测试",
-	            "image": "image/home/banner/1.png",
-	            "link": "http://www.baidu.com"
-	        },
-	        {
-	            "title": "ffff",
-	            "image": "image/home/banner/1.png",
-	            "link": "http://www.baidu.com"
-	        }
+			{"title": "测试", "image": "image/home/banner/1.png", "link": "http://www.baidu.com"},
+	        {"title": "测试", "image": "image/home/banner/2.png", "link": "http://www.baidu.com"},
+	        {"title": "测试", "image": "image/home/banner/3.png", "link": "http://www.baidu.com"},
+	        {"title": "测试", "image": "image/home/banner/4.png", "link": "http://www.baidu.com"},
+	        {"title": "测试", "image": "image/home/banner/5.png", "link": "http://www.baidu.com"},
+	        {"title": "测试", "image": "image/home/banner/6.png", "link": "http://www.baidu.com"},
 		]
 	};
 	constructor(props) {super(props);}
 	componentWillMount()
 	{
-		var imgUrls = context.get("carousels");
+		var imgUrls = Loader.get("carousels");
 		if(imgUrls) this.data.imgUrls = imgUrls;
 	}
 
