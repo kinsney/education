@@ -8,7 +8,6 @@ export default class Footer extends React.Component
 	render()
 	{
 		return <div className="footer">
-		<div className="bar"></div>
 		<div className="footCont">
 			<Row>
 				<Col span={9}>

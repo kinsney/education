@@ -1,0 +1,24 @@
+@import '../../theme.less';
+
+.guessYouLike
+{
+	* { box-sizing:border-box; }
+	background-color:white; border:1px solid #f0f0f0;
+	.cards
+	{
+		padding:0 20px;
+		.card
+		{
+			border:1px solid @BDC-split; margin:6px 0 20px;
+			.cover
+			{
+				overflow:hidden; img{width:100%;}
+			}
+			.info
+			{
+				padding:16px; position:relative;
+				h5{.mix-F-h5(14px;); line-height:18px;}
+			}
+		}
+	}
+}

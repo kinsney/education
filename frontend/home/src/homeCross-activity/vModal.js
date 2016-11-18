@@ -12,9 +12,6 @@ export default class VModal extends React.Component
 		loading: false,
 		width:960,
 	};
-	static propTypes = {
-        "vid": React.PropTypes.string.isRequired
-    };
 	constructor(props) 
 	{
 		super(props);
@@ -24,7 +21,7 @@ export default class VModal extends React.Component
 	}
 	showModal(ev) 
 	{
-		this.setState({visible: true}); 
+		this.setState({visible:true});
 	}
 	handleOk(ev) 
 	{
@@ -36,8 +33,7 @@ export default class VModal extends React.Component
 	}
 	handleCancel(ev) 
 	{
-		console.log(ev);
-		this.setState({visible: false, });
+		this.setState({visible: false});
 	}
 	componentDidMount()
 	{
@@ -52,14 +48,18 @@ export default class VModal extends React.Component
 		loginFooter = <div></div>
 
 		return <div>
-			<Button type="ghost" onClick={this.showModal}>播放</Button>
+			<div className="playBtn" onClick={this.showModal}>
+				<Icon type="play-circle-o" />&nbsp;&nbsp;&nbsp;
+				<span>播放</span>
+			</div>
 			<Modal title="Basic Modal" 
 				visible={this.state.visible} 
 				onOk={this.handleOk}
 				width={this.state.width}
 				onCancel={this.handleCancel}
+				maskClosable={false}
 				footer={loginFooter} >
-				<Video width={this.state.width}/>
+				{this.state.visible?<Video width={this.state.width}/>:<div className="player"></div>}
 			</Modal>
 		</div>
 	}
