@@ -11,8 +11,8 @@ module.exports =
         [
             'webpack-dev-server/client?http://localhost:8080',
             'webpack/hot/only-dev-server',
-            './pageHome.js',
-            // './pageVideo.js'
+            // './pageHome.js',
+            './pageVideo.js'
         ]
     },
     output: 

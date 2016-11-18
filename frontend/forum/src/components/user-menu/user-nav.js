@@ -26,7 +26,7 @@ export class UserMenu extends React.Component {
         <strong>{this.props.user.username}</strong>
       </li>
       <li className="divider" />
-      <li>
+      {/*<li>
         <a href={this.props.user.absolute_url}>
           <span className="material-icon">account_circle</span>
           {gettext("See your profile")}
@@ -37,7 +37,7 @@ export class UserMenu extends React.Component {
           <span className="material-icon">done_all</span>
           {gettext("Change options")}
         </a>
-      </li>
+      </li>*/}
       <li>
         <button type="button" className="btn-link" onClick={this.changeAvatar}>
           <span className="material-icon">portrait</span>

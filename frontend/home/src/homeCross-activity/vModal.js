@@ -12,6 +12,9 @@ export default class VModal extends React.Component
 		loading: false,
 		width:960,
 	};
+	static propTypes = {
+        url:React.PropTypes.number.isRequired,
+    };
 	constructor(props) 
 	{
 		super(props);
@@ -59,7 +62,7 @@ export default class VModal extends React.Component
 				onCancel={this.handleCancel}
 				maskClosable={false}
 				footer={loginFooter} >
-				{this.state.visible?<Video width={this.state.width}/>:<div className="player"></div>}
+				{this.state.visible?<Video url={this.props.url} width={this.state.width}/>:<div className="player"></div>}
 			</Modal>
 		</div>
 	}

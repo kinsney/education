@@ -46,7 +46,7 @@ export default class Activity extends React.Component
 			return <div key={index} className="activity">
 			<div style={{backgroundImage:"url('"+item.thumbnail+"')"}}>
 				<h2>{item.title}</h2> <p>{item.profile}</p>
-				<VModal/>
+				<VModal url={item.video}/>
 			</div></div>
 		});
 

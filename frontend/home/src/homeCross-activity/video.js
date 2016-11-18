@@ -8,7 +8,8 @@ import './style.less';
 export default class Video extends React.Component
 {
 	static propTypes = {
-        width: React.PropTypes.number.isRequired
+        width: React.PropTypes.number.isRequired,
+        url:React.PropTypes.number.isRequired,
     };
     constructor(props)
 	{
@@ -26,7 +27,8 @@ export default class Video extends React.Component
 		return <div className="player">
 			<video ref="video" className="video-js vjs-default-skin"
 				controls preload="auto" width={this.props.width-32} height="525">
-				<source src="video/demo.flv" type="video/flv" />
+				{/*<source src="video/demo.flv" type="video/flv" />*/}
+				<source src={this.props.url} type="video/flv" />
 			</video>
 		</div>
 	}
