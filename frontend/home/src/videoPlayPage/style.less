@@ -1,0 +1,28 @@
+@import '../theme.less';
+
+.playPage
+{
+	background-color:#fbfbfb; padding:1px;
+	&>div{width:1208px; margin:0 auto;}
+
+	.ant-tabs-bar
+	{
+		background-color:#f6f8fe; font-size:16px;
+		border-bottom-color:@BDC-split;
+		.ant-tabs-nav.ant-tabs-nav-animated
+		{
+			div[role='tab']{ border:none;padding:0 24px; height:46px;line-height:46px; }
+		}
+	}
+	.ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-nav-container
+	{ height:48px;}
+}
+
+.barTitle
+{
+	height:25px; margin-bottom:15px;
+	>*{display:inline-block; height:25px; line-height:25px; vertical-align:middle;}
+	>span{width:6px; background-color:@primary-color; margin-right:10px;}
+	>h3{ .mix-F-h5; }
+}
+

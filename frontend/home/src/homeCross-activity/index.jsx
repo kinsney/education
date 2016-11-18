@@ -46,11 +46,7 @@ export default class Activity extends React.Component
 			return <div key={index} className="activity">
 			<div style={{backgroundImage:"url('"+item.thumbnail+"')"}}>
 				<h2>{item.title}</h2> <p>{item.profile}</p>
-				<a href={item.video}>
-					<Icon type="play-circle-o" />&nbsp;&nbsp;&nbsp;
-					<span>播放</span>
-				</a>
-
+				<VModal/>
 			</div></div>
 		});
 
@@ -63,7 +59,6 @@ export default class Activity extends React.Component
 					<Carousel ref="slider" dots={false} slidesToShow={2} >
 						{Videos}
 					</Carousel>
-					<VModal vid="my-video"/>
 				</Col>
 				<Col span={1}><div onClick={this.next} className="icon"><Icon type="right-circle-o"/></div></Col>
 			</Row>

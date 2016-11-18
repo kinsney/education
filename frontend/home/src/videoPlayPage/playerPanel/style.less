@@ -1,0 +1,38 @@
+@import '../../theme.less';
+
+.playerPanel
+{
+	* { box-sizing:border-box; }
+	margin:32px 0; padding:24px; background-color:white; border:1px solid #f0f0f0;
+	>h1 {.mix-F-h5; margin-bottom:16px;}
+	.player
+	{
+		height:480px; background-color: black;
+	}
+
+	.userInteract
+	{
+		height:40px; display:none;
+	}
+
+	.videoInfo
+	{
+		.geekTeacher
+		{
+			height:85px; margin-bottom:25px;
+			h5{.mix-F-h5(@s:14px);margin-bottom:7px;}
+			p{.mix-F-txt(@c:@FC-second);}
+		}
+		.slick-slider
+		{
+			.toolRow{padding:12px 0;}
+			.slick-dots{right:-17px;}
+		}
+		
+	}
+
+	.getDevice
+	{
+		height:40px;  display:none;
+	}
+}
