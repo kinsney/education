@@ -7,10 +7,9 @@ module.exports =
     context: dirpath+'home',
     entry: 
     {
-        app: 
-        [
-            './pageHome.js'
-        ],
+        home: ['./pageHome.js'],
+        video: ['./pageVideo.js'],
+        together:['./pageHome.js','./pageVideo.js']
     },
     output: 
     {
@@ -37,7 +36,8 @@ module.exports =
             { test: /\.(js|jsx)$/, exclude: /node_modules/, loader: 'babel' },
             { test: /\.json$/, loader: 'json' },
             { test: /\.(png|jpg)$/, loader: 'url' },
-            { test: /\.less$/, loaders: ["style", "css", "postcss", "less"] },    
+            { test: /\.css$/, loaders: ["style", "css?-url"] },
+            { test: /\.less$/, loaders: ["style", "css?-url", "postcss", "less"] },    
         ]
     },
     postcss: [require('autoprefixer') ],  // 使用postcss时需要的配置

@@ -32,10 +32,15 @@ function initializer()
 }
 
 Loader.addInitializer(initializer);
-Loader.init({});
+// Loader.init({});
 
-const contextModle = 
+const contextModle =
 {
-    
+    video:
+    {
+    	url: "video/demo.flv",
+    	type: "video/flv"
+    },
+    misagoContext:{}
 }
 

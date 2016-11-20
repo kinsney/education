@@ -39,6 +39,7 @@ function initializer()
 }
 
 Loader.addInitializer(initializer);
+// Loader.init({});
 
 const contextModle =
 {
