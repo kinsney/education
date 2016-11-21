@@ -12,18 +12,19 @@ import './style.less';
 export default class Footer extends React.Component
 {
 	data = {
-		video:{ url: "video/demo.flv", type: "video/flv" },
+		video:{ name:"",url: "video/demo.flv", type: "video/flv" },
 	};
 	componentWillMount()
 	{
 		var video = Loader.get("video");
-		if(video) this.data.viedo = video;
+		if(video) this.data.video = video;
+		console.log(video)
 	}
 	componentDidMount()
 	{
 		var box = this.refs.playerBox;
 		var element = this.refs.video;
-		var option = 
+		var option =
 		{
 			example_option:true,
 			height:$(box).height(),
@@ -37,9 +38,8 @@ export default class Footer extends React.Component
 	render()
 	{
 		var item = this.data.video;
-
 		return <div className="playerPanel">
-			<h1>十分钟教会你制作会跑酷的纸机器人</h1>
+			<h1>{ item.name }</h1>
 			<Row gutter={24}>
 				<Col span={18}>
 					<div className="player" ref="playerBox">

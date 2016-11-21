@@ -27,17 +27,17 @@ export class UserMenu extends React.Component {
       </li>
       <li className="divider" />
       {/*<li>
-        <a href={this.props.user.absolute_url}>
-          <span className="material-icon">account_circle</span>
-          {gettext("See your profile")}
-        </a>
-      </li>
-      <li>
-        <a href={misago.get('USERCP_URL')}>
-          <span className="material-icon">done_all</span>
-          {gettext("Change options")}
-        </a>
-      </li>*/}
+            <a href={this.props.user.absolute_url}>
+              <span className="material-icon">account_circle</span>
+              {gettext("See your profile")}
+            </a>
+          </li>
+          <li>
+            <a href={misago.get('USERCP_URL')}>
+              <span className="material-icon">done_all</span>
+              {gettext("Change options")}
+            </a>
+          </li>*/}
       <li>
         <button type="button" className="btn-link" onClick={this.changeAvatar}>
           <span className="material-icon">portrait</span>

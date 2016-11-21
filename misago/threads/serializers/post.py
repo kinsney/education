@@ -23,6 +23,7 @@ class PostSerializer(serializers.ModelSerializer):
     acl = serializers.SerializerMethodField()
     is_read = serializers.SerializerMethodField()
     is_new = serializers.SerializerMethodField()
+    is_liked = serializers.SerializerMethodField()
 
     api = serializers.SerializerMethodField()
     url = serializers.SerializerMethodField()
@@ -52,8 +53,11 @@ class PostSerializer(serializers.ModelSerializer):
             'is_event',
             'event_type',
             'event_context',
+            'likes',
+            'last_likes',
 
             'acl',
+            'is_liked',
             'is_new',
             'is_read',
 
@@ -82,6 +86,12 @@ class PostSerializer(serializers.ModelSerializer):
         except AttributeError:
             return None
 
+    def get_is_liked(self, obj):
+        try:
+            return obj.is_liked
+        except AttributeError:
+            return None
+
     def get_is_new(self, obj):
         try:
             return obj.is_new
@@ -97,7 +107,9 @@ class PostSerializer(serializers.ModelSerializer):
     def get_api(self, obj):
         return {
             'index': obj.get_api_url(),
+            'likes': obj.get_likes_api_url(),
             'editor': obj.get_editor_api_url(),
+            'edits': obj.get_edits_api_url(),
             'read': obj.get_read_api_url(),
         }
 

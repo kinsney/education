@@ -25,7 +25,7 @@ export default class Card extends React.Component
 
 		return <div className="card">
 			<div className="cover">
-				<img src={info.thumbnail}/>
+				<a href={info.link }><img src={info.thumbnail}/></a>
 			</div>
 			<div className="info">
 				<h5>{info.title}</h5>

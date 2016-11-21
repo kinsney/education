@@ -1,0 +1,18 @@
+{% extends "home/home_base.html" %}
+{% load staticfiles %}
+{% block content %}
+{{ block.super }}
+<script src="{% static "js/video.js" %}"></script>
+<script>
+var lesson_add = {
+        "video":
+            {
+                name:"{{ lesson.name }}",
+                url: "{{ lesson.get_first_video.file.url }}",
+                type: "{{ lesson.get_first_video.mimetype }}",
+            },
+    }
+Object.assign(home_context,lesson_add)
+Loader.init(home_context);
+</script>
+{% endblock %}

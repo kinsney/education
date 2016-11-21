@@ -9,7 +9,7 @@ import Footer from './src/footer/index';
 import Loader from './Loader';
 
 
-if(module.hot) 
+if(module.hot)
 {
 	module.hot.accept();
 }
@@ -26,7 +26,7 @@ class PageVideo extends React.Component
 	}
 }
 
-function initializer() 
+function initializer()
 {
 	ReactDOM.render(<PageVideo/>, document.getElementById('home') );
 }
@@ -38,6 +38,7 @@ const contextModle =
 {
     video:
     {
+        name:"name",
     	url: "video/demo.flv",
     	type: "video/flv"
     },

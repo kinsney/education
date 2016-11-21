@@ -19,6 +19,8 @@ from ..viewmodels.post import ThreadPost
 from ..viewmodels.posts import ThreadPosts
 from ..viewmodels.thread import ForumThread
 from .postingendpoint import PostingEndpoint
+from .postendpoints.edits import get_edit_endpoint, revert_post_endpoint
+from .postendpoints.likes import likes_list_endpoint
 from .postendpoints.merge import posts_merge_endpoint
 from .postendpoints.move import posts_move_endpoint
 from .postendpoints.patch_event import event_patch_endpoint
@@ -186,8 +188,8 @@ class ViewSet(viewsets.ViewSet):
     @detail_route(methods=['post'])
     @transaction.atomic
     def read(self, request, thread_pk, pk):
-        thread = self.get_thread(request, get_int_or_404(thread_pk))
-        post = self.get_post(request, thread, get_int_or_404(pk)).model
+        thread = self.get_thread(request, thread_pk)
+        post = self.get_post(request, thread, pk).model
 
         request.user.lock()
 
@@ -197,11 +199,11 @@ class ViewSet(viewsets.ViewSet):
     def post_editor(self, request, thread_pk, pk):
         thread = self.get_thread(
             request,
-            get_int_or_404(thread_pk),
+            thread_pk,
             read_aware=False,
             subscription_aware=False
         )
-        post = self.get_post(request, thread, get_int_or_404(pk)).model
+        post = self.get_post(request, thread, pk).model
 
         allow_edit_post(request.user, post)
 
@@ -226,14 +228,14 @@ class ViewSet(viewsets.ViewSet):
     def reply_editor(self, request, thread_pk):
         thread = self.get_thread(
             request,
-            get_int_or_404(thread_pk),
+            thread_pk,
             read_aware=False,
             subscription_aware=False
         )
         allow_reply_thread(request.user, thread.model)
 
         if 'reply' in request.query_params:
-            reply_to = self.get_post(request, thread, get_int_or_404(request.query_params['reply'])).model
+            reply_to = self.get_post(request, thread, request.query_params['reply']).model
 
             if reply_to.is_event:
                 raise PermissionDenied(_("You can't reply to events."))
@@ -247,6 +249,33 @@ class ViewSet(viewsets.ViewSet):
             })
         else:
             return Response({})
+
+    @detail_route(methods=['get', 'post'])
+    def edits(self, request, thread_pk, pk):
+        if request.method == 'GET':
+            thread = self.get_thread(request, thread_pk)
+            post = self.get_post(request, thread, pk).model
+
+            return get_edit_endpoint(request, post)
+
+        if request.method == 'POST':
+            with transaction.atomic():
+                thread = self.get_thread(request, thread_pk)
+                post = self.get_post_for_update(request, thread, pk).model
+
+                allow_edit_post(request.user, post)
+
+                return revert_post_endpoint(request, post)
+
+    @detail_route(methods=['get'])
+    def likes(self, request, thread_pk, pk):
+        thread = self.get_thread(request, thread_pk)
+        post = self.get_post(request, thread, pk).model
+
+        if post.acl['can_see_likes'] < 2:
+            raise PermissionDenied(_("You can't see who liked this post."))
+
+        return likes_list_endpoint(request, post)
 
 
 class ThreadPostsViewSet(ViewSet):

@@ -135,7 +135,10 @@ def post_poll(thread, poster):
 
     # one user voted for Alpha choice
     User = get_user_model()
-    user = User.objects.create_user('bob', 'bob@test.com', 'Pass.123')
+    try:
+        user = User.objects.get(slug='bob')
+    except User.DoesNotExist:
+        user = User.objects.create_user('bob', 'bob@test.com', 'Pass.123')
 
     poll.pollvote_set.create(
         category=thread.category,
@@ -178,3 +181,25 @@ def post_poll(thread, poster):
     )
 
     return poll
+
+
+def like_post(post, user):
+    like = post.postlike_set.create(
+        category=post.category,
+        thread=post.thread,
+        user=user,
+        user_name=user.username,
+        user_slug=user.slug,
+        user_ip='127.0.0.1'
+    )
+    post.likes += 1
+    post.last_likes = [
+        {
+            'username': user.username,
+            'slug': user.slug,
+            'url': user.get_absolute_url()
+        }
+    ]
+    post.save()
+
+    return like
