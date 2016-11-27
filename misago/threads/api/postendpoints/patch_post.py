@@ -57,15 +57,11 @@ def patch_is_liked(request, post, value):
         post.likes -= 1
 
     post.last_likes = []
-    for like in post.postlike_set.all()[:3]:
+    for like in post.postlike_set.all()[:4]:
         post.last_likes.append({
-            'username': request.user.username,
-            'slug': request.user.slug,
-            'url': None
+            'id': like.user_id,
+            'username': like.user_name
         })
-
-        if like.user_id:
-            post.last_likes[-1]['url'] = request.user.get_absolute_url()
 
     post.save(update_fields=['likes', 'last_likes'])
 

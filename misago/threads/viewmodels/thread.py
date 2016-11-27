@@ -4,6 +4,7 @@ from django.utils.translation import gettext as _
 from misago.acl import add_acl
 from misago.categories.models import THREADS_ROOT_NAME, Category
 from misago.core.shortcuts import validate_slug
+from misago.core.viewmodel import ViewModel as BaseViewModel
 from misago.readtracker.threadstracker import make_read_aware
 
 from ..models import Poll, Thread
@@ -11,6 +12,9 @@ from ..permissions.threads import allow_see_thread
 from ..serializers import ThreadSerializer
 from ..subscriptions import make_subscription_aware
 from ..threadtypes import trees_map
+
+
+__all__ = ['ForumThread', 'PrivateThread']
 
 
 BASE_RELATIONS = (
@@ -23,9 +27,9 @@ BASE_RELATIONS = (
 )
 
 
-class ViewModel(object):
-    def __init__(self, request, pk, slug=None,
-            read_aware=False, subscription_aware=False, poll_votes_aware=False, select_for_update=False):
+class ViewModel(BaseViewModel):
+    def __init__(self, request, pk, slug=None, read_aware=False,
+            subscription_aware=False, poll_votes_aware=False, select_for_update=False):
         model = self.get_thread(request, pk, slug, select_for_update)
 
         model.path = self.get_thread_path(model.category)
@@ -39,8 +43,6 @@ class ViewModel(object):
             make_subscription_aware(request.user, model)
 
         self._model = model
-        self._category = model.category
-        self._path = model.path
 
         try:
             self._poll = model.poll
@@ -50,18 +52,6 @@ class ViewModel(object):
                 self._poll.make_choices_votes_aware(request.user)
         except Poll.DoesNotExist:
             self._poll = None
-
-    @property
-    def model(self):
-        return self._model
-
-    @property
-    def category(self):
-        return self._category
-
-    @property
-    def path(self):
-        return self._path
 
     @property
     def poll(self):
@@ -96,15 +86,15 @@ class ViewModel(object):
         return {
             'thread': self._model,
             'poll': self._poll,
-            'category': self._category,
-            'breadcrumbs': self._path
+            'category': self._model.category,
+            'breadcrumbs': self._model.path
         }
 
 
 class ForumThread(ViewModel):
     def get_thread(self, request, pk, slug=None, select_for_update=False):
         if select_for_update:
-            queryset = Thread.objects.select_for_update().select_related('category')
+            queryset = Thread.objects.select_for_update()
         else:
             queryset = Thread.objects.select_related(*BASE_RELATIONS)
 
@@ -121,3 +111,8 @@ class ForumThread(ViewModel):
 
     def get_root_name(self):
         return _("Threads")
+
+
+class PrivateThread(ViewModel):
+    pass
+

@@ -140,7 +140,7 @@ export default class extends Form {
                     loading={this.state.isLoading}>
               {gettext("Sign in")}
             </Button>
-           {/*<a href={misago.get('FORGOTTEN_PASSWORD_URL')}
+            {/*<a href={misago.get('FORGOTTEN_PASSWORD_URL')}
                className="btn btn-default btn-block">
                {gettext("Forgot password?")}
             </a>*/}

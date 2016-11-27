@@ -13,7 +13,7 @@ from ...moderation import threads as moderation
 from ...permissions import can_reply_thread, can_see_thread
 from ...serializers import NewThreadSerializer, ThreadsListSerializer
 from ...threadtypes import trees_map
-from ...utils import add_categories_to_threads, get_thread_id_from_url
+from ...utils import add_categories_to_items, get_thread_id_from_url
 from .pollmergehandler import PollMergeHandler
 
 
@@ -36,7 +36,7 @@ def thread_merge_endpoint(request, thread, viewmodel):
         return Response({'detail': _("You can't merge thread with itself.")}, status=400)
 
     try:
-        other_thread = viewmodel(request, other_thread_id, select_for_update=True).model
+        other_thread = viewmodel(request, other_thread_id, select_for_update=True).unwrap()
         if not can_reply_thread(request.user, other_thread):
             raise PermissionDenied(_("You can't merge this thread into thread you can't reply."))
         if not other_thread.acl['can_merge']:
@@ -224,7 +224,7 @@ def merge_threads(request, validated_data, threads, poll):
         categories = list(Category.objects.all_categories().filter(
             id__in=request.user.acl['visible_categories']
         ))
-        add_categories_to_threads(validated_data['top_category'], categories, [new_thread])
+        add_categories_to_items(validated_data['top_category'], categories, [new_thread])
     else:
         new_thread.top_category = None
 

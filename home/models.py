@@ -6,6 +6,7 @@ from mptt.managers import TreeManager
 from mptt.models import MPTTModel, TreeForeignKey
 from misago.core.utils import slugify
 from django.db.models import Q,Sum,Count
+from device.models import Device
 # Create your models here.
 class Banner(models.Model):
     title = models.CharField('横幅主题', max_length=64,blank=False)
@@ -61,7 +62,7 @@ class Lesson(models.Model):
     price = models.DecimalField('价格',max_digits=5,decimal_places=1)
     category = models.ForeignKey(LessonCategory,verbose_name="课程类别")
     added = models.DateTimeField('发布时间',auto_now_add = True)
-    equipment = models.CharField('设备',max_length=100,blank=True)
+    equipment = models.ManyToManyField(Device,verbose_name="设备")
     description = models.CharField('描述', max_length=60,blank=False)
     order = models.SmallIntegerField('顺序', default=0)
     teacher = models.ForeignKey(

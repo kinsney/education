@@ -8,7 +8,7 @@ from django.views.generic import View
 from misago.conf import settings
 
 from ..permissions.threads import exclude_invisible_posts
-from ..viewmodels.thread import ForumThread
+from ..viewmodels import ForumThread
 
 
 class GotoView(View):
@@ -16,7 +16,7 @@ class GotoView(View):
     read_aware=False
 
     def get(self, request, pk, slug, **kwargs):
-        thread = self.get_thread(request, pk, slug).model
+        thread = self.get_thread(request, pk, slug).unwrap()
         self.test_permissions(request, thread)
 
         posts_queryset = exclude_invisible_posts(request.user, thread.category, thread.post_set)

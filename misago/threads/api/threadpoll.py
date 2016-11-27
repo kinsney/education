@@ -12,7 +12,7 @@ from ..models import Poll
 from ..permissions.polls import (
     allow_see_poll_votes, allow_start_poll, allow_edit_poll, allow_delete_poll, can_start_poll)
 from ..serializers import PollSerializer, PollVoteSerializer, NewPollSerializer, EditPollSerializer
-from ..viewmodels.thread import ForumThread
+from ..viewmodels import ForumThread
 from .pollvotecreateendpoint import poll_vote_create
 
 
@@ -24,7 +24,7 @@ class ViewSet(viewsets.ViewSet):
             request,
             get_int_or_404(thread_pk),
             select_for_update=select_for_update,
-        ).model
+        ).unwrap()
 
     def get_thread_for_update(self, request, thread_pk):
         return self.get_thread(request, thread_pk, select_for_update=True)

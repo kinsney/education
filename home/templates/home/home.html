@@ -37,7 +37,12 @@ var home_add = {
                                 "link":"{{ lesson.get_first_link }}",
                                 "price":"{{ lesson.price }}",
                                 "time":"{{ lesson.get_duration }}",
-                                "equipment":"{{ lesson.equipment }}",
+                                "equipment": [{% for equipment in lesson.equipment.all %}
+                                                {
+                                                    "name":"{{ equipment.name}}",
+                                                    "icon":"{{equipment.category.icon.url}}"
+                                                },
+                                            {% endfor %}]
                             },
                          {% endfor %}
                         ],
