@@ -138,7 +138,7 @@ MISAGO_POSTING_MIDDLEWARES = (
     'misago.threads.api.postingendpoint.close.CloseMiddleware',
     'misago.threads.api.postingendpoint.hide.HideMiddleware',
     'misago.threads.api.postingendpoint.protect.ProtectMiddleware',
-    # 'misago.threads.api.postingendpoint.recordedit.RecordEditMiddleware',
+    'misago.threads.api.postingendpoint.recordedit.RecordEditMiddleware',
     'misago.threads.api.postingendpoint.updatestats.UpdateStatsMiddleware',
     'misago.threads.api.postingendpoint.mentions.MentionsMiddleware',
     'misago.threads.api.postingendpoint.subscribe.SubscribeMiddleware',
@@ -345,6 +345,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'misago.users.rest_permissions.IsAuthenticatedOrReadOnly',
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
     ),
     'EXCEPTION_HANDLER': 'misago.core.exceptionhandler.handle_api_exception',
     'UNAUTHENTICATED_USER': 'misago.users.models.AnonymousUser',

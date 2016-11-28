@@ -18,6 +18,7 @@ class LessonAdmin(admin.ModelAdmin):
     def inline_image(self, obj):
         return format_html('<img src="%s" style="height:128px"/>' % obj.thumbnail.url)
     inlines = (LessonVideoInline,)
+    filter_horizontal = ('equipment',)
 
 class LessonInline(admin.TabularInline):
     model = Lesson

@@ -2,8 +2,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.views.generic import View
 
-from ..viewmodels.posts import ThreadPosts
-from ..viewmodels.thread import ForumThread
+from ..viewmodels import ForumThread, ThreadPosts
 
 
 class ThreadBase(View):
@@ -23,7 +22,12 @@ class ThreadBase(View):
         return render(request, self.template_name, template_context)
 
     def get_thread(self, request, pk, slug):
-        return self.thread(request, pk, slug, read_aware=True, subscription_aware=True, poll_votes_aware=True)
+        return self.thread(
+            request, pk, slug,
+            read_aware=True,
+            subscription_aware=True,
+            poll_votes_aware=True
+        )
 
     def get_posts(self, request, thread, page):
         return self.posts(request, thread, page)

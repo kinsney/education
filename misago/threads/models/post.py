@@ -67,6 +67,15 @@ class Post(models.Model):
     event_type = models.CharField(max_length=255, null=True, blank=True)
     event_context = JSONField(null=True, blank=True)
 
+    likes = models.PositiveIntegerField(default=0)
+    last_likes = JSONField(null=True, blank=True)
+
+    liked_by = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name='liked_post_set',
+        through='misago_threads.PostLike',
+    )
+
     class Meta:
         index_together = [
             ('is_event', 'is_hidden'),
@@ -132,8 +141,14 @@ class Post(models.Model):
     def get_api_url(self):
         return self.thread_type.get_post_api_url(self)
 
+    def get_likes_api_url(self):
+        return self.thread_type.get_post_likes_api_url(self)
+
     def get_editor_api_url(self):
         return self.thread_type.get_post_editor_api_url(self)
+
+    def get_edits_api_url(self):
+        return self.thread_type.get_post_edits_api_url(self)
 
     def get_read_api_url(self):
         return self.thread_type.get_post_read_api_url(self)

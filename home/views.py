@@ -12,7 +12,7 @@ def home(request):
         activities = Activity.objects.filter(is_visible=True).order_by('order')
     except:
         pass
-    return render(request,'home.html',locals())
+    return render(request,'home/home.html',locals())
 
 
 

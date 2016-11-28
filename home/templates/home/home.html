@@ -1,0 +1,66 @@
+{% extends "home/home_base.html" %}
+{% load i18n staticfiles misago_json %}
+{% block content %}
+{{ block.super }}
+<script src="http://localhost:8080/app.js"></script>
+<script>
+var home_add = {
+        "carousels":[
+            {% for carousel in carousels %}
+                {
+                    "title":"{{ carousel.title }}",
+                    "image":"{{ carousel.image.url }}",
+                    "link":"{{ carousel.link }}"
+                },
+            {% endfor %}
+        ],
+        "hotpots":[
+            {% for hotpot in hotpots %}
+                {
+                    "title":"{{ hotpot.title }}",
+                    "image":"{{ hotpot.image.url }}",
+                    "link":"{{ hotpot.link }}",
+                    "date":"{{ hotpot.added|date:"Y年m月j日"}}",
+                },
+            {% endfor %}
+        ],
+        "categories":[
+                {% for category in categories %}
+                    {
+                        "title":"{{ category.name }}",
+                        "more":"#",
+                        "lessons": [
+                        {% for lesson in category.get_top_lessons %}
+                            {
+                                "title":"{{ lesson.name }}",
+                                "thumbnail":"{{ lesson.thumbnail.url }}",
+                                "link":"{{ lesson.get_first_link }}",
+                                "price":"{{ lesson.price }}",
+                                "time":"{{ lesson.get_duration }}",
+                                "equipment": [{% for equipment in lesson.equipment.all %}
+                                                {
+                                                    "name":"{{ equipment.name}}",
+                                                    "icon":"{{equipment.category.icon.url}}"
+                                                },
+                                            {% endfor %}]
+                            },
+                         {% endfor %}
+                        ],
+                    },
+                {% endfor %}
+            ],
+        "activities":[
+            {% for activity in activities %}
+                {
+                    "title":"{{ activity.title }}",
+                    "video":"{{ activity.video.url }}",
+                    "thumbnail":"{{ activity.thumbnail.url }}",
+                    "profile":"{{ activity.description }}"
+                },
+            {% endfor %}
+        ]
+    }
+Object.assign(home_context,home_add)
+Loader.init(home_context);
+</script>
+{% endblock %}

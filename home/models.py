@@ -1,16 +1,17 @@
 from django.db import models
-from . import POSITIONS
+from . import POSITIONS,MIMETYPE
 from ckeditor_uploader.fields import RichTextUploadingField
 from misago.conf import settings
 from mptt.managers import TreeManager
 from mptt.models import MPTTModel, TreeForeignKey
 from misago.core.utils import slugify
 from django.db.models import Q,Sum,Count
+from device.models import Device
 # Create your models here.
 class Banner(models.Model):
     title = models.CharField('横幅主题', max_length=64,blank=False)
     image = models.ImageField('图像',upload_to='banner/')
-    link = models.URLField('链接')
+    link = models.CharField('链接',max_length=200)
     position = models.CharField('位置', max_length=32,
         choices=POSITIONS)
     is_visible = models.BooleanField('显示', default=True)
@@ -61,7 +62,7 @@ class Lesson(models.Model):
     price = models.DecimalField('价格',max_digits=5,decimal_places=1)
     category = models.ForeignKey(LessonCategory,verbose_name="课程类别")
     added = models.DateTimeField('发布时间',auto_now_add = True)
-    equipment = models.CharField('设备',max_length=100,blank=True)
+    equipment = models.ManyToManyField(Device,verbose_name="设备")
     description = models.CharField('描述', max_length=60,blank=False)
     order = models.SmallIntegerField('顺序', default=0)
     teacher = models.ForeignKey(
@@ -72,7 +73,8 @@ class Lesson(models.Model):
         verbose_name="老师"
     )
     def get_duration(self):
-        return 0
+        duration = self.lessonvideo_set.aggregate(Sum('duration'))
+        return duration['duration__sum'] or "未知"
     def set_name(self, name):
         self.name = name
         self.slug = slugify(name)
@@ -81,12 +83,18 @@ class Lesson(models.Model):
         super(Lesson,self).save(*args, **kwargs)
     def __str__(self):
         return self.name
-    # def get_all_time(self):
-    #     return null
     def get_video_number(self):
         return self.lessonvideo_set.count()
-    def get_link(self):
-        return '/LesCategories/{}/{}'.format(self.category.slug,self.slug)
+    def get_first_link(self):
+        return '/lesson/{}-{}'.format(self.slug,self.pk)
+    def get_all_videos(self):
+        return self.lessonvideo_set.order_by('order')
+    def get_first_video(self):
+        return self.lessonvideo_set.order_by('order').first()
+    @property
+    def get_index_video(self,index):
+        index = int(index)
+        return self.lessonvideo_set.order_by('order')[index]
     class Meta:
         verbose_name = '课程'
         verbose_name_plural = '课程'
@@ -102,6 +110,7 @@ class LessonVideo(models.Model):
     duration = models.DurationField('视频秒数')
     added = models.DateTimeField('发布时间',auto_now_add = True)
     thumbnail = models.ImageField('缩略图',upload_to=video_path)
+    mimetype = models.CharField('视频格式', max_length=20,choices=MIMETYPE,default="video/mp4")
     description = RichTextUploadingField()
     order = models.SmallIntegerField('顺序', default=0)
     def __str__(self):

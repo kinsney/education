@@ -135,8 +135,20 @@ class Thread(ThreadType):
             'pk': post.pk
         })
 
+    def get_post_likes_api_url(self, post):
+        return reverse('misago:api:thread-post-likes', kwargs={
+            'thread_pk': post.thread_id,
+            'pk': post.pk
+        })
+
     def get_post_editor_api_url(self, post):
         return reverse('misago:api:thread-post-editor', kwargs={
+            'thread_pk': post.thread_id,
+            'pk': post.pk
+        })
+
+    def get_post_edits_api_url(self, post):
+        return reverse('misago:api:thread-post-edits', kwargs={
             'thread_pk': post.thread_id,
             'pk': post.pk
         })
