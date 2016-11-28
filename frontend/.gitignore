@@ -3,3 +3,4 @@
 /bower_components
 .cache-require-paths.json
 .DS_Store
+/架构.mindnode
