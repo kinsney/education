@@ -18,7 +18,6 @@ export default class Footer extends React.Component
 	{
 		var video = Loader.get("video");
 		if(video) this.data.video = video;
-		console.log(video)
 	}
 	componentDidMount()
 	{

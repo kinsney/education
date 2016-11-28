@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Banner,LessonCategory,Lesson,LessonVideo,Activity
+from .models import Banner,LessonCategory,Lesson,LessonVideo,Activity,LessonQuestion
 from django.utils.html import format_html
 # Register your models here.
 
@@ -7,8 +7,13 @@ from django.utils.html import format_html
 class LessonVideoAdmin(admin.ModelAdmin):
     pass
 
+
 class LessonVideoInline(admin.TabularInline):
     model = LessonVideo
+    extra = 0
+
+class LessonQuestionInline(admin.TabularInline):
+    model = LessonQuestion
     extra = 0
 
 @admin.register(Lesson)
@@ -17,7 +22,7 @@ class LessonAdmin(admin.ModelAdmin):
     list_display = ('name','inline_image','category')
     def inline_image(self, obj):
         return format_html('<img src="%s" style="height:128px"/>' % obj.thumbnail.url)
-    inlines = (LessonVideoInline,)
+    inlines = (LessonVideoInline,LessonQuestionInline)
     filter_horizontal = ('equipment',)
 
 class LessonInline(admin.TabularInline):
