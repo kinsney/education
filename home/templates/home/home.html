@@ -2,7 +2,7 @@
 {% load i18n staticfiles misago_json %}
 {% block content %}
 {{ block.super }}
-<script src="http://localhost:8080/app.js"></script>
+<script src="{% static "js/home.js" %}"></script>
 <script>
 var home_add = {
         "carousels":[

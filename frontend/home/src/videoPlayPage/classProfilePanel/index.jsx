@@ -11,31 +11,31 @@ import './style.less';
 export default class ClassProfile extends React.Component
 {
 	data = {
-		imgIcons : 
+		imgIcons :
 		[
 			require('./img/1.png'),
 			require('./img/2.png'),
 			require('./img/3.png'),
 			require('./img/4.png')
 		],
-		devices: 
+		devices:
 		[
 	        { name: "电子包", description: "这是描述", icon: "image/video/arduino.png" },
 	        { name: "Arduno", description: "这是描述", icon: "image/video/arduino.png" },
 	    ],
-	    introduction: 
+	    introduction:
 	    {
 	        brief: "课程简介",
 	        target: "课程目标",
 	        groupSuit: "适合人群",
 	        advice: "学习建议",
-	        questions: 
-	        [ 
+	        questions:
+	        [
 	        	{title: "谁是傻逼", answer: "你是"},
-	        	{title: "谁是傻逼", answer: "你是"}, 
-	        	{title: "谁是傻逼", answer: "你是"}, 
-	        	{title: "谁是傻逼", answer: "你是"}, 
-	        	{title: "谁是傻逼", answer: "你是"}, 
+	        	{title: "谁是傻逼", answer: "你是"},
+	        	{title: "谁是傻逼", answer: "你是"},
+	        	{title: "谁是傻逼", answer: "你是"},
+	        	{title: "谁是傻逼", answer: "你是"},
 	        ],
 	        other:"<img src='image/video/other.png' />",
 	    }
@@ -52,7 +52,7 @@ export default class ClassProfile extends React.Component
 	}
 	componentWillMount()
 	{
-		var devices = Loader.get("video");
+		var devices = Loader.get("devices");
 		var introduction = Loader.get("introduction");
 		if(devices) this.data.devices = devices;
 		if(introduction) this.data.introduction = introduction;
