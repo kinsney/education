@@ -9,7 +9,8 @@ module.exports =
     {
         app:
         [
-            './pageHome.js'
+            // './pageHome.js',
+            './pageVideo.js'
         ],
     },
     output:
@@ -20,7 +21,7 @@ module.exports =
     },
     externals:
     {
-        'jquery':'Jquery',
+        'jquery':'jQuery',
         'react':'React',
         'react-dom':'ReactDom',
         'react-router':'ReactRouter',
