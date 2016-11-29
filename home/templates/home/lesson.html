@@ -11,6 +11,34 @@ var lesson_add = {
                 url: "{{ lesson.get_first_video.file.url }}",
                 type: "{{ lesson.get_first_video.mimetype }}",
             },
+        "introduction":{
+            brief:"{{ lesson.introduction }}",
+            target:"{{ lesson.target}}",
+            groupSuit:"{{ lesson.groupSuit }}",
+            advice:"{{ lesson.advice }}",
+            questions:[
+                        {% for quesion in lesson.get_questions %}
+                            {
+                                title:"{{ quesion.title }}",
+                                answer:"{{ quesion.answer }}"
+                            },
+                        {% endfor %}
+                        ]
+        },
+        "devices":[{% for device in lesson.equipment.all %}
+                        {
+                            name:"{{ device.name }}",
+                            description:"{{ device.description }}",
+                            icon:"{{ device.category.icon.url }}"
+                        },
+                    {% endfor %}],
+        "lessons":[{% for lesson in lesson.category.get_top_lessons %}
+                        {
+                            "title":"{{ lesson.name }}",
+                            "thumbnail":"{{ lesson.thumbnail.url }}",
+                            "link":"{{ lesson.get_first_link }}",
+                        },
+                    {% endfor %}]
     }
 Object.assign(home_context,lesson_add)
 Loader.init(home_context);

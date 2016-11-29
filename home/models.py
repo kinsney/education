@@ -63,7 +63,11 @@ class Lesson(models.Model):
     category = models.ForeignKey(LessonCategory,verbose_name="课程类别")
     added = models.DateTimeField('发布时间',auto_now_add = True)
     equipment = models.ManyToManyField(Device,verbose_name="设备")
-    description = models.CharField('描述', max_length=60,blank=False)
+    description = RichTextUploadingField('其他')
+    introduction = models.CharField('课程简介',max_length=255,blank=True)
+    target = models.CharField('课程目的',max_length=255,blank=True)
+    groupSuit = models.CharField('适合人群',max_length=255,blank=True)
+    advice = models.CharField('学习建议',max_length=255,blank=True)
     order = models.SmallIntegerField('顺序', default=0)
     teacher = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -91,13 +95,21 @@ class Lesson(models.Model):
         return self.lessonvideo_set.order_by('order')
     def get_first_video(self):
         return self.lessonvideo_set.order_by('order').first()
-    @property
-    def get_index_video(self,index):
-        index = int(index)
-        return self.lessonvideo_set.order_by('order')[index]
+    def get_questions(self):
+        return self.lessonquestion_set.order_by('order')
     class Meta:
         verbose_name = '课程'
         verbose_name_plural = '课程'
+        ordering = ['order']
+
+class LessonQuestion(models.Model):
+    Lesson = models.ForeignKey(Lesson,verbose_name="课程")
+    title = models.CharField('问题',max_length=255)
+    answer = models.CharField('答案',max_length=255)
+    order = models.SmallIntegerField('顺序', default=0)
+    class Meta:
+        verbose_name = '常见课程问题'
+        verbose_name_plural = '常见课程问题'
         ordering = ['order']
 
 
@@ -111,7 +123,6 @@ class LessonVideo(models.Model):
     added = models.DateTimeField('发布时间',auto_now_add = True)
     thumbnail = models.ImageField('缩略图',upload_to=video_path)
     mimetype = models.CharField('视频格式', max_length=20,choices=MIMETYPE,default="video/mp4")
-    description = RichTextUploadingField()
     order = models.SmallIntegerField('顺序', default=0)
     def __str__(self):
         return self.name
