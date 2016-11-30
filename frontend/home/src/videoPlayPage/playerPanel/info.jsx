@@ -31,17 +31,17 @@ export default class VideoInfo extends React.Component
 		{
 			if((i+1)==devices.length)
 			{
-				let ele = <div className="toolRow"><Row gutter={24}>
-      				<Col span="12"><TeachTool {...devices[i]}/></Col>
-    			</Row></div>;
+				let ele = <div className="toolRow">
+      				<div><TeachTool {...devices[i]}/></div>
+    			</div>;
 				TeachTools.push(ele);
 			}
 			else
 			{
-				let ele = <div className="toolRow"><Row gutter={24}>
-      				<Col span="12"><TeachTool  {...devices[i]}/></Col>
-      				<Col span="12"><TeachTool  {...devices[i+1]}/></Col>
-    			</Row></div>;
+				let ele = <div className="toolRow">
+      				<div><TeachTool {...devices[i]}/></div>
+      				<div><TeachTool {...devices[i+1]}/></div>
+    			</div>;
 				TeachTools.push(ele);
 			}
 		}
@@ -53,13 +53,15 @@ export default class VideoInfo extends React.Component
 					<img src={require('./img/teacher.png')}/>
 				</Col>
 				<Col span={16}>
-					<h5>显卡圣诞</h5>
-					<p>是可敬的阿萨德交罚款的积分卡带机发电房，谁考得好阿卡剪短发说的</p>
+					<h5>小志老师</h5>
+					<p>全延河颜值最高的老师，非常富有才华，讲课风趣幽默，超乎你的想象</p>
 				</Col>
 			</Row></div>
 			
 			<BarTitle title="教具清单"/>
-			<Carousel vertical="true" slidesToShow={2} draggable={false} infinite={false}>
+			<Carousel slidesToShow={2} draggable={false} infinite={false}>
+				{TeachTools}
+				{TeachTools}
 				{TeachTools}
 			</Carousel>
 		</div>

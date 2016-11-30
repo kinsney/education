@@ -13,7 +13,7 @@ module.exports =
     },
     externals: 
     {
-        'jquery':'Jquery',
+        'jquery':'jQuery',
         'react':'React', 
         'react-dom':'ReactDom', 
         'react-router':'ReactRouter', 

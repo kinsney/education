@@ -51,6 +51,7 @@ export default class Activity extends React.Component
 		});
 
 		return <div className="crossActivity"> <div className="crossCont">
+			<a name="activity"></a>
 			<h1>创客活动</h1>
 			<h5>时空裂痕是看得见，奥斯卡的哈大量的收发货开始打</h5>
 			<Row>

@@ -124,6 +124,7 @@ export default class Course extends React.Component
 		</div>
 
 		return <div className="crossCourse"><div className="crossCont">
+			<a name="course"></a>
 			<Row gutter={24}>
 				<Col span={6}>
 					<div className="hotTop"><h1 onClick={this.checkState}>热门公开课</h1></div>
@@ -131,7 +132,6 @@ export default class Course extends React.Component
 				</Col>
 				<Col span={18}>
 					<Tabs onChange={this.changeTab}
-						tabBarExtraContent={tabMore}
 						activeKey={this.state.nowIndex+''} >
 						{TabPanes}
 					</Tabs>

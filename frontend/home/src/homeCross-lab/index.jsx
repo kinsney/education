@@ -22,6 +22,7 @@ export default class laboratory extends React.Component
 	render()
 	{
 		return <div className="crossLab">
+			<a name="lab"></a>
 			<Carousel ref="slider1" effect="fade" speed={1500} draggable={false} dots={false}>
 				<div className="cover" style={{backgroundImage:"url('static/image/home/lab/1.png')"}}></div>
 				<div className="cover" style={{backgroundImage:"url('static/image/home/lab/2.png')"}}></div>

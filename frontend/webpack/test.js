@@ -9,8 +9,8 @@ module.exports =
     {
         app:
         [
-            // './pageHome.js',
-            './pageVideo.js'
+            './pageHome.js',
+            // './pageVideo.js'
         ],
     },
     output:

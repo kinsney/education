@@ -39,6 +39,6 @@ function initializer()
 }
 
 Loader.addInitializer(initializer);
-// Loader.init({});
+Loader.init({});
 
 

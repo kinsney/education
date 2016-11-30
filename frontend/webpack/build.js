@@ -12,7 +12,7 @@ module.exports =
     },
     output:
     {
-        path: dirpath+'dist',
+        path: dirpath+'../home/static/js',
         filename: '[name].js',
     },
     externals:
