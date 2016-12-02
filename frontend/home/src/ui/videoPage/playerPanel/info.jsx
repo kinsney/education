@@ -12,8 +12,8 @@ export default class VideoInfo extends React.Component
 	data = {
 		devices: 
 		[
-	        { name: "电子包", description: "这是描述", icon: "image/video/arduino.png" },
-	        { name: "Arduno", description: "这是描述", icon: "image/video/arduino.png" },
+	        { name: "电子包", description: "这是描述", icon: "/image/video/arduino.png" },
+	        { name: "Arduno", description: "这是描述", icon: "/image/video/arduino.png" },
 	    ]
 	};
 
@@ -60,8 +60,6 @@ export default class VideoInfo extends React.Component
 			
 			<BarTitle title="教具清单"/>
 			<Carousel slidesToShow={2} draggable={false} infinite={false}>
-				{TeachTools}
-				{TeachTools}
 				{TeachTools}
 			</Carousel>
 		</div>

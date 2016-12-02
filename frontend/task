@@ -11,7 +11,7 @@ const del = require('del');
 /*————————————生成hot和test的函数————————————*/
 function generate(command)
 {
-    return function(filename)
+    return function(filename='index')
     {
         if(!filename)
         {
@@ -76,8 +76,7 @@ const tasks =
         Object.assign(buildConfig,{
             entry: 
             {
-                home: ['./pageHome.js'],
-                video: ['./pageVideo.js'],
+                app: ['./index.js']
             }
         });
 
