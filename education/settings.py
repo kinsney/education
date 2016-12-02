@@ -21,6 +21,8 @@ INSTALLED_APPS += (
     'device',
     'ckeditor',
     'ckeditor_uploader',
+    'django.contrib.sites',
+    'django.contrib.flatpages'
 )
 
 # Quick-start development settings - unsuitable for production

@@ -18,6 +18,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 INSTALLED_APPS += (
     'home',
+    'device',
     'ckeditor',
     'ckeditor_uploader',
 )
@@ -26,14 +27,13 @@ INSTALLED_APPS += (
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-TEMPLATE_DEBUG = DEBUG
 
 # Hosts allowed to POST to your site
 # If you are unsure, just enter here your host name, eg. 'mysite.com'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['www.yanheedu.cn','yanheedu.cn']
 
 
 # Database
@@ -43,7 +43,7 @@ DATABASES = {
     'default': {
         # Only PostgreSQL is supported
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'testforum',
+        'NAME': 'education',
         'USER': 'yanhedb',
         'PASSWORD':'Kinsney123',
         'HOST': 'rm-2ze470sqf77tr9285o.pg.rds.aliyuncs.com',
@@ -172,9 +172,9 @@ DEFAULT_FILE_STORAGE = 'aliyun_oss2_storage.backends.AliyunMediaStorage'
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-# EMAIL_USE_TLS = False
-# EMAIL_HOST = 'smtpdm.aliyun.com'
-# EMAIL_PORT = 25
-# EMAIL_HOST_USER = 'post@verify.yanheedu.cn'
-# EMAIL_HOST_PASSWORD = 'kinsney123'
-# DEFAULT_FROM_EMAIL = 'post@verify.yanheedu.cn'
+EMAIL_USE_TLS = False
+EMAIL_HOST = 'smtpdm.aliyun.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'post@verify.yanheedu.cn'
+EMAIL_HOST_PASSWORD = 'Dxhsdsb123'
+DEFAULT_FROM_EMAIL = 'post@verify.yanheedu.cn'

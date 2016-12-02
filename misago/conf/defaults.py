@@ -84,6 +84,7 @@ MIDDLEWARE_CLASSES = (
     'misago.admin.middleware.AdminAuthMiddleware',
     'misago.threads.middleware.UnreadThreadsCountMiddleware',
     'misago.core.middleware.threadstore.ThreadStoreMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
