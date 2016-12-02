@@ -3,16 +3,6 @@ import React from 'react';
 import { Row, Col,Button } from 'antd';
 import $ from 'jquery';
 
-/************************************************/
-/*————————————引入videojs及相关配置文件————————————*/
-import VP from 'video.js';
-import 'video.js/dist/video-js.min.css';
-import SWF_PATH from 'video.js/dist/video-js.swf';
-import VTTJS_PATH from 'file!videojs-vtt.js/dist/vtt.min.js';
-VP.options.flash.swf = SWF_PATH;
-VP.options['vtt.js'] = VTTJS_PATH;
-/*——————————————————————————————————————————————*/
-/************************************************/
 
 import VideoInfo from './info.jsx';
 import Loader from 'home/../Loader';
@@ -41,7 +31,7 @@ export default class Footer extends React.Component
 			preload:"auto"
 		};
 		var callback = function(){};
-		VP(element,option,callback);
+		videojs(element,option,callback);
 	}
 	render()
 	{
