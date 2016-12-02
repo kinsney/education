@@ -5,16 +5,10 @@ var dirpath = join(__dirname, '../');
 module.exports = 
 {
     context: dirpath+'home',
-    entry: 
-    {
-        app: 
-        [
-            './pageHome.js'
-        ],
-    },
+    entry: { },
     output: 
     {
-        path: dirpath+'dist',
+        path: dirpath+'dist/js',
         filename: '[name].js',
     },
     externals: 
@@ -34,16 +28,12 @@ module.exports =
     {
         loaders: 
         [
-            { test: /\.(js|jsx)$/, exclude: /node_modules/, loader: 'babel' },
+            { test: /\.(js|jsx)$/, exclude: /node_modules/, loaders: ['babel'] },
             { test: /\.json$/, loader: 'json' },
+            { test: /\.(swf|ttf|eot|svg|woff(2))(\?[a-z0-9]+)?$/, loader: 'file' },
             { test: /\.(png|jpg)$/, loader: 'url' },
-            { test: /\.less$/, loaders: ["style", "css", "postcss", "less"] },    
+            { test: /\.css$/, loaders: ["style", "css?-url"] },
+            { test: /\.less$/, loaders: ["style", "css?-url", "less"] },
         ]
-    },
-    postcss: [require('autoprefixer') ],  // 使用postcss时需要的配置
-    plugins: 
-    [
-        new webpack.DefinePlugin({'process.env': {NODE_ENV: '"production"'} }),
-        new webpack.optimize.UglifyJsPlugin({compress:{warnings:false },output:{comments:false}})
-    ]
+    }
 }

@@ -1,82 +1,161 @@
 #!/usr/bin/env node
 
-var webpack = require('webpack');
-var webpackServe = require('webpack-dev-server');
-var gutil = require('gulp-util');
+const webpack = require('webpack');
+const webpackServe = require('webpack-dev-server');
+const gutil = require('gulp-util');
 
+const fs = require('fs');
+const glob = require('glob');
+const del = require('del');
 
-var fs = require('fs');
-var glob = require('glob');
-var del = require('del');
-
-
-var tasks = 
+/*————————————生成hot和test的函数————————————*/
+function generate(command)
 {
-    build: function()
+    return function(filename)
     {
-        var buildConfig = require('./webpack/buildGulp.js');
-        var compiler = webpack(buildConfig);
-
-        compiler.run(function(err, stats)
+        if(!filename)
         {
-            if(err) throw new gutil.PluginError("webpack", err);
-            gutil.log("[webpack]", stats.toString(
-            {
-                colors: true
-            }));
-        });
-
-        var watchOption = 
-        {
-            aggregateTimeout: 300, // wait so long for more changes
-            poll: true // use polling instead of native watchers
+            console.log('\n',"----------哥们儿，告诉我一个文件名！---------",'\n','\n');
+            return ;
         };
-        // compiler.watch(watchOption,function(err, stats){});
-    },
 
-    hot: function()
-    {
         var port = 8080;
         var host = "0.0.0.0";
 
-        var hotConfig = require('./webpack/hotGulp.js');
-        hotConfig.entry = {
-            app:[
-                "webpack-dev-server/client?http://localhost:"+port+"/",
-                "webpack/hot/dev-server",
-                './pageHome.js'
-            ]
-        };
-        hotConfig.output.publicPath = "http://localhost:"+port+"/assets/";
-        hotConfig.devtool = "eval";
-        hotConfig.debug = true;
+        var Config = require('./webpack/devBuild.js');
+        Object.assign(Config,{
+            entry:
+            {    
+                app: ['./'+filename+'.js']
+            },
+            output: 
+            {
+                path: __dirname+'dist/',
+                filename: '[name].js',
+                publicPath: "http://localhost:"+port+"/assets/"
+            },
+            devtool:'eval',
+        });
 
-        var compiler = webpack(hotConfig);
+        if(command=='hot')
+        {
+            Config.entry.app.unshift("webpack-dev-server/client?http://localhost:"+port+"/", "webpack/hot/dev-server");
+            Config.plugins = [ new webpack.HotModuleReplacementPlugin() ];
+        }
+        if(command=='test')
+        {
+            Config.entry.app.unshift("webpack-dev-server/client?http://localhost:"+port+"/");
+        }
+
+        var compiler = webpack(Config);
         var devOption = 
         {
+            publicPath: "http://localhost:"+port+"/assets/",
             contentBase: './dist',
-            hot: true,
+            hot: command=='hot',
             historyApiFallback: true,
-            stats: { colors: true }
+            stats: { colors: true, chunks: false }
         };
 
         var devCompiler = new webpackServe(compiler,devOption);
         devCompiler.listen(port, host, function(err) 
         {
             if(err) throw new gutil.PluginError("webpack-dev-server", err);
-            // Server listening
-            gutil.log("[webpack-dev-server]", "http://localhost:"+port+"/webpack-dev-server/index.html");
-
-            // keep the server alive or continue?
-            // callback();
+            gutil.log("[webpack-dev-server]", "http://localhost:"+port);
         });
     }
+}
+
+/*******************************************************************************/
+/*—————————————————————————————————————————————————————————————————————————————*/
+const tasks = 
+{
+    build: function(mode)
+    {
+        var buildConfig = require('./webpack/build.js');
+        Object.assign(buildConfig,{
+            entry: 
+            {
+                home: ['./pageHome.js'],
+                video: ['./pageVideo.js'],
+            }
+        });
+
+        var compiler = webpack(buildConfig);
+
+        if(!mode)
+        {
+            compiler.run(function(err, stats)
+            {
+                if(err) throw new gutil.PluginError("webpack", err);
+                gutil.log("[webpack]", stats.toString(
+                {
+                    chunks: false,  // Makes the build much quieter
+                    colors: true
+                }));
+            });
+        }
+        else if(mode=='watch')
+        {
+            var watchOption = 
+            {
+                aggregateTimeout: 300, // wait so long for more changes
+                poll: true // use polling instead of native watchers
+            };
+            compiler.watch(watchOption,function(err, stats)
+            {
+                if(err) throw new gutil.PluginError("webpack", err);
+                gutil.log("[webpack]", stats.toString(
+                {
+                    chunks: false,  // Makes the build much quieter
+                    colors: true
+                }));
+            });
+        }
+        else console.log('\n',"----------哥们儿，你参数弄错了！---------",'\n','\n');
+    },
+    hot:  generate('hot'),
+    test: generate('test')
 };
+/*—————————————————————————————————————————————————————————————————————————————*/
+/*******************************************************************************/
 
 
-var parameters = require('yargs').argv;
+var cliParam = require('yargs').argv;
+console.log(cliParam);
+
+var command = cliParam._[0];
+var arg1 = cliParam._[1];
+var arg2 = cliParam._[2];
+var arg3 = cliParam._[3];
+var arg4 = cliParam._[4];
+
+var mode = cliParam['mode']     // --mode
+var file = cliParam['file']     // --file
 
 
+if(command=='build')
+{
+    // arg1 只能是 watch
+    tasks.build(arg1);
+}
+else if(command=='hot')
+{
+    // arg1 指代文件名
+    tasks.hot(arg1);
+}
+else if(command=='test')
+{
+    // arg1 指代文件名
+    tasks.test(arg1);
+}
+else
+{
+    console.log("\n——————我擦嘞!");
+    console.log("——————我猜你是参数输错了吧！");
+    console.log("——————赶紧先去面壁5分钟！");
+    console.log("——————改过自新了再来！\n\n");
+}
 
 
 

@@ -4,9 +4,6 @@
   "description": "Misago Frontend",
   "main": "index.js",
   "scripts": {
-    "test": "webpack-dev-server --config webpack/test.js",
-    "hot": "webpack-dev-server --config webpack/hot.js",
-    "build": "webpack --config webpack/build.js",
     "vendor": "webpack --config webpack/vendor.js"
   },
   "author": "Rafal Piton",
