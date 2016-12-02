@@ -29,7 +29,7 @@ function initializer()
 	ReactDOM.render(<Page/>, document.getElementById('home') );
 }
 Loader.addInitializer(initializer);
-Loader.init({});
+// Loader.init({});
 
 
 
