@@ -3,8 +3,8 @@ import React from 'react';
 import { Row, Col } from 'antd';
 
 import PlayerPanel from './playerPanel/index';
-import ClassProfile from './classProfilePanel/index';
-import GuessYouLike from './guessYouLikePanel/index';
+import ClassProfile from './classProfile/index';
+import GuessYouLike from './guessYouLike/index';
 
 import './style.less';
 

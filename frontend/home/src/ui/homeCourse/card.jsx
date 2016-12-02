@@ -7,7 +7,7 @@ export default class Card extends React.Component
     	itemdata:
     	{
     		"title": "十分钟教你制作一个超级炫酷的跑酷机器人",
-	        "thumbnail": "image/home/course/card2.png",
+	        "thumbnail": "/image/home/course/card2.png",
 	        "link": "http://www.baidu.com",
 	        "price": 0,
 	        "time" : "10:08",

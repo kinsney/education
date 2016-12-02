@@ -68,6 +68,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.locale.LocaleMiddleware',
     'misago.users.middleware.AvatarServerMiddleware',
     'misago.users.middleware.RealIPMiddleware',
     'misago.core.middleware.frontendcontext.FrontendContextMiddleware',
@@ -84,7 +85,7 @@ MIDDLEWARE_CLASSES = (
     'misago.admin.middleware.AdminAuthMiddleware',
     'misago.threads.middleware.UnreadThreadsCountMiddleware',
     'misago.core.middleware.threadstore.ThreadStoreMiddleware',
-    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    'simplepage.middleware.SimplePageFallbackMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

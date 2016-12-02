@@ -24,10 +24,10 @@ export default class laboratory extends React.Component
 		return <div className="crossLab">
 			<a name="lab"></a>
 			<Carousel ref="slider1" effect="fade" speed={1500} draggable={false} dots={false}>
-				<div className="cover" style={{backgroundImage:"url('static/image/home/lab/1.png')"}}></div>
-				<div className="cover" style={{backgroundImage:"url('static/image/home/lab/2.png')"}}></div>
-				<div className="cover" style={{backgroundImage:"url('static/image/home/lab/3.png')"}}></div>
-				<div className="cover" style={{backgroundImage:"url('static/image/home/lab/4.png')"}}></div>
+				<div className="cover" style={{backgroundImage:"url('/static/image/home/lab/1.png')"}}></div>
+				<div className="cover" style={{backgroundImage:"url('/static/image/home/lab/2.png')"}}></div>
+				<div className="cover" style={{backgroundImage:"url('/static/image/home/lab/3.png')"}}></div>
+				<div className="cover" style={{backgroundImage:"url('/static/image/home/lab/4.png')"}}></div>
 			</Carousel>
 			<div className="info">
 				<Carousel autoplay ref="slider2" speed={1500} draggable={false} dots={false} beforeChange={this.changeTab}>

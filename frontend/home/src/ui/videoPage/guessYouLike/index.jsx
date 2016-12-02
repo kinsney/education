@@ -35,11 +35,11 @@ export default class GuessYouLike extends React.Component
 	data = {
 		lessons:
 		[
-			{title:'教你快速制作一个跑酷机器人',thumbnail:'image/home/course/card1.png',link:'#'},
-			{title:'教你快速制作一个跑酷机器人',thumbnail:'image/home/course/card2.png',link:'#'},
-			{title:'教你快速制作一个跑酷机器人',thumbnail:'image/home/course/card3.png',link:'#'},
-			{title:'教你快速制作一个跑酷机器人',thumbnail:'image/home/course/card4.png',link:'#'},
-			{title:'教你快速制作一个跑酷机器人',thumbnail:'image/home/course/card5.png',link:'#'},
+			{title:'教你快速制作一个跑酷机器人',thumbnail:'/image/home/course/card1.png',link:'#'},
+			{title:'教你快速制作一个跑酷机器人',thumbnail:'/image/home/course/card2.png',link:'#'},
+			{title:'教你快速制作一个跑酷机器人',thumbnail:'/image/home/course/card3.png',link:'#'},
+			{title:'教你快速制作一个跑酷机器人',thumbnail:'/image/home/course/card4.png',link:'#'},
+			{title:'教你快速制作一个跑酷机器人',thumbnail:'/image/home/course/card5.png',link:'#'},
 		]
 	};
 	state = {

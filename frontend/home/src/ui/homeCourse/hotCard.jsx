@@ -10,13 +10,13 @@ export default class HotCard extends React.Component
 	        {
 	            "title": "2017创客",
 	            "date" : "2016年12月12日",
-	            "image": "image/home/course/hot1.png",
+	            "image": "/image/home/course/hot1.png",
 	            "link": "http://www.baidu.com"
 	        },
 	        {
 	            "title": "2018创客活动",
 	            "date" : "2016年12月12日",
-	            "image": "image/home/course/hot2.png",
+	            "image": "/image/home/course/hot2.png",
 	            "link": "http://www.baidu.com"
 	        },
 	    ]

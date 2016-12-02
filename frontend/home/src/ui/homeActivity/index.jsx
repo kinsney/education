@@ -3,8 +3,6 @@ import React from 'react';
 import { Carousel,Icon,Row,Col } from 'antd';
 
 import './style.less';
-
-
 import VModal from './vModal'
 import Loader from 'home/../Loader';
 
@@ -17,13 +15,13 @@ export default class Activity extends React.Component
 	            "title": "2017创客活动",
 	            "profile":"看得见啊是看得见风案例老师的，谁考得好交罚款，是打了打飞机是打发，是肯定会发离开家打发打发卡斯加大回复阿道",
 	            "video": "http://www.baidu.com",
-	            "thumbnail": "image/home/activity/1.png",
+	            "thumbnail": "/image/home/activity/1.png",
 	        },
 	        {
 	            "title": "沙发斯蒂芬",
 	            "profile":"看得见啊是看得见风案例老师的，谁考得好交罚款，是打了打飞机是打发，是肯定会发离开家打发打发卡斯加大回复阿道",
 	            "video": "http://www.baidu.com",
-	            "thumbnail": "image/home/activity/2.png",
+	            "thumbnail": "/image/home/activity/2.png",
 	        }
 	    ]
 	};

@@ -20,8 +20,8 @@ export default class ClassProfile extends React.Component
 		],
 		devices:
 		[
-	        { name: "电子包", description: "这是描述", icon: "image/video/arduino.png" },
-	        { name: "Arduno", description: "这是描述", icon: "image/video/arduino.png" },
+	        { name: "电子包", description: "这是描述", icon: "/image/video/arduino.png" },
+	        { name: "Arduno", description: "这是描述", icon: "/image/video/arduino.png" },
 	    ],
 	    introduction:
 	    {
@@ -37,7 +37,7 @@ export default class ClassProfile extends React.Component
 	        	{title: "谁是傻逼", answer: "你是"},
 	        	{title: "谁是傻逼", answer: "你是"},
 	        ],
-	        other:"<img src='image/video/other.png' />",
+	        other:"<img src='/image/video/other.png' />",
 	    }
 	};
 

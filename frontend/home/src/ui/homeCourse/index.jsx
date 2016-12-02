@@ -17,13 +17,13 @@ export default class Course extends React.Component
 	        {
 	            "title": "2017创客",
 	            "date" : "2016年12月12日",
-	            "image": "image/home/course/hot1.png",
+	            "image": "/image/home/course/hot1.png",
 	            "link": "http://www.baidu.com"
 	        },
 	        {
 	            "title": "2017创客",
 	            "date" : "2016年12月12日",
-	            "image": "image/home/course/hot1.png",
+	            "image": "/image/home/course/hot1.png",
 	            "link": "http://www.baidu.com"
 	        },
 	    ],
@@ -34,7 +34,7 @@ export default class Course extends React.Component
 	    		lessons:[
 	    			{
 	    				"title": "1十分钟教你制作一个超级炫酷的跑酷机器人",
-				        "thumbnail": "image/home/course/card2.png",
+				        "thumbnail": "/image/home/course/card2.png",
 				        "link": "http://www.baidu.com",
 				        "price": 0,
 				        "time" : "10:08",
@@ -42,7 +42,7 @@ export default class Course extends React.Component
 				    },
 	    			{
 	    				"title": "2十分钟教你制作一个超级炫酷的跑酷机器人",
-				        "thumbnail": "image/home/course/card2.png",
+				        "thumbnail": "/image/home/course/card2.png",
 				        "link": "http://www.baidu.com",
 				        "price": 0,
 				        "time" : "10:08",
@@ -50,7 +50,7 @@ export default class Course extends React.Component
 				    },
 				    {
 	    				"title": "3十分钟教你制作一个超级炫酷的跑酷机器人",
-				        "thumbnail": "image/home/course/card2.png",
+				        "thumbnail": "/image/home/course/card2.png",
 				        "link": "http://www.baidu.com",
 				        "price": 0,
 				        "time" : "10:08",
@@ -58,7 +58,7 @@ export default class Course extends React.Component
 				    },
 				    {
 	    				"title": "4十分钟教你制作一个超级炫酷的跑酷机器人",
-				        "thumbnail": "image/home/course/card2.png",
+				        "thumbnail": "/image/home/course/card2.png",
 				        "link": "http://www.baidu.com",
 				        "price": 0,
 				        "time" : "10:08",

@@ -11,7 +11,7 @@ import './style.less';
 export default class Footer extends React.Component
 {
 	data = {
-		video:{ name:"",url: "video/demo.flv", type: "video/flv" },
+		video:{ name:"",url: "/video/demo.flv", type: "video/flv" },
 	};
 	componentWillMount()
 	{
