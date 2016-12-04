@@ -11,7 +11,7 @@ const del = require('del');
 /*————————————生成hot和test的函数————————————*/
 function generate(command)
 {
-    return function(filename='index')
+    return function(filename)
     {
         if(!filename)
         {
@@ -25,10 +25,10 @@ function generate(command)
         var Config = require('./webpack/devBuild.js');
         Object.assign(Config,{
             entry:
-            {    
+            {
                 app: ['./'+filename+'.js']
             },
-            output: 
+            output:
             {
                 path: __dirname+'dist/',
                 filename: '[name].js',
@@ -48,7 +48,7 @@ function generate(command)
         }
 
         var compiler = webpack(Config);
-        var devOption = 
+        var devOption =
         {
             publicPath: "http://localhost:"+port+"/assets/",
             contentBase: './dist',
@@ -58,7 +58,7 @@ function generate(command)
         };
 
         var devCompiler = new webpackServe(compiler,devOption);
-        devCompiler.listen(port, host, function(err) 
+        devCompiler.listen(port, host, function(err)
         {
             if(err) throw new gutil.PluginError("webpack-dev-server", err);
             gutil.log("[webpack-dev-server]", "http://localhost:"+port);
@@ -68,13 +68,13 @@ function generate(command)
 
 /*******************************************************************************/
 /*—————————————————————————————————————————————————————————————————————————————*/
-const tasks = 
+const tasks =
 {
     build: function(mode)
     {
         var buildConfig = require('./webpack/build.js');
         Object.assign(buildConfig,{
-            entry: 
+            entry:
             {
                 app: ['./index.js']
             }
@@ -96,7 +96,7 @@ const tasks =
         }
         else if(mode=='watch')
         {
-            var watchOption = 
+            var watchOption =
             {
                 aggregateTimeout: 300, // wait so long for more changes
                 poll: true // use polling instead of native watchers

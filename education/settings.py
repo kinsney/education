@@ -21,6 +21,8 @@ INSTALLED_APPS += (
     'device',
     'ckeditor',
     'ckeditor_uploader',
+    'django.contrib.sites',
+    'simplepage'
 )
 
 # Quick-start development settings - unsuitable for production
@@ -36,7 +38,7 @@ TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = []
 
-
+APPEND_SLASH = True
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
@@ -65,7 +67,7 @@ CACHES = {
 # Site language
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'zh-cn'
+LANGUAGE_CODE = 'zh_CN'
 
 # Fallback Timezone
 # Used to format dates on server, that are then

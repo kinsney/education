@@ -31,7 +31,8 @@ var lesson_add = {
                                 answer:"{{ quesion.answer }}"
                             },
                         {% endfor %}
-                        ]
+                        ],
+            other:'{{ lesson.description|safe }}'
         },
         "devices":[{% for device in lesson.equipment.all %}
                         {
