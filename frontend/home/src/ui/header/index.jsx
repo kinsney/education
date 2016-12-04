@@ -4,18 +4,18 @@ import './style.less';
 import { Row, Col, Menu, Popover, Button } from 'antd';
 const MenuItem = Menu.Item;
 
-// import misago from 'misago/index';
-// import 'misago/initializers/reducers/auth';
-// import 'misago/initializers/modal';
-// import 'misago/initializers/ajax';
-// import 'misago/initializers/captcha';
-// import 'misago/initializers/zxcvbn';
-// import 'misago/initializers/include';
-// import 'misago/initializers/snackbar';
-// import 'misago/initializers/store';
-// import 'misago/initializers/auth';
-// import 'misago/initializers/local-storage';
-// import 'misago/initializers/components/user-menu';
+import misago from 'misago/index';
+import 'misago/initializers/reducers/auth';
+import 'misago/initializers/modal';
+import 'misago/initializers/ajax';
+import 'misago/initializers/captcha';
+import 'misago/initializers/zxcvbn';
+import 'misago/initializers/include';
+import 'misago/initializers/snackbar';
+import 'misago/initializers/store';
+import 'misago/initializers/auth';
+import 'misago/initializers/local-storage';
+import 'misago/initializers/components/user-menu';
 
 import Loader from 'home/../Loader';
 
@@ -31,11 +31,11 @@ export default class Header extends React.Component
 
 	componentDidMount()
 	{
-		// var misagoContext = Loader.get('misagoContext');
-		// if(misagoContext)
-		// {
-		// 	misago.init(misagoContext);
-		// }
+		var misagoContext = Loader.get('misagoContext');
+		if(misagoContext)
+		{
+			misago.init(misagoContext);
+		}
 	}
 
 	render()
